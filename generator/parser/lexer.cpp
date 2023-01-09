@@ -1696,6 +1696,20 @@ void Lexer::scanKeyword9()
 	}
 	  break;
 
+	case 'c':
+	  if (*(cursor + 1) == 'o' &&
+	  *(cursor + 2) == 'n' &&
+	  *(cursor + 3) == 's' &&
+	  *(cursor + 4) == 't' &&
+	  *(cursor + 5) == 'e' &&
+	  *(cursor + 6) == 'x' &&
+	  *(cursor + 7) == 'p' &&
+	  *(cursor + 8) == 'r')
+	{
+	  token_stream[(int) index++].kind = Token_constexpr;
+	  return;
+	}
+	  break;
 	}
   token_stream[(int) index++].kind = Token_identifier;
 }

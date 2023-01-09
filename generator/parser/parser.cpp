@@ -239,7 +239,8 @@ bool Parser::skipUntilDeclaration()
         case Token_float:
         case Token_double:
         case Token_void:
-        case Token_extern:
+		case Token_constexpr:
+		case Token_extern:
         case Token_namespace:
         case Token_using:
         case Token_typedef:
@@ -276,6 +277,7 @@ bool Parser::skipUntilStatement()
         case '}':
         case Token_const:
         case Token_volatile:
+		case Token_constexpr:
         case Token_identifier:
         case Token_case:
         case Token_default:
@@ -1586,7 +1588,9 @@ bool Parser::parseFunctionSpecifier(const ListNode<std::size_t> *&node)
   int tk;
   while (0 != (tk = token_stream.lookAhead())
          && (tk == Token_inline || tk == Token_virtual
-             || tk == Token_explicit || tk == Token_Q_INVOKABLE))
+			 || tk == Token_explicit || tk == Token_Q_INVOKABLE
+			 || tk == Token_constexpr
+			 ))
     {
       node = snoc(node, token_stream.cursor(), _M_pool);
       token_stream.nextToken();
