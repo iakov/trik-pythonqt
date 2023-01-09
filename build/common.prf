@@ -58,6 +58,6 @@ PYTHONQT_GENERATED_PATH = $$PWD/../generated_cpp
 
 !exists($$PYTHONQT_GENERATED_PATH) {
 	PYTHONQT_GENERATED_PATH = $$PWD/../generated_cpp_UNSUPPORTED_QT_VERSION
-	error(Unsupported Qt version for PythonQt: missing generated_cpp)
+	warning(Unsupported Qt version for PythonQt: missing generated_cpp)
 }
 
