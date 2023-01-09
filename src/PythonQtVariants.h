@@ -54,7 +54,12 @@
 #include <QLineF>
 #include <QPoint>
 #include <QPointF>
-#include <QRegExp>
+
+#if QT_VERSION_MAJOR >= 6
+#  include <QRegularExpression>
+#else
+#  include <QRegExp>
+#endif
 
 #include <QFont>
 #include <QBitmap>
@@ -67,12 +72,11 @@
 #include <QRegion>
 #include <QBitmap>
 #include <QCursor>
-#include <QSizePolicy>
+#include <QtWidgets/QSizePolicy>
 #include <QKeySequence>
 #include <QPen>
 #include <QTextLength>
 #include <QTextFormat>
-#include <QMatrix>
 
 #endif
 

@@ -89,11 +89,11 @@ struct Preprocess
 
         // Include Qt
         QProcess process;
-        QString qtHeadersVariable = "QT_INSTALL_HEADERS";
-        process.start("qmake -query " + qtHeadersVariable);
+		process.start("qmake", {"-query", "QT_INSTALL_HEADERS"});
         process.waitForFinished(-1);
 
         QString qtHeadersDir = process.readAllStandardOutput().simplified();
+		qDebug() << qtHeadersDir;
 
         if (qtHeadersDir.isEmpty()) {
 #if defined(Q_OS_MAC)

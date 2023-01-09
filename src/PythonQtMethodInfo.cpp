@@ -370,7 +370,7 @@ int PythonQtMethodInfo::nameToType(const char* name)
 	_parameterTypeDict.insert("QLineF", QMetaType::QLineF);
 	_parameterTypeDict.insert("QPoint", QMetaType::QPoint);
 	_parameterTypeDict.insert("QPointF", QMetaType::QPointF);
-	_parameterTypeDict.insert("QRegExp", QMetaType::QRegExp);
+	_parameterTypeDict.insert("QRegularExpression", QMetaType::QRegularExpression);
 	_parameterTypeDict.insert("QFont", QMetaType::QFont);
 	_parameterTypeDict.insert("QPixmap", QMetaType::QPixmap);
 	_parameterTypeDict.insert("QBrush", QMetaType::QBrush);
@@ -386,7 +386,7 @@ int PythonQtMethodInfo::nameToType(const char* name)
 	_parameterTypeDict.insert("QPen", QMetaType::QPen);
 	_parameterTypeDict.insert("QTextLength", QMetaType::QTextLength);
 	_parameterTypeDict.insert("QTextFormat", QMetaType::QTextFormat);
-	_parameterTypeDict.insert("QMatrix", QMetaType::QMatrix);
+	//_parameterTypeDict.insert("QMatrix", QMetaType::QMatrix);
 	_parameterTypeDict.insert("QVariant", PythonQtMethodInfo::Variant);
 	// own special types... (none so far, could be e.g. ObjectList
   }

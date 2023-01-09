@@ -41,18 +41,18 @@
 
 #include "PythonQtScriptingConsole.h"
 
-#include <QMenu>
+#include <QtWidgets/QMenu>
 #include <QMouseEvent>
 #include <QKeyEvent>
-#include <QApplication>
+#include <QtWidgets/QApplication>
 #include <QTextDocumentFragment>
 #include <QTextBlock>
 #include <QTextCursor>
 #include <QDebug>
-#include <QCompleter>
+#include <QtWidgets/QCompleter>
 #include <QStringListModel>
-#include <QScrollBar>
-#include <QAbstractItemView>
+#include <QtWidgets/QScrollBar>
+#include <QtWidgets/QAbstractItemView>
 
 //-----------------------------------------------------------------------------
 

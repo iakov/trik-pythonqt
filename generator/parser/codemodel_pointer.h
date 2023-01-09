@@ -43,6 +43,7 @@
 #define CODEMODEL_POINTER_H
 
 #include <QtCore/QSharedData>
+#include <QtCore/QAtomicPointer>
 
 // Since the atomic API changed in 4.4 we need to hack a little here
 // to make it work with both 4.3 and 4.4 until that is not required
@@ -123,19 +124,23 @@ private:
 
 #   if QT_VERSION >= 0x050000
     operator T * () const {
-        return QAtomicPointer<T>::load();
+		return load();
     }
     inline bool operator!() const { return !(bool)*this; }
     operator bool () const {
-        return (bool)QAtomicPointer<T>::load();
+		return (bool)load();
     }
 
-    inline T *operator->() { return QAtomicPointer<T>::load(); }
-    inline const T *operator->() const { return QAtomicPointer<T>::load(); }
+	inline T *operator->() { return load(); }
+	inline const T *operator->() const { return load(); }
     inline bool operator==(const CodeModelPointer<T> &other) const { return (T*)*this == (T*)other; }
     inline bool operator!=(const CodeModelPointer<T> &other) const { return (T*)*this != (T*)other; }
     inline bool operator==(const T *ptr) const { return (T*)*this == ptr; }
     inline bool operator!=(const T *ptr) const { return (T*)*this != ptr; }
+#   if QT_VERSION >= 0x060000
+private:
+	inline T * load() const { return QAtomicPointer<T>::loadRelaxed(); }
+#   endif
 #   endif
 #endif
 };

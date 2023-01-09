@@ -8,7 +8,7 @@
   <object-type name="QSvgRenderer">
     <extra-includes>
         <include file-name="QRectF" location="global"/>
-        <include file-name="QMatrix" location="global"/>
+	<!--<include file-name="QMatrix" location="global"/>-->
         <include file-name="QSize" location="global"/>
         <include file-name="QByteArray" location="global"/>
     </extra-includes>

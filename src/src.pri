@@ -4,6 +4,9 @@ INCLUDEPATH += $$PWD
 
 CONFIG += c++11
 
+greaterThan(QT_MAJOR_VERSION, 5): QT += core5compat
+QT_PRIVATE += core-private
+
 !no_warn:gcc: QMAKE_CXXFLAGS += -Werror
 # This was needed to work around "number of sections exceeded object file format limit" linker error
 win32-msvc*:!gcc:QMAKE_CXXFLAGS += /bigobj

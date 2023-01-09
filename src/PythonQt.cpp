@@ -243,7 +243,7 @@ void PythonQt::init(int flags, const QByteArray& pythonQtModuleName)
 	PythonQtRegisterToolClassesTemplateConverterForKnownClass(QPen);
 	PythonQtRegisterToolClassesTemplateConverterForKnownClass(QTextLength);
 	PythonQtRegisterToolClassesTemplateConverterForKnownClass(QTextFormat);
-	PythonQtRegisterToolClassesTemplateConverterForKnownClass(QMatrix);
+	//PythonQtRegisterToolClassesTemplateConverterForKnownClass(QMatrix);
 
 	constexpr auto moduleQt = "Qt";
 	constexpr auto moduleQtCore = "Qt";

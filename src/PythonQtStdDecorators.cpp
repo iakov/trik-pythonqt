@@ -43,7 +43,6 @@
 #include "PythonQt.h"
 #include "PythonQtClassInfo.h"
 #include "PythonQtConversion.h"
-
 #include <QCoreApplication>
 
 bool PythonQtStdDecorators::connect(QObject* sender, const QByteArray& signal, PyObject* callable)
@@ -240,7 +239,7 @@ QList<QObject*> PythonQtStdDecorators::findChildren(QObject* parent, PyObject* t
   return list;
 }
 
-QList<QObject*> PythonQtStdDecorators::findChildren(QObject* parent, PyObject* type, const QRegExp& regExp)
+QList<QObject*> PythonQtStdDecorators::findChildren(QObject* parent, PyObject* type, const QRegExp &regExp)
 {
   const QMetaObject* meta = NULL;
   QByteArray typeName;

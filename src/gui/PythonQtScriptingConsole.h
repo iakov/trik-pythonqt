@@ -44,7 +44,7 @@
 
 #include "PythonQt.h"
 #include <QVariant>
-#include <QTextEdit>
+#include <QtWidgets/QTextEdit>
 
 class QCompleter;
 
@@ -55,7 +55,8 @@ class PYTHONQT_EXPORT PythonQtScriptingConsole : public QTextEdit
   Q_OBJECT
 
 public:
-  PythonQtScriptingConsole(QWidget* parent, const PythonQtObjectPtr& context, Qt::WindowFlags i = 0);
+  PythonQtScriptingConsole(QWidget* parent, const PythonQtObjectPtr& context
+						   , Qt::WindowFlags i = Qt::WindowFlags::fromInt(0));
 
   ~PythonQtScriptingConsole();
 

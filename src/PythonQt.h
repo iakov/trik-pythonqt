@@ -60,6 +60,9 @@
 #include <QtDebug>
 #include <iostream>
 
+#if QT_VERSION_MAJOR > 5
+#  include <QtCore5Compat/QtCore5Compat>
+#endif
 
 class PythonQtClassInfo;
 class PythonQtPrivate;

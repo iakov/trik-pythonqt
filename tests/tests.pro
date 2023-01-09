@@ -13,7 +13,7 @@ CONFIG -= app_bundle
 QT += testlib
 #QT += opengl
 
-contains(QT_MAJOR_VERSION, 5) {
+!lessThan(QT_MAJOR_VERSION, 5) {
   QT += widgets
 }
 

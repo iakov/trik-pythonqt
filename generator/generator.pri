@@ -2,6 +2,7 @@ isEmpty(GENERATORPATH):GENERATORPATH = $$PWD
 INCLUDEPATH += $$GENERATORPATH
 
 TEMPLATE = app
+greaterThan(QT_MAJOR_VERSION, 5): QT += core5compat
 TARGET +=
 DEPENDPATH += $$GENERATORPATH tests parser
 mac:CONFIG -= app_bundle

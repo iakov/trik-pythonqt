@@ -854,13 +854,13 @@
   <enum-type name="QLineF::IntersectType"/>
   <value-type name="QLineF">
     <extra-includes>
-        <include file-name="QMatrix" location="global"/>
+	<!--<include file-name="QMatrix" location="global"/>-->
         <include file-name="QTransform" location="global"/>
     </extra-includes>
   </value-type>
   <value-type name="QLine">
     <extra-includes>
-        <include file-name="QMatrix" location="global"/>
+	<!--<include file-name="QMatrix" location="global"/>-->
         <include file-name="QTransform" location="global"/>
     </extra-includes>
   </value-type>

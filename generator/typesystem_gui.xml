@@ -884,7 +884,8 @@
     <modify-function signature="data()const" remove="all"/>
     <modify-function signature="operator()(int, int)const" remove="all"/>
   </value-type>
-  <value-type name="QMatrix">
+ <!--
+ <value-type name="QMatrix">
       <extra-includes>
         <include file-name="QPainterPath" location="global"/>
       </extra-includes>
@@ -900,7 +901,7 @@
       <modify-function signature="shear(double,double)" access="private" rename="shear_private"/>
       <modify-function signature="translate(double,double)" access="private" rename="translate_private"/>
   </value-type>
-
+-->
   <value-type name="QConicalGradient" polymorphic-id-expression="%1-&gt;type() == QGradient::ConicalGradient">
   </value-type>
 

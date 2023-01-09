@@ -49,6 +49,9 @@
 #include <memory>
 
 #include <QtXml>
+#if QT_VERSION_MAJOR > 5
+#include <QtCore5Compat/QtCore5Compat>
+#endif
 
 QString strings_Object = QLatin1String("Object");
 QString strings_String = QLatin1String("String");
@@ -59,6 +62,8 @@ QString strings_jchar = QLatin1String("jchar");
 QString strings_jobject = QLatin1String("jobject");
 
 static void addRemoveFunctionToTemplates(TypeDatabase *db);
+
+static const char endl = '\n';
 
 class StackElement
 {

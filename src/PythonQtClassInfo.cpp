@@ -555,7 +555,8 @@ QStringList PythonQtClassInfo::memberList()
     }
   }
 
-  return QSet<QString>::fromList(l).toList();
+  QSet<QString> uniq(l.begin(), l.end());
+  return QStringList(uniq.begin(),uniq.end());
 }
 
 const QByteArray& PythonQtClassInfo::className() const
