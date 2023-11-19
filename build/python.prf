@@ -76,9 +76,9 @@ contains(PKGCONFIG, "python.*"){
   $$system_quote(import sysconfig;exit(0 if 0 <= sysconfig.get_platform().find(\'win-amd64\') else 1))\
   ):DEFINES += MS_WIN64
 
-  INCLUDEPATH += $$shell_path($${PYTHON_PATH}/include)
+  INCLUDEPATH += $$clean_path($${PYTHON_PATH}/include)
 
-  LIBS += $$shell_path(-L$${PYTHON_PATH}/libs)
+  LIBS += $$clean_path(-L$${PYTHON_PATH}/libs)
   LIBS += -lpython$${PYTHON_VERSION_MAJOR}$${PYTHON_VERSION_MINOR}$${DEBUG_EXT}
 
   # Hack for "CONFIG+=testcase" and 'make check' to add python's dll to PATH
