@@ -95,6 +95,8 @@ jobs:
             container_os_version: '9'
             container_os_python_package: 'python3-devel'
             configuration: 'release'
+            pythonqtall-config: 'PythonQtCore PythonQtGui PythonQtMultimedia'
+
     runs-on: ubuntu-latest
     container: '${{ matrix.container_os }}:${{ matrix.container_os_version }}'
     steps:
