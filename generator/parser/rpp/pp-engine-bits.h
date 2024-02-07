@@ -1070,9 +1070,7 @@ InputIterator pp::eval_expression (InputIterator _first, InputIterator _last, Va
 }
 
 template <typename InputIterator>
-InputIterator pp::handle_if (InputIterator _first, InputIterator _last)
-{
-  if (test_if_level())
+std::string pp::expand_condition(InputIterator _first, InputIterator _last)
     {
       pp_macro_expander expand_condition (env);
       std::string condition;
@@ -1083,10 +1081,19 @@ InputIterator pp::handle_if (InputIterator _first, InputIterator _last)
       const char* first = condition.c_str ();
       const char* last = first + condition.size ();
       expand_condition (skip_blanks (first, last), last, std::back_inserter (condition2ndpass));
+  return condition2ndpass;
+}
+
+template <typename InputIterator>
+InputIterator pp::handle_if (InputIterator _first, InputIterator _last)
+{
+  if (test_if_level())
+    {
+      std::string condition = expand_condition(_first, _last);
 
       Value result;
       result.set_long (0);
-      eval_expression(condition2ndpass.c_str (), condition2ndpass.c_str () + condition2ndpass.size (), &result);
+      eval_expression(condition.c_str (), condition.c_str () + condition.size (), &result);
 
       _M_true_test[iflevel] = !result.is_zero ();
       _M_skipping[iflevel] = result.is_zero ();
@@ -1125,8 +1132,11 @@ InputIterator pp::handle_elif (InputIterator _first, InputIterator _last)
     }
   else if (!_M_true_test[iflevel] && !_M_skipping[iflevel - 1])
     {
+      std::string condition = expand_condition(_first, _last);
+
       Value result;
-      _first = eval_expression(_first, _last, &result);
+      result.set_long(0);
+      eval_expression(condition.c_str(), condition.c_str() + condition.size(), &result);
       _M_true_test[iflevel] = !result.is_zero ();
       _M_skipping[iflevel] = result.is_zero ();
     }

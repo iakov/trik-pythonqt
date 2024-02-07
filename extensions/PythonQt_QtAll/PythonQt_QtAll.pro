@@ -11,13 +11,17 @@ isEmpty( PYTHONQTALL_CONFIG ) {
   qtHaveModule(svg):CONFIG += PythonQtSvg
   qtHaveModule(sql):CONFIG += PythonQtSql
   qtHaveModule(network):CONFIG += PythonQtNetwork
-  qtHaveModule(opengl):CONFIG += PythonQtOpengl
+  lessThan(QT_MAJOR_VERSION, 6) {
+    # module is empty in Qt6
+    qtHaveModule(opengl):CONFIG += PythonQtOpengl
+  }
   qtHaveModule(xml):CONFIG += PythonQtXml
   qtHaveModule(xmlpatterns):CONFIG += PythonQtXmlpatterns
   qtHaveModule(multimedia):CONFIG += PythonQtMultimedia
   qtHaveModule(qml):CONFIG += PythonQtQml
   qtHaveModule(quick):CONFIG += PythonQtQuick
   qtHaveModule(uitools):CONFIG += PythonQtUiTools
+  qtHaveModule(webenginewidgets):CONFIG += PythonQtWebEngineWidgets
 
   qtHaveModule(webkit):CONFIG += PythonQtWebKit
 } else {
@@ -35,7 +39,7 @@ include ( ../../build/common.prf )
 include ( ../../build/PythonQt.prf )  
 TARGET = $$replace(TARGET, PythonXY, Python$${PYTHON_VERSION})
 
-CONFIG += qt strict_c++
+CONFIG += qt strict_c++ msvc_mp
 
 !static:!staticlib {
   CONFIG += dll
@@ -58,7 +62,7 @@ unix {
   QMAKE_PKGCONFIG_PREFIX = $$INSTALLBASE
   QMAKE_PKGCONFIG_LIBDIR = $$target.path
   QMAKE_PKGCONFIG_INCDIR = $$headers.path
-  QMAKE_PKGCONFIG_INCDIR += $$PREFIX/include/trikPythonQt
+  QMAKE_PKGCONFIG_INCDIR += $$PREFIX/include/trikPythonQt$${QT_MAJOR_VERSION}
   QMAKE_PKGCONFIG_VERSION = $$VERSION
 }
 
@@ -77,63 +81,88 @@ defineTest(Xinclude) {
 }
 
 
-PythonQtCore:Xinclude (com_trolltech_qt_core) {
+PythonQtCore {
   DEFINES += PYTHONQT_WITH_CORE
+  Xinclude (com_trolltech_qt_core)
   QT += core
 }
 
-PythonQtGui:Xinclude (com_trolltech_qt_gui)  {
+PythonQtGui  {
   DEFINES += PYTHONQT_WITH_GUI
+  Xinclude (com_trolltech_qt_gui)
   QT += gui widgets printsupport
 }
 
-PythonQtSvg:Xinclude (com_trolltech_qt_svg) {
+PythonQtSvg {
   DEFINES += PYTHONQT_WITH_SVG
+  Xinclude (com_trolltech_qt_svg)
   QT +=svg
+  !lessThan(QT_MAJOR_VERSION,6): QT += svgwidgets
 }
 
-PythonQtSql:Xinclude (com_trolltech_qt_sql) {
+PythonQtSql {
   DEFINES += PYTHONQT_WITH_SQL
+  Xinclude (com_trolltech_qt_sql)
   QT += sql
 }
 
-PythonQtNetwork:Xinclude (com_trolltech_qt_network) {
+PythonQtNetwork {
   DEFINES += PYTHONQT_WITH_NETWORK
+  Xinclude (com_trolltech_qt_network)
   QT += network
 }
 
-PythonQtOpengl:PythonQtCore: Xinclude (com_trolltech_qt_opengl) {
+PythonQtOpengl {
   DEFINES += PYTHONQT_WITH_OPENGL
   QT += opengl
+  PythonQtCore: Xinclude (com_trolltech_qt_opengl)
   QT += xml
 }
 
-PythonQtXmlpatterns:Xinclude (com_trolltech_qt_xmlpatterns) {
+PythonQtXml {
+  DEFINES += PYTHONQT_WITH_XML
+  Xinclude (com_trolltech_qt_xml)
+  QT += xml
+}
+
+PythonQtXmlpatterns {
   DEFINES += PYTHONQT_WITH_XMLPATTERNS
+  Xinclude (com_trolltech_qt_xmlpatterns)
   QT += xmlpatterns
 }
 
-PythonQtMultimedia:Xinclude (com_trolltech_qt_multimedia) {
+PythonQtMultimedia {
   DEFINES += PYTHONQT_WITH_MULTIMEDIA
+  Xinclude (com_trolltech_qt_multimedia)
   QT += multimedia multimediawidgets
 }
 
-PythonQtQml:Xinclude (com_trolltech_qt_qml) {
+PythonQtQml {
   DEFINES += PYTHONQT_WITH_QML
+  Xinclude (com_trolltech_qt_qml)
   QT += qml
 }
 
-PythonQtQuick:Xinclude (com_trolltech_qt_quick) {
+PythonQtQuick {
   DEFINES += PYTHONQT_WITH_QUICK
+  Xinclude (com_trolltech_qt_quick)
   QT += quick quickwidgets
 }
 
-PythonQtUiTools:Xinclude (com_trolltech_qt_uitools) {
+PythonQtUiTools {
   DEFINES += PYTHONQT_WITH_UITOOLS
+  Xinclude (com_trolltech_qt_uitools)
   QT += uitools
 }
 
-PythonQtWebKit:Xinclude (com_trolltech_qt_webkit) {
+PythonQtWebEngineWidgets {
+  DEFINES += PYTHONQT_WITH_WEBENGINEWIDGETS
+  Xinclude (com_trolltech_qt_webenginewidgets)
+  QT += webenginewidgets
+}
+
+PythonQtWebKit {
   DEFINES += PYTHONQT_WITH_WEBKIT
+  Xinclude (com_trolltech_qt_webkit)
   QT += webkit webkitwidgets
 }
