@@ -435,6 +435,16 @@ PythonQt::PythonQt(int flags, const QByteArray& pythonQtModuleName)
 PythonQt::~PythonQt() {
   delete _p;
   _p = nullptr;
+
+  Py_DECREF(&PythonQtSlotFunction_Type);
+  Py_DECREF(&PythonQtSignalFunction_Type);
+  Py_DECREF(&PythonQtSlotDecorator_Type);
+  Py_DECREF(&PythonQtProperty_Type);
+  Py_DECREF(&PythonQtBoolResult_Type);
+  Py_DECREF(&PythonQtClassWrapper_Type);
+  Py_DECREF(&PythonQtInstanceWrapper_Type);
+  Py_DECREF(&PythonQtStdOutRedirectType);
+  Py_DECREF(&PythonQtStdInRedirectType);
 }
 
 PythonQtPrivate::~PythonQtPrivate() {
