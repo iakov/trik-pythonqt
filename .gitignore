@@ -2,13 +2,13 @@ src/object_script.*
 src/pkg-config_wrapper.sh
 src/.build/*
 *~
-
-
 # Compiled Object files
 *.slo
 *.lo
 *.o
 *.obj
+*.pdb
+*.cbt
 
 # By mistake (in pkgConfigExecutable function in features/qt_functions.prf)
 # qmake generates NUL file on Linux in ./build subdir
@@ -52,6 +52,8 @@ ui_*.h
 *.jsc
 Makefile*
 *build-*
+*resource.rc
+*.FileListAbsolute.txt
 
 # CMake
 CMakeLists.txt.user
@@ -90,6 +92,9 @@ Thumbs.db
 
 # Visual Studio Code
 .vscode/*
+
+*.tlog
+
 
 # JetBrains tools
 .idea/*

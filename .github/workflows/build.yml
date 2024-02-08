@@ -15,12 +15,13 @@ jobs:
   ubuntu:
     strategy:
       fail-fast: false
-      matrix:
-        container: 
-        - 'ubuntu:20.04'
-#        - 'ubuntu:22.04'
+      matrix:        
+        pythonqtall-config: ['PythonQtCore PythonQtGui PythonQtMultimedia']
+        container_version:
+        - '20.04'
+        - '22.04'
     runs-on: ubuntu-latest
-    container: ${{ matrix.container }}
+    container: ubuntu:${{ matrix.container_version }}
     steps:
     - name: Install Qt
       run: |
@@ -46,7 +47,7 @@ jobs:
         apt-get clean
       
     - name: Checkout PythonQt
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Build PythonQt
       run: |
@@ -54,11 +55,15 @@ jobs:
         echo ======= SYSTEM INFO ========
         uname -a; gcc --version | grep "gcc"; python3 --version; qmake --version
         echo ============================
-        qmake -r PythonQt.pro CONFIG+=release CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=generator CONFIG+=tests \
+        qmake -r PythonQt.pro CONFIG+=release CONFIG+=force_debug_info \
+        PYTHONQTALL_CONFIG="${{ matrix.pythonqtall-config }}" \
+        CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address \
+        CONFIG+=generator CONFIG+=tests \
         PYTHON_VERSION=$(python3 --version | cut -d " " -f 2 | cut -d "." -f1,2) \
         PYTHON_DIR=$(which python3 | xargs dirname | xargs dirname)
-        make -j 2
-        UBSAN_OPTIONS="halt_on_error=1" ASAN_OPTIONS="detect_stack_use_after_return=1:fast_unwind_on_malloc=0" \
+        make -j $(nproc)
+        PYTHONDEVMODE=1 PYTHONASYNCIODEBUG=1 PYTHONWARNINGS=error PYTHONMALLOC=malloc_debug \
+        UBSAN_OPTIONS="halt_on_error=1" ASAN_OPTIONS="detect_leaks=0:detect_stack_use_after_return=1:fast_unwind_on_malloc=0" \
           make check TESTARGS="-platform offscreen"
       
     - name: Generate Wrappers
@@ -67,31 +72,33 @@ jobs:
         mkdir /usr/include/qt5; ln -s /usr/include/x86_64-linux-gnu/qt5 /usr/include/qt5/include
         export QTDIR=/usr/include/qt5
         cd generator
+        UBSAN_OPTIONS="halt_on_error=1" ASAN_OPTIONS="detect_leaks=0:detect_stack_use_after_return=1:fast_unwind_on_malloc=0" \
         ./pythonqt_generator
 
     - name: Upload Wrappers
-      uses: actions/upload-artifact@v3
-      if: ${{ matrix.container }} == 'ubuntu:20.04'
+      uses: actions/upload-artifact@v4
       with:
-        name: wrappers_ubuntu_20_04
+        name: wrappers_ubuntu_${{ matrix.container_version }}
         path: generated_cpp
 
-    - name: Upload Wrappers
-      uses: actions/upload-artifact@v3
-      if: ${{ matrix.container }} == 'ubuntu:22.04'
-      with:
-        name: wrappers_ubuntu_22_04
-        path: generated_cpp
-
-  centos:
+  oldschool:
     strategy:
       fail-fast: false
       matrix:
-        container:
-        - 'centos:7'
-        configuration: ['debug', 'release']
+        container_os: ['centos']
+        container_os_version: ['7']
+        container_os_python_package: ['python-debug']
+        configuration: ['debug', 'release']        
+        pythonqtall-config: ['PythonQtCore PythonQtGui PythonQtMultimedia']
+        include:
+          - container_os: 'rockylinux'
+            container_os_version: '9'
+            container_os_python_package: 'python3-devel'
+            configuration: 'release'
+            pythonqtall-config: 'PythonQtCore PythonQtGui PythonQtMultimedia'
+
     runs-on: ubuntu-latest
-    container: ${{ matrix.container }}
+    container: '${{ matrix.container_os }}:${{ matrix.container_os_version }}'
     steps:
     - name: Install Qt
       run: |
@@ -99,7 +106,7 @@ jobs:
         yum groupinstall "Development Tools" -y
         yum install -y \
         which \
-        python-debug \
+        ${{ matrix.container_os_python_package }} \
         qt5-qtbase-* \
         qt5-qttools* \
         qt5-qtsvg \
@@ -115,12 +122,21 @@ jobs:
       run: |
         export QT_SELECT=qt5
         echo ======= SYSTEM INFO ========
-        uname -a; gcc --version | grep "gcc"; python --version; qmake-qt5 --version
+        which python 2>/dev/null && export PYTHON_VERSION_SUFFIX= || export PYTHON_VERSION_SUFFIX=3
+        uname -a; gcc --version | grep "gcc"; python${PYTHON_VERSION_SUFFIX} --version; qmake-qt5 --version
         echo ============================
-        qmake-qt5 -r PythonQt.pro CONFIG+=${{ matrix.configuration }} CONFIG+=generator CONFIG+=tests \
-          PYTHON_VERSION=$(python --version | cut -d " " -f 2 | cut -d "." -f1,2) \
-          PYTHON_DIR=$(which python | xargs dirname | xargs dirname)
-        make -j 2 && make check TESTARGS="-platform offscreen"
+        export PYTHON_VERSION_SHORT=`python${PYTHON_VERSION_SUFFIX} --version | cut -d " " -f 2 | cut -d "." -f1,2`
+        if [[ `echo ${PYTHON_VERSION_SHORT} | wc -w` = 0 ]]; then export PYTHON_VERSION_SHORT=2.7; fi
+        export PYTHON_DIR=`which python${PYTHON_VERSION_SUFFIX} | xargs dirname | xargs dirname`
+        echo PYTHON_VERSION_SHORT=${PYTHON_VERSION_SHORT}
+        echo PYTHON_DIR=${PYTHON_DIR}
+        qmake-qt5 -r PythonQt.pro CONFIG+=${{ matrix.configuration }} \
+          PYTHONQTALL_CONFIG="${{ matrix.pythonqtall-config }}" \
+          CONFIG+=generator CONFIG+=tests \
+          "PYTHON_VERSION=${PYTHON_VERSION_SHORT}" "PYTHON_DIR=${PYTHON_DIR}"
+        make -j $(nproc) && \
+        PYTHONDEVMODE=1 PYTHONASYNCIODEBUG=1 PYTHONWARNINGS=error PYTHONMALLOC=malloc_debug \
+          make check TESTARGS="-platform offscreen"
       
     - name: Generate Wrappers
       run: |
@@ -133,7 +149,7 @@ jobs:
     - name: Upload Wrappers
       uses: actions/upload-artifact@v3
       with:
-        name: wrappers_centos7
+        name: wrappers_${{ matrix.container_os }}-${{ matrix.container_os_version }}_${{ matrix.configuration }}
         path: generated_cpp
 
   macOS:
@@ -141,9 +157,9 @@ jobs:
       fail-fast: false
       matrix:
        macos-version:  ['11']
-       python-version: ['3.9']
-       qt-version: ['5.12.*']
-       configuration: ['release']
+       python-version: ['3.6']
+       qt-version: ['5.9.*']
+       configuration: ['release','debug']
        include:
          - macos-version: '12'
            python-version: '3.9'
@@ -167,12 +183,12 @@ jobs:
         archives: 'qtmultimedia qtmacextras qtbase qttools'
 
     - name: Setup Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '${{ matrix.python-version }}'
 
     - name: Checkout PythonQt
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Detect exact versions
       id : versions
@@ -202,13 +218,16 @@ jobs:
         for i in "python${{ steps.versions.outputs.PYTHON_VERSION_SHORT }}-embed" "python${{ steps.versions.outputs.PYTHON_VERSION_SHORT }}" \
                  "python${PYTHON_VERSION_MAJOR}-embed" "python${PYTHON_VERSION_MAJOR}"
         do if pkg-config --exists "$i"; then PYTHON_PKGCONFIG_NAME="$i"; break; fi; done
-        qmake CONFIG+=${{ matrix.configuration }} CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=generator CONFIG+=tests \
+        qmake CONFIG+=${{ matrix.configuration }} CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address \
+          PYTHONQTALL_CONFIG="${{ matrix.pythonqtall-config }}" \
+          CONFIG+=sanitize_undefined CONFIG+=generator CONFIG+=tests \
           PYTHON_VERSION=${{ steps.versions.outputs.PYTHON_VERSION_SHORT }} \
           PYTHON_DIR="$pythonLocation" \
           PKGCONFIG+=$PYTHON_PKGCONFIG_NAME \
           -r PythonQt.pro
-        make -j 2
-        UBSAN_OPTIONS="halt_on_error=1" ASAN_OPTIONS="detect_stack_use_after_return=1:fast_unwind_on_malloc=0" \
+        make -j $(nproc)
+        PYTHONDEVMODE=1 PYTHONASYNCIODEBUG=1 PYTHONWARNINGS=error PYTHONMALLOC=malloc_debug \
+        UBSAN_OPTIONS="halt_on_error=1" ASAN_OPTIONS="detect_leaks=0:detect_stack_use_after_return=1:fast_unwind_on_malloc=0" \
           make check TESTARGS="-platform offscreen"
 
     - name: Generate Wrappers
@@ -216,10 +235,11 @@ jobs:
       run: |
         cd generator
         # workaround to allow to find the Qt include dirs for installed standard qt packages
-        QTDIR=-UNDEFINED- ./pythonqt_generator --include-paths=$Qt5_Dir/lib
+        UBSAN_OPTIONS="halt_on_error=1" ASAN_OPTIONS="detect_leaks=0:detect_stack_use_after_return=1:fast_unwind_on_malloc=0" \
+        QTDIR=-UNDEFINED- ./pythonqt_generator --qt-version=${{ steps.versions.outputs.QT_VERSION_FULL }} --include-paths=$Qt5_Dir/lib
 
     - name: Upload Wrappers
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: wrappers_macos${{ steps.versions.outputs.MACOS_VERSION_SHORT }}_qt${{ steps.versions.outputs.QT_VERSION_SHORT }}
         path: generated_cpp
@@ -229,10 +249,10 @@ jobs:
       fail-fast: false
       matrix:
        qt-arch: ['win64_mingw73']
-       python-version: ['3.11']
+       python-version: ['3.10']
        qt-version: ['5.12.*']
        python-arch: ['x64']
-       pythonqtall-config: ['']
+       pythonqtall-config: ['PythonQtCore PythonQtGui PythonQtMultimedia']
 #       msvc-toolset: ['14.0']
        include:
 #         - qt-arch: 'win64_msvc2017_64'
@@ -263,20 +283,21 @@ jobs:
     steps:
 
     - name: Checkout PythonQt
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Reset PATH
-      uses: egor-tensin/cleanup-path@v3
+      uses: egor-tensin/cleanup-path@v4
 
     - name: Install MSVC++
       uses: ilammy/msvc-dev-cmd@v1
       if: ${{ contains(matrix.qt-arch, 'msvc') }}
       with:
-        arch: ${{ matrix.python-arch }}
+        arch: amd64${{ contains(matrix.python-arch, 'x86') && '_x86' || '' }}
 
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
+        aqtversion: '==2.1.*'
         version: ${{ matrix.qt-version }}
         host: 'windows'
         target: 'desktop'
@@ -286,7 +307,7 @@ jobs:
         tools: ${{ contains(matrix.qt-arch, 'mingw') && format('tools_mingw,qt.tools.{0}0', matrix.qt-arch) || '' }}
 
     - name: Setup Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '${{ matrix.python-version }}'
         architecture: ${{ matrix.python-arch }}
@@ -317,11 +338,15 @@ jobs:
       run: |
         qmake -query
         python --version
-        qmake CONFIG+=release CONFIG-=debug_and_release CONFIG-=debug_and_release_target CONFIG+=generator CONFIG+=tests ^
+        qmake CONFIG+=release CONFIG-=debug_and_release CONFIG-=debug_and_release_target ^
+           CONFIG+=generator CONFIG+=tests ^
            "PYTHONQTALL_CONFIG=${{ matrix.pythonqtall-config }}" ^
            "PYTHON_PATH=%pythonLocation%" ^
            "PYTHON_VERSION=${{ steps.versions.outputs.PYTHON_VERSION_SHORT }}" ^
            PythonQt.pro
+        set PYTHONDEVMODE=1
+        set PYTHONASYNCIODEBUG=1
+        set PYTHONWARNINGS=error
         mingw32-make -j 2 && mingw32-make check "TESTARGS=-platform offscreen" ^
           || nmake && nmake check "TESTARGS=-platform offscreen"
 
@@ -333,7 +358,7 @@ jobs:
         pythonqt_generator
 
     - name: Upload Wrappers
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: wrappers_${{ matrix.qt-arch }}_${{ steps.versions.outputs.QT_VERSION_SHORT }}
         path: generated_cpp
