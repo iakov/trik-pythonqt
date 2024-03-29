@@ -2,7 +2,6 @@
 #include <QObject>
 #include <QPixmap>
 #include <QPoint>
-#include <QStringList>
 #include <QUrl>
 #include <QVariant>
 #include <qabstractbutton.h>
@@ -43,13 +42,13 @@
 #include <qfocusframe.h>
 #include <qfont.h>
 #include <qfontcombobox.h>
-#include <qfontdatabase.h>
 #include <qfontinfo.h>
 #include <qfontmetrics.h>
 #include <qgraphicseffect.h>
 #include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qkeysequence.h>
+#include <qlayout.h>
 #include <qlineedit.h>
 #include <qlist.h>
 #include <qlocale.h>
@@ -79,6 +78,91 @@
 #include <qvector.h>
 #include <qwidget.h>
 #include <qwindow.h>
+
+
+
+class PythonQtShell_QCompleter : public QCompleter
+{
+public:
+    PythonQtShell_QCompleter(QAbstractItemModel*  model, QObject*  parent = nullptr):QCompleter(model, parent),_wrapper(nullptr) {};
+    PythonQtShell_QCompleter(QObject*  parent = nullptr):QCompleter(parent),_wrapper(nullptr) {};
+    PythonQtShell_QCompleter(const QStringList&  completions, QObject*  parent = nullptr):QCompleter(completions, parent),_wrapper(nullptr) {};
+
+   ~PythonQtShell_QCompleter() override;
+
+void childEvent(QChildEvent*  event) override;
+void customEvent(QEvent*  event) override;
+bool  event(QEvent*  arg__1) override;
+bool  eventFilter(QObject*  o, QEvent*  e) override;
+QString  pathFromIndex(const QModelIndex&  index) const override;
+QStringList  splitPath(const QString&  path) const override;
+void timerEvent(QTimerEvent*  event) override;
+
+  const QMetaObject* metaObject() const override;
+  int qt_metacall(QMetaObject::Call call, int id, void** args) override;
+  PythonQtInstanceWrapper* _wrapper;
+};
+
+class PythonQtPublicPromoter_QCompleter : public QCompleter
+{ public:
+inline bool  promoted_event(QEvent*  arg__1) { return this->event(arg__1); }
+inline bool  promoted_eventFilter(QObject*  o, QEvent*  e) { return this->eventFilter(o, e); }
+inline bool  py_q_event(QEvent*  arg__1) { return QCompleter::event(arg__1); }
+inline bool  py_q_eventFilter(QObject*  o, QEvent*  e) { return QCompleter::eventFilter(o, e); }
+inline QString  py_q_pathFromIndex(const QModelIndex&  index) const { return QCompleter::pathFromIndex(index); }
+inline QStringList  py_q_splitPath(const QString&  path) const { return QCompleter::splitPath(path); }
+};
+
+class PythonQtWrapper_QCompleter : public QObject
+{ Q_OBJECT
+public:
+Q_ENUMS(CompletionMode ModelSorting )
+enum CompletionMode{
+  PopupCompletion = QCompleter::PopupCompletion,   UnfilteredPopupCompletion = QCompleter::UnfilteredPopupCompletion,   InlineCompletion = QCompleter::InlineCompletion};
+enum ModelSorting{
+  UnsortedModel = QCompleter::UnsortedModel,   CaseSensitivelySortedModel = QCompleter::CaseSensitivelySortedModel,   CaseInsensitivelySortedModel = QCompleter::CaseInsensitivelySortedModel};
+public slots:
+QCompleter* new_QCompleter(QAbstractItemModel*  model, QObject*  parent = nullptr);
+QCompleter* new_QCompleter(QObject*  parent = nullptr);
+QCompleter* new_QCompleter(const QStringList&  completions, QObject*  parent = nullptr);
+void delete_QCompleter(QCompleter* obj) { delete obj; }
+   Qt::CaseSensitivity  caseSensitivity(QCompleter* theWrappedObject) const;
+   int  completionColumn(QCompleter* theWrappedObject) const;
+   int  completionCount(QCompleter* theWrappedObject) const;
+   QCompleter::CompletionMode  completionMode(QCompleter* theWrappedObject) const;
+   QAbstractItemModel*  completionModel(QCompleter* theWrappedObject) const;
+   QString  completionPrefix(QCompleter* theWrappedObject) const;
+   int  completionRole(QCompleter* theWrappedObject) const;
+   QString  currentCompletion(QCompleter* theWrappedObject) const;
+   QModelIndex  currentIndex(QCompleter* theWrappedObject) const;
+   int  currentRow(QCompleter* theWrappedObject) const;
+   bool  py_q_event(QCompleter* theWrappedObject, QEvent*  arg__1){  return (((PythonQtPublicPromoter_QCompleter*)theWrappedObject)->py_q_event(arg__1));}
+   bool  py_q_eventFilter(QCompleter* theWrappedObject, QObject*  o, QEvent*  e){  return (((PythonQtPublicPromoter_QCompleter*)theWrappedObject)->py_q_eventFilter(o, e));}
+   Qt::MatchFlags  filterMode(QCompleter* theWrappedObject) const;
+   int  maxVisibleItems(QCompleter* theWrappedObject) const;
+   QAbstractItemModel*  model(QCompleter* theWrappedObject) const;
+   QCompleter::ModelSorting  modelSorting(QCompleter* theWrappedObject) const;
+   QString  pathFromIndex(QCompleter* theWrappedObject, const QModelIndex&  index) const;
+   QString  py_q_pathFromIndex(QCompleter* theWrappedObject, const QModelIndex&  index) const{  return (((PythonQtPublicPromoter_QCompleter*)theWrappedObject)->py_q_pathFromIndex(index));}
+   QAbstractItemView*  popup(QCompleter* theWrappedObject) const;
+   void setCaseSensitivity(QCompleter* theWrappedObject, Qt::CaseSensitivity  caseSensitivity);
+   void setCompletionColumn(QCompleter* theWrappedObject, int  column);
+   void setCompletionMode(QCompleter* theWrappedObject, QCompleter::CompletionMode  mode);
+   void setCompletionRole(QCompleter* theWrappedObject, int  role);
+   bool  setCurrentRow(QCompleter* theWrappedObject, int  row);
+   void setFilterMode(QCompleter* theWrappedObject, Qt::MatchFlags  filterMode);
+   void setMaxVisibleItems(QCompleter* theWrappedObject, int  maxItems);
+   void setModel(QCompleter* theWrappedObject, PythonQtPassOwnershipToCPP<QAbstractItemModel* >  c);
+   void setModelSorting(QCompleter* theWrappedObject, QCompleter::ModelSorting  sorting);
+   void setPopup(QCompleter* theWrappedObject, PythonQtPassOwnershipToCPP<QAbstractItemView* >  popup);
+   void setWidget(QCompleter* theWrappedObject, QWidget*  widget);
+   QStringList  splitPath(QCompleter* theWrappedObject, const QString&  path) const;
+   QStringList  py_q_splitPath(QCompleter* theWrappedObject, const QString&  path) const{  return (((PythonQtPublicPromoter_QCompleter*)theWrappedObject)->py_q_splitPath(path));}
+   QWidget*  widget(QCompleter* theWrappedObject) const;
+   bool  wrapAround(QCompleter* theWrappedObject) const;
+};
+
+
 
 
 
@@ -115,7 +199,7 @@ public:
    ~PythonQtShell_QContextMenuEvent() override;
 
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QContextMenuEvent : public QObject
@@ -158,7 +242,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QDataWidgetMapper : public QDataWidgetMapper
@@ -260,7 +344,7 @@ void wheelEvent(QWheelEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QDateEdit : public QObject
@@ -342,7 +426,7 @@ void wheelEvent(QWheelEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QDateTimeEdit : public QDateTimeEdit
@@ -464,7 +548,7 @@ public:
    ~PythonQtShell_QDesktopServices();
 
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QDesktopServices : public QObject
@@ -537,7 +621,7 @@ void wheelEvent(QWheelEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QDesktopWidget : public QDesktopWidget
@@ -628,7 +712,7 @@ void wheelEvent(QWheelEvent*  e) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QDial : public QDial
@@ -741,7 +825,7 @@ void wheelEvent(QWheelEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QDialog : public QDialog
@@ -864,7 +948,7 @@ void wheelEvent(QWheelEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QDialogButtonBox : public QDialogButtonBox
@@ -966,7 +1050,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QDirModel : public QDirModel
@@ -1096,7 +1180,7 @@ void wheelEvent(QWheelEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QDockWidget : public QDockWidget
@@ -1209,7 +1293,7 @@ void wheelEvent(QWheelEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QDoubleSpinBox : public QDoubleSpinBox
@@ -1238,8 +1322,10 @@ void delete_QDoubleSpinBox(QDoubleSpinBox* obj) { delete obj; }
    void setPrefix(QDoubleSpinBox* theWrappedObject, const QString&  prefix);
    void setRange(QDoubleSpinBox* theWrappedObject, double  min, double  max);
    void setSingleStep(QDoubleSpinBox* theWrappedObject, double  val);
+   void setStepType(QDoubleSpinBox* theWrappedObject, QAbstractSpinBox::StepType  stepType);
    void setSuffix(QDoubleSpinBox* theWrappedObject, const QString&  suffix);
    double  singleStep(QDoubleSpinBox* theWrappedObject) const;
+   QAbstractSpinBox::StepType  stepType(QDoubleSpinBox* theWrappedObject) const;
    QString  suffix(QDoubleSpinBox* theWrappedObject) const;
    QString  textFromValue(QDoubleSpinBox* theWrappedObject, double  val) const;
    QString  py_q_textFromValue(QDoubleSpinBox* theWrappedObject, double  val) const{  return (((PythonQtPublicPromoter_QDoubleSpinBox*)theWrappedObject)->py_q_textFromValue(val));}
@@ -1272,7 +1358,7 @@ QValidator::State  validate(QString&  arg__1, int&  arg__2) const override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QDoubleValidator : public QDoubleValidator
@@ -1320,7 +1406,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QDrag : public QObject
@@ -1382,7 +1468,7 @@ public:
    ~PythonQtShell_QDragMoveEvent() override;
 
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QDragMoveEvent : public QObject
@@ -1408,7 +1494,7 @@ public:
    ~PythonQtShell_QDropEvent() override;
 
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QDropEvent : public QObject
@@ -1442,7 +1528,7 @@ public:
    ~PythonQtShell_QEnterEvent() override;
 
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QEnterEvent : public QObject
@@ -1526,7 +1612,7 @@ void wheelEvent(QWheelEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QErrorMessage : public QErrorMessage
@@ -1560,7 +1646,7 @@ public:
    ~PythonQtShell_QExposeEvent() override;
 
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QExposeEvent : public QObject
@@ -1636,7 +1722,7 @@ void wheelEvent(QWheelEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QFileDialog : public QFileDialog
@@ -1750,7 +1836,7 @@ QIcon  icon(QFileIconProvider::IconType  type) const override;
 QIcon  icon(const QFileInfo&  info) const override;
 QString  type(const QFileInfo&  info) const override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QFileIconProvider : public QFileIconProvider
@@ -1852,7 +1938,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QFileSystemModel : public QFileSystemModel
@@ -2013,7 +2099,7 @@ void wheelEvent(QWheelEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QFocusFrame : public QFocusFrame
@@ -2102,7 +2188,7 @@ void wheelEvent(QWheelEvent*  e) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QFontComboBox : public QFontComboBox
@@ -2130,55 +2216,6 @@ void delete_QFontComboBox(QFontComboBox* obj) { delete obj; }
    void setWritingSystem(QFontComboBox* theWrappedObject, QFontDatabase::WritingSystem  arg__1);
    QSize  py_q_sizeHint(QFontComboBox* theWrappedObject) const{  return (((PythonQtPublicPromoter_QFontComboBox*)theWrappedObject)->py_q_sizeHint());}
    QFontDatabase::WritingSystem  writingSystem(QFontComboBox* theWrappedObject) const;
-};
-
-
-
-
-
-class PythonQtWrapper_QFontDatabase : public QObject
-{ Q_OBJECT
-public:
-Q_ENUMS(SystemFont WritingSystem )
-enum SystemFont{
-  GeneralFont = QFontDatabase::GeneralFont,   FixedFont = QFontDatabase::FixedFont,   TitleFont = QFontDatabase::TitleFont,   SmallestReadableFont = QFontDatabase::SmallestReadableFont};
-enum WritingSystem{
-  Any = QFontDatabase::Any,   Latin = QFontDatabase::Latin,   Greek = QFontDatabase::Greek,   Cyrillic = QFontDatabase::Cyrillic,   Armenian = QFontDatabase::Armenian,   Hebrew = QFontDatabase::Hebrew,   Arabic = QFontDatabase::Arabic,   Syriac = QFontDatabase::Syriac,   Thaana = QFontDatabase::Thaana,   Devanagari = QFontDatabase::Devanagari,   Bengali = QFontDatabase::Bengali,   Gurmukhi = QFontDatabase::Gurmukhi,   Gujarati = QFontDatabase::Gujarati,   Oriya = QFontDatabase::Oriya,   Tamil = QFontDatabase::Tamil,   Telugu = QFontDatabase::Telugu,   Kannada = QFontDatabase::Kannada,   Malayalam = QFontDatabase::Malayalam,   Sinhala = QFontDatabase::Sinhala,   Thai = QFontDatabase::Thai,   Lao = QFontDatabase::Lao,   Tibetan = QFontDatabase::Tibetan,   Myanmar = QFontDatabase::Myanmar,   Georgian = QFontDatabase::Georgian,   Khmer = QFontDatabase::Khmer,   SimplifiedChinese = QFontDatabase::SimplifiedChinese,   TraditionalChinese = QFontDatabase::TraditionalChinese,   Japanese = QFontDatabase::Japanese,   Korean = QFontDatabase::Korean,   Vietnamese = QFontDatabase::Vietnamese,   Symbol = QFontDatabase::Symbol,   Other = QFontDatabase::Other,   Ogham = QFontDatabase::Ogham,   Runic = QFontDatabase::Runic,   Nko = QFontDatabase::Nko,   WritingSystemsCount = QFontDatabase::WritingSystemsCount};
-public slots:
-QFontDatabase* new_QFontDatabase();
-QFontDatabase* new_QFontDatabase(const QFontDatabase& other) {
-QFontDatabase* a = new QFontDatabase();
-*((QFontDatabase*)a) = other;
-return a; }
-void delete_QFontDatabase(QFontDatabase* obj) { delete obj; }
-   int  static_QFontDatabase_addApplicationFont(const QString&  fileName);
-   int  static_QFontDatabase_addApplicationFontFromData(const QByteArray&  fontData);
-   QStringList  static_QFontDatabase_applicationFontFamilies(int  id);
-   bool  bold(QFontDatabase* theWrappedObject, const QString&  family, const QString&  style) const;
-   QStringList  families(QFontDatabase* theWrappedObject, QFontDatabase::WritingSystem  writingSystem = QFontDatabase::Any) const;
-   QFont  font(QFontDatabase* theWrappedObject, const QString&  family, const QString&  style, int  pointSize) const;
-   bool  hasFamily(QFontDatabase* theWrappedObject, const QString&  family) const;
-   bool  isBitmapScalable(QFontDatabase* theWrappedObject, const QString&  family, const QString&  style = QString()) const;
-   bool  isFixedPitch(QFontDatabase* theWrappedObject, const QString&  family, const QString&  style = QString()) const;
-   bool  isPrivateFamily(QFontDatabase* theWrappedObject, const QString&  family) const;
-   bool  isScalable(QFontDatabase* theWrappedObject, const QString&  family, const QString&  style = QString()) const;
-   bool  isSmoothlyScalable(QFontDatabase* theWrappedObject, const QString&  family, const QString&  style = QString()) const;
-   bool  italic(QFontDatabase* theWrappedObject, const QString&  family, const QString&  style) const;
-   QList<int >  pointSizes(QFontDatabase* theWrappedObject, const QString&  family, const QString&  style = QString());
-   bool  static_QFontDatabase_removeAllApplicationFonts();
-   bool  static_QFontDatabase_removeApplicationFont(int  id);
-   QList<int >  smoothSizes(QFontDatabase* theWrappedObject, const QString&  family, const QString&  style);
-   QList<int >  static_QFontDatabase_standardSizes();
-   QString  styleString(QFontDatabase* theWrappedObject, const QFont&  font);
-   QString  styleString(QFontDatabase* theWrappedObject, const QFontInfo&  fontInfo);
-   QStringList  styles(QFontDatabase* theWrappedObject, const QString&  family) const;
-   bool  static_QFontDatabase_supportsThreadedFontRendering();
-   QFont  static_QFontDatabase_systemFont(QFontDatabase::SystemFont  type);
-   int  weight(QFontDatabase* theWrappedObject, const QString&  family, const QString&  style) const;
-   QString  static_QFontDatabase_writingSystemName(QFontDatabase::WritingSystem  writingSystem);
-   QString  static_QFontDatabase_writingSystemSample(QFontDatabase::WritingSystem  writingSystem);
-   QList<QFontDatabase::WritingSystem >  writingSystems(QFontDatabase* theWrappedObject) const;
-   QList<QFontDatabase::WritingSystem >  writingSystems(QFontDatabase* theWrappedObject, const QString&  family) const;
 };
 
 

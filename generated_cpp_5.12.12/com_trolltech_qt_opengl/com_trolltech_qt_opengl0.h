@@ -26,6 +26,7 @@
 #include <qicon.h>
 #include <qimage.h>
 #include <qkeysequence.h>
+#include <qlayout.h>
 #include <qlist.h>
 #include <qlocale.h>
 #include <qmargins.h>
@@ -103,7 +104,7 @@ public:
    ~PythonQtShell_QGLColormap();
 
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QGLColormap : public QGLColormap
@@ -150,7 +151,7 @@ void doneCurrent() override;
 void makeCurrent() override;
 void swapBuffers() const override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QGLContext : public QGLContext
@@ -329,7 +330,7 @@ QPaintEngine*  paintEngine() const override;
 QPaintDevice*  redirected(QPoint*  offset) const override;
 QPainter*  sharedPainter() const override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QGLFramebufferObject : public QGLFramebufferObject
@@ -538,7 +539,7 @@ QPaintEngine*  paintEngine() const override;
 QPaintDevice*  redirected(QPoint*  offset) const override;
 QPainter*  sharedPainter() const override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QGLPixelBuffer : public QGLPixelBuffer
@@ -602,7 +603,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QGLShader : public QObject
@@ -650,7 +651,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QGLShaderProgram : public QGLShaderProgram
@@ -850,7 +851,7 @@ void wheelEvent(QWheelEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QGLWidget : public QGLWidget

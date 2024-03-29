@@ -54,7 +54,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QJSEngine : public QObject
@@ -73,9 +73,11 @@ void delete_QJSEngine(QJSEngine* obj) { delete obj; }
    QJSValue  importModule(QJSEngine* theWrappedObject, const QString&  fileName);
    void installTranslatorFunctions(QJSEngine* theWrappedObject, const QJSValue&  object = QJSValue());
    QJSValue  newArray(QJSEngine* theWrappedObject, uint  length = 0);
+   QJSValue  newErrorObject(QJSEngine* theWrappedObject, QJSValue::ErrorType  errorType, const QString&  message = QString());
    QJSValue  newObject(QJSEngine* theWrappedObject);
    QJSValue  newQMetaObject(QJSEngine* theWrappedObject, const QMetaObject*  metaObject);
    QJSValue  newQObject(QJSEngine* theWrappedObject, QObject*  object);
+   void throwError(QJSEngine* theWrappedObject, QJSValue::ErrorType  errorType, const QString&  message = QString());
    void throwError(QJSEngine* theWrappedObject, const QString&  message);
 };
 
@@ -86,14 +88,15 @@ void delete_QJSEngine(QJSEngine* obj) { delete obj; }
 class PythonQtWrapper_QJSValue : public QObject
 { Q_OBJECT
 public:
-Q_ENUMS(SpecialValue )
+Q_ENUMS(ErrorType SpecialValue )
+enum ErrorType{
+  NoError = QJSValue::NoError,   GenericError = QJSValue::GenericError,   EvalError = QJSValue::EvalError,   RangeError = QJSValue::RangeError,   ReferenceError = QJSValue::ReferenceError,   SyntaxError = QJSValue::SyntaxError,   TypeError = QJSValue::TypeError,   URIError = QJSValue::URIError};
 enum SpecialValue{
   NullValue = QJSValue::NullValue,   UndefinedValue = QJSValue::UndefinedValue};
 public slots:
 QJSValue* new_QJSValue(QJSValue::SpecialValue  value = QJSValue::UndefinedValue);
 QJSValue* new_QJSValue(bool  value);
 QJSValue* new_QJSValue(const QJSValue&  other);
-QJSValue* new_QJSValue(const QLatin1String&  value);
 QJSValue* new_QJSValue(const QString&  value);
 QJSValue* new_QJSValue(const char*  str);
 QJSValue* new_QJSValue(double  value);
@@ -106,6 +109,7 @@ void delete_QJSValue(QJSValue* obj) { delete obj; }
    bool  deleteProperty(QJSValue* theWrappedObject, const QString&  name);
    QJSEngine*  engine(QJSValue* theWrappedObject) const;
    bool  equals(QJSValue* theWrappedObject, const QJSValue&  other) const;
+   QJSValue::ErrorType  errorType(QJSValue* theWrappedObject) const;
    bool  hasOwnProperty(QJSValue* theWrappedObject, const QString&  name) const;
    bool  hasProperty(QJSValue* theWrappedObject, const QString&  name) const;
    bool  isArray(QJSValue* theWrappedObject) const;
@@ -156,7 +160,7 @@ public:
 
 QUrl  intercept(const QUrl&  path, QQmlAbstractUrlInterceptor::DataType  type) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QQmlAbstractUrlInterceptor : public QQmlAbstractUrlInterceptor
@@ -198,7 +202,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QQmlApplicationEngine : public QObject
@@ -240,7 +244,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QQmlComponent : public QQmlComponent
@@ -302,7 +306,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QQmlContext : public QObject
@@ -369,7 +373,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QQmlEngine : public QQmlEngine
@@ -471,7 +475,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QQmlExpression : public QObject
@@ -513,7 +517,7 @@ public:
 void initializeEngine(QQmlEngine*  engine, const char*  uri) override;
 void registerTypes(const char*  uri) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QQmlExtensionInterface : public QQmlExtensionInterface
@@ -547,7 +551,7 @@ void registerTypes(const char*  uri) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QQmlExtensionPlugin : public QQmlExtensionPlugin
@@ -630,7 +634,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QQmlFileSelector : public QObject
@@ -659,7 +663,7 @@ public:
 
 void incubatingObjectCountChanged(int  arg__1) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QQmlIncubationController : public QQmlIncubationController
@@ -676,6 +680,7 @@ QQmlIncubationController* new_QQmlIncubationController();
 void delete_QQmlIncubationController(QQmlIncubationController* obj) { delete obj; }
    QQmlEngine*  engine(QQmlIncubationController* theWrappedObject) const;
    void incubateFor(QQmlIncubationController* theWrappedObject, int  msecs);
+   void incubateWhile(QQmlIncubationController* theWrappedObject, bool*  flag, int  msecs = 0);
    int  incubatingObjectCount(QQmlIncubationController* theWrappedObject) const;
    void incubatingObjectCountChanged(QQmlIncubationController* theWrappedObject, int  arg__1);
    void py_q_incubatingObjectCountChanged(QQmlIncubationController* theWrappedObject, int  arg__1){  (((PythonQtPublicPromoter_QQmlIncubationController*)theWrappedObject)->py_q_incubatingObjectCountChanged(arg__1));}
@@ -695,7 +700,7 @@ public:
 void setInitialState(QObject*  arg__1) override;
 void statusChanged(QQmlIncubator::Status  arg__1) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QQmlIncubator : public QQmlIncubator
@@ -748,9 +753,7 @@ void delete_QQmlInfo(QQmlInfo* obj) { delete obj; }
    QQmlInfo*  __lshift__(QQmlInfo* theWrappedObject, bool  t);
    QQmlInfo*  __lshift__(QQmlInfo* theWrappedObject, char  t);
    QQmlInfo*  __lshift__(QQmlInfo* theWrappedObject, const QByteArray&  t);
-   QQmlInfo*  __lshift__(QQmlInfo* theWrappedObject, const QLatin1String&  t);
    QQmlInfo*  __lshift__(QQmlInfo* theWrappedObject, const QString&  t);
-   QQmlInfo*  __lshift__(QQmlInfo* theWrappedObject, const QStringRef&  t);
    QQmlInfo*  __lshift__(QQmlInfo* theWrappedObject, const QUrl&  t);
    QQmlInfo*  __lshift__(QQmlInfo* theWrappedObject, const char*  t);
    QQmlInfo*  __lshift__(QQmlInfo* theWrappedObject, const void*  t);
@@ -808,7 +811,7 @@ public:
 
 QNetworkAccessManager*  create(QObject*  parent) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QQmlNetworkAccessManagerFactory : public QQmlNetworkAccessManagerFactory
@@ -840,7 +843,7 @@ public:
 void classBegin() override;
 void componentComplete() override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QQmlParserStatus : public QQmlParserStatus
@@ -936,7 +939,7 @@ QVariant  updateValue(const QString&  key, const QVariant&  input) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QQmlPropertyMap : public QQmlPropertyMap
@@ -978,7 +981,7 @@ public:
 
 void setTarget(const QQmlProperty&  arg__1) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QQmlPropertyValueSource : public QQmlPropertyValueSource
@@ -1032,7 +1035,7 @@ public:
 
 void registerTypes(const char*  uri) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QQmlTypesExtensionInterface : public QQmlTypesExtensionInterface

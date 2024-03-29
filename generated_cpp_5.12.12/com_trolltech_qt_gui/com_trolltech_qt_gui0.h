@@ -1,13 +1,14 @@
 #include <PythonQt.h>
-#include <QAbstractTextDocumentLayout>
 #include <QBasicTimer>
 #include <QFont>
 #include <QFontMetrics>
 #include <QIcon>
+#include <QImage>
 #include <QItemSelection>
 #include <QLocale>
 #include <QObject>
 #include <QPalette>
+#include <QPixmap>
 #include <QSize>
 #include <QStringList>
 #include <QTextCharFormat>
@@ -34,6 +35,7 @@
 #include <qbytearray.h>
 #include <qcalendarwidget.h>
 #include <qcheckbox.h>
+#include <qclipboard.h>
 #include <qcolor.h>
 #include <qcolordialog.h>
 #include <qcolumnview.h>
@@ -59,9 +61,11 @@
 #include <qgraphicstransform.h>
 #include <qgraphicswidget.h>
 #include <qicon.h>
+#include <qimage.h>
 #include <qinputmethod.h>
 #include <qitemselectionmodel.h>
 #include <qkeysequence.h>
+#include <qlayout.h>
 #include <qlayoutitem.h>
 #include <qlineedit.h>
 #include <qlist.h>
@@ -84,6 +88,7 @@
 #include <qprinter.h>
 #include <qrect.h>
 #include <qregion.h>
+#include <qscreen.h>
 #include <qscrollbar.h>
 #include <qsessionmanager.h>
 #include <qsize.h>
@@ -164,7 +169,7 @@ void wheelEvent(QWheelEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QAbstractButton : public QAbstractButton
@@ -292,7 +297,7 @@ bool  supportsExtension(QGraphicsItem::Extension  extension) const override;
 int  type() const override;
 void wheelEvent(QGraphicsSceneWheelEvent*  event) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QAbstractGraphicsShapeItem : public QAbstractGraphicsShapeItem
@@ -344,7 +349,7 @@ void updateEditorGeometry(QWidget*  editor, const QStyleOptionViewItem&  option,
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QAbstractItemDelegate : public QAbstractItemDelegate
@@ -493,7 +498,7 @@ void wheelEvent(QWheelEvent*  arg__1) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QAbstractItemView : public QAbstractItemView
@@ -842,7 +847,7 @@ void wheelEvent(QWheelEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QAbstractPrintDialog : public QAbstractPrintDialog
@@ -938,7 +943,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QAbstractProxyModel : public QAbstractProxyModel
@@ -1077,7 +1082,7 @@ void wheelEvent(QWheelEvent*  arg__1) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QAbstractScrollArea : public QAbstractScrollArea
@@ -1240,7 +1245,7 @@ void wheelEvent(QWheelEvent*  e) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QAbstractSlider : public QAbstractSlider
@@ -1370,7 +1375,7 @@ void wheelEvent(QWheelEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QAbstractSpinBox : public QAbstractSpinBox
@@ -1543,7 +1548,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QAbstractTableModel : public QAbstractTableModel
@@ -1595,7 +1600,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QAbstractTextDocumentLayout : public QAbstractTextDocumentLayout
@@ -1668,7 +1673,7 @@ public:
    ~PythonQtShell_QAbstractTextDocumentLayout__PaintContext();
 
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QAbstractTextDocumentLayout__PaintContext : public QObject
@@ -1701,7 +1706,7 @@ public:
    ~PythonQtShell_QAbstractTextDocumentLayout__Selection();
 
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QAbstractTextDocumentLayout__Selection : public QObject
@@ -1732,7 +1737,7 @@ public:
    ~PythonQtShell_QAccessibleEvent() override;
 
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QAccessibleEvent : public QObject
@@ -1769,7 +1774,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QAction : public QAction
@@ -1875,7 +1880,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QActionGroup : public QObject
@@ -1995,25 +2000,37 @@ class PythonQtShell_QBoxLayout : public QBoxLayout
 public:
     PythonQtShell_QBoxLayout(QBoxLayout::Direction  arg__1, QWidget*  parent = nullptr):QBoxLayout(arg__1, parent),_wrapper(nullptr) {};
 
-   ~PythonQtShell_QBoxLayout();
+   ~PythonQtShell_QBoxLayout() override;
 
 void addItem(QLayoutItem*  arg__1) override;
+void childEvent(QChildEvent*  e) override;
+QSizePolicy::ControlTypes  controlTypes() const override;
 int  count() const override;
+void customEvent(QEvent*  event) override;
+bool  event(QEvent*  event) override;
+bool  eventFilter(QObject*  watched, QEvent*  event) override;
 Qt::Orientations  expandingDirections() const override;
+QRect  geometry() const override;
 bool  hasHeightForWidth() const override;
 int  heightForWidth(int  arg__1) const override;
+int  indexOf(QWidget*  arg__1) const override;
 void invalidate() override;
+bool  isEmpty() const override;
 QLayoutItem*  itemAt(int  arg__1) const override;
+QLayout*  layout() override;
 QSize  maximumSize() const override;
 int  minimumHeightForWidth(int  arg__1) const override;
 QSize  minimumSize() const override;
 void setGeometry(const QRect&  arg__1) override;
 QSize  sizeHint() const override;
+QSpacerItem*  spacerItem() override;
 QLayoutItem*  takeAt(int  arg__1) override;
+void timerEvent(QTimerEvent*  event) override;
+QWidget*  widget() override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QBoxLayout : public QBoxLayout
@@ -2042,49 +2059,40 @@ enum Direction{
 public slots:
 QBoxLayout* new_QBoxLayout(QBoxLayout::Direction  arg__1, QWidget*  parent = nullptr);
 void delete_QBoxLayout(QBoxLayout* obj) { delete obj; }
-   void addItem(QBoxLayout* theWrappedObject, QLayoutItem*  arg__1);
    void py_q_addItem(QBoxLayout* theWrappedObject, QLayoutItem*  arg__1){  (((PythonQtPublicPromoter_QBoxLayout*)theWrappedObject)->py_q_addItem(arg__1));}
+   void addLayout(QBoxLayout* theWrappedObject, PythonQtPassOwnershipToCPP<QLayout* >  layout, int  stretch = 0);
    void addSpacerItem(QBoxLayout* theWrappedObject, PythonQtPassOwnershipToCPP<QSpacerItem* >  spacerItem);
    void addSpacing(QBoxLayout* theWrappedObject, int  size);
    void addStretch(QBoxLayout* theWrappedObject, int  stretch = 0);
    void addStrut(QBoxLayout* theWrappedObject, int  arg__1);
    void addWidget(QBoxLayout* theWrappedObject, PythonQtPassOwnershipToCPP<QWidget* >  arg__1, int  stretch = 0, Qt::Alignment  alignment = Qt::Alignment());
-   int  count(QBoxLayout* theWrappedObject) const;
    int  py_q_count(QBoxLayout* theWrappedObject) const{  return (((PythonQtPublicPromoter_QBoxLayout*)theWrappedObject)->py_q_count());}
    QBoxLayout::Direction  direction(QBoxLayout* theWrappedObject) const;
-   Qt::Orientations  expandingDirections(QBoxLayout* theWrappedObject) const;
    Qt::Orientations  py_q_expandingDirections(QBoxLayout* theWrappedObject) const{  return (((PythonQtPublicPromoter_QBoxLayout*)theWrappedObject)->py_q_expandingDirections());}
-   bool  hasHeightForWidth(QBoxLayout* theWrappedObject) const;
    bool  py_q_hasHeightForWidth(QBoxLayout* theWrappedObject) const{  return (((PythonQtPublicPromoter_QBoxLayout*)theWrappedObject)->py_q_hasHeightForWidth());}
-   int  heightForWidth(QBoxLayout* theWrappedObject, int  arg__1) const;
    int  py_q_heightForWidth(QBoxLayout* theWrappedObject, int  arg__1) const{  return (((PythonQtPublicPromoter_QBoxLayout*)theWrappedObject)->py_q_heightForWidth(arg__1));}
    void insertItem(QBoxLayout* theWrappedObject, int  index, PythonQtPassOwnershipToCPP<QLayoutItem* >  arg__2);
+   void insertLayout(QBoxLayout* theWrappedObject, int  index, PythonQtPassOwnershipToCPP<QLayout* >  layout, int  stretch = 0);
    void insertSpacerItem(QBoxLayout* theWrappedObject, int  index, PythonQtPassOwnershipToCPP<QSpacerItem* >  spacerItem);
    void insertSpacing(QBoxLayout* theWrappedObject, int  index, int  size);
    void insertStretch(QBoxLayout* theWrappedObject, int  index, int  stretch = 0);
    void insertWidget(QBoxLayout* theWrappedObject, int  index, PythonQtPassOwnershipToCPP<QWidget* >  widget, int  stretch = 0, Qt::Alignment  alignment = Qt::Alignment());
-   void invalidate(QBoxLayout* theWrappedObject);
    void py_q_invalidate(QBoxLayout* theWrappedObject){  (((PythonQtPublicPromoter_QBoxLayout*)theWrappedObject)->py_q_invalidate());}
-   QLayoutItem*  itemAt(QBoxLayout* theWrappedObject, int  arg__1) const;
    QLayoutItem*  py_q_itemAt(QBoxLayout* theWrappedObject, int  arg__1) const{  return (((PythonQtPublicPromoter_QBoxLayout*)theWrappedObject)->py_q_itemAt(arg__1));}
-   QSize  maximumSize(QBoxLayout* theWrappedObject) const;
    QSize  py_q_maximumSize(QBoxLayout* theWrappedObject) const{  return (((PythonQtPublicPromoter_QBoxLayout*)theWrappedObject)->py_q_maximumSize());}
-   int  minimumHeightForWidth(QBoxLayout* theWrappedObject, int  arg__1) const;
    int  py_q_minimumHeightForWidth(QBoxLayout* theWrappedObject, int  arg__1) const{  return (((PythonQtPublicPromoter_QBoxLayout*)theWrappedObject)->py_q_minimumHeightForWidth(arg__1));}
-   QSize  minimumSize(QBoxLayout* theWrappedObject) const;
    QSize  py_q_minimumSize(QBoxLayout* theWrappedObject) const{  return (((PythonQtPublicPromoter_QBoxLayout*)theWrappedObject)->py_q_minimumSize());}
    void setDirection(QBoxLayout* theWrappedObject, QBoxLayout::Direction  arg__1);
-   void setGeometry(QBoxLayout* theWrappedObject, const QRect&  arg__1);
    void py_q_setGeometry(QBoxLayout* theWrappedObject, const QRect&  arg__1){  (((PythonQtPublicPromoter_QBoxLayout*)theWrappedObject)->py_q_setGeometry(arg__1));}
    void setSpacing(QBoxLayout* theWrappedObject, int  spacing);
    void setStretch(QBoxLayout* theWrappedObject, int  index, int  stretch);
+   bool  setStretchFactor(QBoxLayout* theWrappedObject, QLayout*  l, int  stretch);
    bool  setStretchFactor(QBoxLayout* theWrappedObject, QWidget*  w, int  stretch);
-   QSize  sizeHint(QBoxLayout* theWrappedObject) const;
    QSize  py_q_sizeHint(QBoxLayout* theWrappedObject) const{  return (((PythonQtPublicPromoter_QBoxLayout*)theWrappedObject)->py_q_sizeHint());}
    int  spacing(QBoxLayout* theWrappedObject) const;
    int  stretch(QBoxLayout* theWrappedObject, int  index) const;
-   QLayoutItem*  takeAt(QBoxLayout* theWrappedObject, int  arg__1);
    QLayoutItem*  py_q_takeAt(QBoxLayout* theWrappedObject, int  arg__1){  return (((PythonQtPublicPromoter_QBoxLayout*)theWrappedObject)->py_q_takeAt(arg__1));}
+    bool __nonzero__(QBoxLayout* obj) { return !obj->isEmpty(); }
 };
 
 
@@ -2106,7 +2114,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QButtonGroup : public QObject
@@ -2187,7 +2195,7 @@ void wheelEvent(QWheelEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QCalendarWidget : public QCalendarWidget
@@ -2320,7 +2328,7 @@ void wheelEvent(QWheelEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QCheckBox : public QCheckBox
@@ -2364,6 +2372,34 @@ void delete_QCheckBox(QCheckBox* obj) { delete obj; }
    void setTristate(QCheckBox* theWrappedObject, bool  y = true);
    QSize  sizeHint(QCheckBox* theWrappedObject) const;
    QSize  py_q_sizeHint(QCheckBox* theWrappedObject) const{  return (((PythonQtPublicPromoter_QCheckBox*)theWrappedObject)->py_q_sizeHint());}
+};
+
+
+
+
+
+class PythonQtWrapper_QClipboard : public QObject
+{ Q_OBJECT
+public:
+Q_ENUMS(Mode )
+enum Mode{
+  Clipboard = QClipboard::Clipboard,   Selection = QClipboard::Selection,   FindBuffer = QClipboard::FindBuffer,   LastMode = QClipboard::LastMode};
+public slots:
+   void clear(QClipboard* theWrappedObject, QClipboard::Mode  mode = QClipboard::Clipboard);
+   QImage  image(QClipboard* theWrappedObject, QClipboard::Mode  mode = QClipboard::Clipboard) const;
+   const QMimeData*  mimeData(QClipboard* theWrappedObject, QClipboard::Mode  mode = QClipboard::Clipboard) const;
+   bool  ownsClipboard(QClipboard* theWrappedObject) const;
+   bool  ownsFindBuffer(QClipboard* theWrappedObject) const;
+   bool  ownsSelection(QClipboard* theWrappedObject) const;
+   QPixmap  pixmap(QClipboard* theWrappedObject, QClipboard::Mode  mode = QClipboard::Clipboard) const;
+   void setImage(QClipboard* theWrappedObject, const QImage&  arg__1, QClipboard::Mode  mode = QClipboard::Clipboard);
+   void setMimeData(QClipboard* theWrappedObject, PythonQtPassOwnershipToCPP<QMimeData* >  data, QClipboard::Mode  mode = QClipboard::Clipboard);
+   void setPixmap(QClipboard* theWrappedObject, const QPixmap&  arg__1, QClipboard::Mode  mode = QClipboard::Clipboard);
+   void setText(QClipboard* theWrappedObject, const QString&  arg__1, QClipboard::Mode  mode = QClipboard::Clipboard);
+   bool  supportsFindBuffer(QClipboard* theWrappedObject) const;
+   bool  supportsSelection(QClipboard* theWrappedObject) const;
+   QString  text(QClipboard* theWrappedObject, QClipboard::Mode  mode = QClipboard::Clipboard) const;
+   QString  text(QClipboard* theWrappedObject, QString&  subtype, QClipboard::Mode  mode = QClipboard::Clipboard) const;
 };
 
 
@@ -2442,7 +2478,7 @@ void wheelEvent(QWheelEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QColorDialog : public QColorDialog
@@ -2588,7 +2624,7 @@ void wheelEvent(QWheelEvent*  arg__1) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QColumnView : public QColumnView
@@ -2722,7 +2758,7 @@ void wheelEvent(QWheelEvent*  e) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QComboBox : public QComboBox
@@ -2916,7 +2952,7 @@ void wheelEvent(QWheelEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QCommandLinkButton : public QCommandLinkButton
@@ -2991,7 +3027,7 @@ void unpolish(QWidget*  widget) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QCommonStyle : public QCommonStyle
@@ -3040,91 +3076,6 @@ void delete_QCommonStyle(QCommonStyle* obj) { delete obj; }
    QRect  py_q_subElementRect(QCommonStyle* theWrappedObject, QStyle::SubElement  r, const QStyleOption*  opt, const QWidget*  widget = nullptr) const{  return (((PythonQtPublicPromoter_QCommonStyle*)theWrappedObject)->py_q_subElementRect(r, opt, widget));}
    void py_q_unpolish(QCommonStyle* theWrappedObject, QApplication*  application){  (((PythonQtPublicPromoter_QCommonStyle*)theWrappedObject)->py_q_unpolish(application));}
    void py_q_unpolish(QCommonStyle* theWrappedObject, QWidget*  widget){  (((PythonQtPublicPromoter_QCommonStyle*)theWrappedObject)->py_q_unpolish(widget));}
-};
-
-
-
-
-
-class PythonQtShell_QCompleter : public QCompleter
-{
-public:
-    PythonQtShell_QCompleter(QAbstractItemModel*  model, QObject*  parent = nullptr):QCompleter(model, parent),_wrapper(nullptr) {};
-    PythonQtShell_QCompleter(QObject*  parent = nullptr):QCompleter(parent),_wrapper(nullptr) {};
-    PythonQtShell_QCompleter(const QStringList&  completions, QObject*  parent = nullptr):QCompleter(completions, parent),_wrapper(nullptr) {};
-
-   ~PythonQtShell_QCompleter() override;
-
-void childEvent(QChildEvent*  event) override;
-void customEvent(QEvent*  event) override;
-bool  event(QEvent*  arg__1) override;
-bool  eventFilter(QObject*  o, QEvent*  e) override;
-QString  pathFromIndex(const QModelIndex&  index) const override;
-QStringList  splitPath(const QString&  path) const override;
-void timerEvent(QTimerEvent*  event) override;
-
-  const QMetaObject* metaObject() const override;
-  int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
-};
-
-class PythonQtPublicPromoter_QCompleter : public QCompleter
-{ public:
-inline bool  promoted_event(QEvent*  arg__1) { return this->event(arg__1); }
-inline bool  promoted_eventFilter(QObject*  o, QEvent*  e) { return this->eventFilter(o, e); }
-inline bool  py_q_event(QEvent*  arg__1) { return QCompleter::event(arg__1); }
-inline bool  py_q_eventFilter(QObject*  o, QEvent*  e) { return QCompleter::eventFilter(o, e); }
-inline QString  py_q_pathFromIndex(const QModelIndex&  index) const { return QCompleter::pathFromIndex(index); }
-inline QStringList  py_q_splitPath(const QString&  path) const { return QCompleter::splitPath(path); }
-};
-
-class PythonQtWrapper_QCompleter : public QObject
-{ Q_OBJECT
-public:
-Q_ENUMS(CompletionMode ModelSorting )
-enum CompletionMode{
-  PopupCompletion = QCompleter::PopupCompletion,   UnfilteredPopupCompletion = QCompleter::UnfilteredPopupCompletion,   InlineCompletion = QCompleter::InlineCompletion};
-enum ModelSorting{
-  UnsortedModel = QCompleter::UnsortedModel,   CaseSensitivelySortedModel = QCompleter::CaseSensitivelySortedModel,   CaseInsensitivelySortedModel = QCompleter::CaseInsensitivelySortedModel};
-public slots:
-QCompleter* new_QCompleter(QAbstractItemModel*  model, QObject*  parent = nullptr);
-QCompleter* new_QCompleter(QObject*  parent = nullptr);
-QCompleter* new_QCompleter(const QStringList&  completions, QObject*  parent = nullptr);
-void delete_QCompleter(QCompleter* obj) { delete obj; }
-   Qt::CaseSensitivity  caseSensitivity(QCompleter* theWrappedObject) const;
-   int  completionColumn(QCompleter* theWrappedObject) const;
-   int  completionCount(QCompleter* theWrappedObject) const;
-   QCompleter::CompletionMode  completionMode(QCompleter* theWrappedObject) const;
-   QAbstractItemModel*  completionModel(QCompleter* theWrappedObject) const;
-   QString  completionPrefix(QCompleter* theWrappedObject) const;
-   int  completionRole(QCompleter* theWrappedObject) const;
-   QString  currentCompletion(QCompleter* theWrappedObject) const;
-   QModelIndex  currentIndex(QCompleter* theWrappedObject) const;
-   int  currentRow(QCompleter* theWrappedObject) const;
-   bool  py_q_event(QCompleter* theWrappedObject, QEvent*  arg__1){  return (((PythonQtPublicPromoter_QCompleter*)theWrappedObject)->py_q_event(arg__1));}
-   bool  py_q_eventFilter(QCompleter* theWrappedObject, QObject*  o, QEvent*  e){  return (((PythonQtPublicPromoter_QCompleter*)theWrappedObject)->py_q_eventFilter(o, e));}
-   Qt::MatchFlags  filterMode(QCompleter* theWrappedObject) const;
-   int  maxVisibleItems(QCompleter* theWrappedObject) const;
-   QAbstractItemModel*  model(QCompleter* theWrappedObject) const;
-   QCompleter::ModelSorting  modelSorting(QCompleter* theWrappedObject) const;
-   QString  pathFromIndex(QCompleter* theWrappedObject, const QModelIndex&  index) const;
-   QString  py_q_pathFromIndex(QCompleter* theWrappedObject, const QModelIndex&  index) const{  return (((PythonQtPublicPromoter_QCompleter*)theWrappedObject)->py_q_pathFromIndex(index));}
-   QAbstractItemView*  popup(QCompleter* theWrappedObject) const;
-   void setCaseSensitivity(QCompleter* theWrappedObject, Qt::CaseSensitivity  caseSensitivity);
-   void setCompletionColumn(QCompleter* theWrappedObject, int  column);
-   void setCompletionMode(QCompleter* theWrappedObject, QCompleter::CompletionMode  mode);
-   void setCompletionRole(QCompleter* theWrappedObject, int  role);
-   bool  setCurrentRow(QCompleter* theWrappedObject, int  row);
-   void setFilterMode(QCompleter* theWrappedObject, Qt::MatchFlags  filterMode);
-   void setMaxVisibleItems(QCompleter* theWrappedObject, int  maxItems);
-   void setModel(QCompleter* theWrappedObject, PythonQtPassOwnershipToCPP<QAbstractItemModel* >  c);
-   void setModelSorting(QCompleter* theWrappedObject, QCompleter::ModelSorting  sorting);
-   void setPopup(QCompleter* theWrappedObject, PythonQtPassOwnershipToCPP<QAbstractItemView* >  popup);
-   void setWidget(QCompleter* theWrappedObject, QWidget*  widget);
-   QStringList  splitPath(QCompleter* theWrappedObject, const QString&  path) const;
-   QStringList  py_q_splitPath(QCompleter* theWrappedObject, const QString&  path) const{  return (((PythonQtPublicPromoter_QCompleter*)theWrappedObject)->py_q_splitPath(path));}
-   QWidget*  widget(QCompleter* theWrappedObject) const;
-   bool  wrapAround(QCompleter* theWrappedObject) const;
 };
 
 

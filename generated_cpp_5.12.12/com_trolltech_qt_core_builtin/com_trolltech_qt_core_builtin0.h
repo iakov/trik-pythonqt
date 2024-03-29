@@ -18,9 +18,11 @@
 #include <qpoint.h>
 #include <qrect.h>
 #include <qregexp.h>
+#include <qregularexpression.h>
 #include <qsize.h>
 #include <qstringlist.h>
 #include <qtextcodec.h>
+#include <qtextdocument.h>
 #include <qtimezone.h>
 #include <qtransform.h>
 #include <qurl.h>
@@ -44,6 +46,7 @@ void delete_QBitArray(QBitArray* obj) { delete obj; }
    int  count(QBitArray* theWrappedObject, bool  on) const;
    void fill(QBitArray* theWrappedObject, bool  val, int  first, int  last);
    bool  fill(QBitArray* theWrappedObject, bool  val, int  size = -1);
+   QBitArray  static_QBitArray_fromBits(const char*  data, qsizetype  len);
    bool  isEmpty(QBitArray* theWrappedObject) const;
    bool  isNull(QBitArray* theWrappedObject) const;
    bool  __ne__(QBitArray* theWrappedObject, const QBitArray&  other) const;
@@ -93,11 +96,8 @@ void delete_QByteArray(QByteArray* obj) { delete obj; }
    QByteArray*  append(QByteArray* theWrappedObject, const char*  s, int  len);
    QByteArray*  append(QByteArray* theWrappedObject, int  count, char  c);
    char  at(QByteArray* theWrappedObject, int  i) const;
-   QByteRef  back(QByteArray* theWrappedObject);
    char  back(QByteArray* theWrappedObject) const;
    int  capacity(QByteArray* theWrappedObject) const;
-   const char*  cbegin(QByteArray* theWrappedObject) const;
-   const char*  cend(QByteArray* theWrappedObject) const;
    void chop(QByteArray* theWrappedObject, int  n);
    QByteArray  chopped(QByteArray* theWrappedObject, int  len) const;
    void clear(QByteArray* theWrappedObject);
@@ -115,7 +115,6 @@ void delete_QByteArray(QByteArray* obj) { delete obj; }
    QByteArray  static_QByteArray_fromBase64(const QByteArray&  base64, QByteArray::Base64Options  options);
    QByteArray  static_QByteArray_fromHex(const QByteArray&  hexEncoded);
    QByteArray  static_QByteArray_fromPercentEncoding(const QByteArray&  pctEncoded, char  percent = '%');
-   QByteRef  front(QByteArray* theWrappedObject);
    char  front(QByteArray* theWrappedObject) const;
    int  indexOf(QByteArray* theWrappedObject, char  c, int  from = 0) const;
    int  indexOf(QByteArray* theWrappedObject, const QByteArray&  a, int  from = 0) const;
@@ -283,7 +282,6 @@ class PythonQtWrapper_QDateTime : public QObject
 public:
 public slots:
 QDateTime* new_QDateTime();
-QDateTime* new_QDateTime(QDateTime&  other);
 QDateTime* new_QDateTime(const QDate&  arg__1);
 QDateTime* new_QDateTime(const QDate&  arg__1, const QTime&  arg__2, Qt::TimeSpec  spec = Qt::LocalTime);
 QDateTime* new_QDateTime(const QDate&  date, const QTime&  time, Qt::TimeSpec  spec, int  offsetSeconds);
@@ -528,7 +526,6 @@ void delete_QLocale(QLocale* obj) { delete obj; }
    QString  pmText(QLocale* theWrappedObject) const;
    QChar  positiveSign(QLocale* theWrappedObject) const;
    QString  quoteString(QLocale* theWrappedObject, const QString&  str, QLocale::QuotationStyle  style = QLocale::StandardQuotation) const;
-   QString  quoteString(QLocale* theWrappedObject, const QStringRef&  str, QLocale::QuotationStyle  style = QLocale::StandardQuotation) const;
    QLocale::Script  script(QLocale* theWrappedObject) const;
    QString  static_QLocale_scriptToString(QLocale::Script  script);
    void static_QLocale_setDefault(const QLocale&  locale);
@@ -554,16 +551,11 @@ void delete_QLocale(QLocale* obj) { delete obj; }
    QDateTime  toDateTime(QLocale* theWrappedObject, const QString&  string, QLocale::FormatType  format = QLocale::LongFormat) const;
    QDateTime  toDateTime(QLocale* theWrappedObject, const QString&  string, const QString&  format) const;
    double  toDouble(QLocale* theWrappedObject, const QString&  s, bool*  ok = nullptr) const;
-   double  toDouble(QLocale* theWrappedObject, const QStringRef&  s, bool*  ok = nullptr) const;
    float  toFloat(QLocale* theWrappedObject, const QString&  s, bool*  ok = nullptr) const;
-   float  toFloat(QLocale* theWrappedObject, const QStringRef&  s, bool*  ok = nullptr) const;
    int  toInt(QLocale* theWrappedObject, const QString&  s, bool*  ok = nullptr) const;
-   int  toInt(QLocale* theWrappedObject, const QStringRef&  s, bool*  ok = nullptr) const;
    qlonglong  toLongLong(QLocale* theWrappedObject, const QString&  s, bool*  ok = nullptr) const;
-   qlonglong  toLongLong(QLocale* theWrappedObject, const QStringRef&  s, bool*  ok = nullptr) const;
    QString  toLower(QLocale* theWrappedObject, const QString&  str) const;
    short  toShort(QLocale* theWrappedObject, const QString&  s, bool*  ok = nullptr) const;
-   short  toShort(QLocale* theWrappedObject, const QStringRef&  s, bool*  ok = nullptr) const;
    QString  toString(QLocale* theWrappedObject, const QDate&  date, QLocale::FormatType  format = QLocale::LongFormat) const;
    QString  toString(QLocale* theWrappedObject, const QDate&  date, const QString&  formatStr) const;
    QString  toString(QLocale* theWrappedObject, const QDateTime&  dateTime, QLocale::FormatType  format = QLocale::LongFormat) const;
@@ -578,11 +570,8 @@ void delete_QLocale(QLocale* obj) { delete obj; }
    QTime  toTime(QLocale* theWrappedObject, const QString&  string, QLocale::FormatType  arg__2 = QLocale::LongFormat) const;
    QTime  toTime(QLocale* theWrappedObject, const QString&  string, const QString&  format) const;
    uint  toUInt(QLocale* theWrappedObject, const QString&  s, bool*  ok = nullptr) const;
-   uint  toUInt(QLocale* theWrappedObject, const QStringRef&  s, bool*  ok = nullptr) const;
    qulonglong  toULongLong(QLocale* theWrappedObject, const QString&  s, bool*  ok = nullptr) const;
-   qulonglong  toULongLong(QLocale* theWrappedObject, const QStringRef&  s, bool*  ok = nullptr) const;
    ushort  toUShort(QLocale* theWrappedObject, const QString&  s, bool*  ok = nullptr) const;
-   ushort  toUShort(QLocale* theWrappedObject, const QStringRef&  s, bool*  ok = nullptr) const;
    QString  toUpper(QLocale* theWrappedObject, const QString&  str) const;
    QStringList  uiLanguages(QLocale* theWrappedObject) const;
    QList<Qt::DayOfWeek >  weekdays(QLocale* theWrappedObject) const;
@@ -910,6 +899,53 @@ void delete_QRegExp(QRegExp* obj) { delete obj; }
    void swap(QRegExp* theWrappedObject, QRegExp&  other);
     QString py_toString(QRegExp*);
     bool __nonzero__(QRegExp* obj) { return !obj->isEmpty(); }
+};
+
+
+
+
+
+class PythonQtWrapper_QRegularExpression : public QObject
+{ Q_OBJECT
+public:
+Q_ENUMS(MatchOption MatchType PatternOption )
+Q_FLAGS(MatchOptions PatternOptions )
+enum MatchOption{
+  NoMatchOption = QRegularExpression::NoMatchOption,   AnchoredMatchOption = QRegularExpression::AnchoredMatchOption,   DontCheckSubjectStringMatchOption = QRegularExpression::DontCheckSubjectStringMatchOption};
+enum MatchType{
+  NormalMatch = QRegularExpression::NormalMatch,   PartialPreferCompleteMatch = QRegularExpression::PartialPreferCompleteMatch,   PartialPreferFirstMatch = QRegularExpression::PartialPreferFirstMatch,   NoMatch = QRegularExpression::NoMatch};
+enum PatternOption{
+  NoPatternOption = QRegularExpression::NoPatternOption,   CaseInsensitiveOption = QRegularExpression::CaseInsensitiveOption,   DotMatchesEverythingOption = QRegularExpression::DotMatchesEverythingOption,   MultilineOption = QRegularExpression::MultilineOption,   ExtendedPatternSyntaxOption = QRegularExpression::ExtendedPatternSyntaxOption,   InvertedGreedinessOption = QRegularExpression::InvertedGreedinessOption,   DontCaptureOption = QRegularExpression::DontCaptureOption,   UseUnicodePropertiesOption = QRegularExpression::UseUnicodePropertiesOption,   OptimizeOnFirstUsageOption = QRegularExpression::OptimizeOnFirstUsageOption,   DontAutomaticallyOptimizeOption = QRegularExpression::DontAutomaticallyOptimizeOption};
+Q_DECLARE_FLAGS(MatchOptions, MatchOption)
+Q_DECLARE_FLAGS(PatternOptions, PatternOption)
+public slots:
+QRegularExpression* new_QRegularExpression();
+QRegularExpression* new_QRegularExpression(const QRegularExpression&  re);
+QRegularExpression* new_QRegularExpression(const QString&  pattern, QRegularExpression::PatternOptions  options = QRegularExpression::NoPatternOption);
+void delete_QRegularExpression(QRegularExpression* obj) { delete obj; }
+   QString  static_QRegularExpression_anchoredPattern(const QString&  expression);
+   int  captureCount(QRegularExpression* theWrappedObject) const;
+   QString  errorString(QRegularExpression* theWrappedObject) const;
+   QString  static_QRegularExpression_escape(const QString&  str);
+   QRegularExpressionMatchIterator  globalMatch(QRegularExpression* theWrappedObject, const QString&  subject, int  offset = 0, QRegularExpression::MatchType  matchType = QRegularExpression::NormalMatch, QRegularExpression::MatchOptions  matchOptions = QRegularExpression::NoMatchOption) const;
+   bool  isValid(QRegularExpression* theWrappedObject) const;
+   QRegularExpressionMatch  match(QRegularExpression* theWrappedObject, const QString&  subject, int  offset = 0, QRegularExpression::MatchType  matchType = QRegularExpression::NormalMatch, QRegularExpression::MatchOptions  matchOptions = QRegularExpression::NoMatchOption) const;
+   QStringList  namedCaptureGroups(QRegularExpression* theWrappedObject) const;
+   bool  __ne__(QRegularExpression* theWrappedObject, const QRegularExpression&  re) const;
+   void writeTo(QRegularExpression* theWrappedObject, QDataStream&  out);
+   QRegularExpression*  operator_assign(QRegularExpression* theWrappedObject, const QRegularExpression&  re);
+   bool  __eq__(QRegularExpression* theWrappedObject, const QRegularExpression&  re) const;
+   void readFrom(QRegularExpression* theWrappedObject, QDataStream&  in);
+   void optimize(QRegularExpression* theWrappedObject) const;
+   QString  pattern(QRegularExpression* theWrappedObject) const;
+   int  patternErrorOffset(QRegularExpression* theWrappedObject) const;
+   QRegularExpression::PatternOptions  patternOptions(QRegularExpression* theWrappedObject) const;
+   void setPattern(QRegularExpression* theWrappedObject, const QString&  pattern);
+   void setPatternOptions(QRegularExpression* theWrappedObject, QRegularExpression::PatternOptions  options);
+   void swap(QRegularExpression* theWrappedObject, QRegularExpression&  other);
+   QString  static_QRegularExpression_wildcardToRegularExpression(const QString&  str);
+    QString py_toString(QRegularExpression*);
+    bool __nonzero__(QRegularExpression* obj) { return obj->isValid(); }
 };
 
 

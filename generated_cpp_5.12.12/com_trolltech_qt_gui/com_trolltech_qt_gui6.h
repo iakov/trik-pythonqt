@@ -1,14 +1,12 @@
 #include <PythonQt.h>
-#include <QAbstractTextDocumentLayout>
 #include <QObject>
 #include <QPainterPath>
 #include <QPixmap>
-#include <QPrinterInfo>
-#include <QTextEdit>
 #include <QVarLengthArray>
 #include <QVariant>
 #include <QWidget>
 #include <qabstractprintdialog.h>
+#include <qabstracttextdocumentlayout.h>
 #include <qaction.h>
 #include <qbackingstore.h>
 #include <qbitmap.h>
@@ -31,6 +29,7 @@
 #include <qimage.h>
 #include <qiodevice.h>
 #include <qkeysequence.h>
+#include <qlayout.h>
 #include <qline.h>
 #include <qlist.h>
 #include <qlocale.h>
@@ -42,12 +41,13 @@
 #include <qobject.h>
 #include <qpagedpaintdevice.h>
 #include <qpagelayout.h>
+#include <qpagesetupdialog.h>
 #include <qpagesize.h>
 #include <qpaintdevice.h>
+#include <qpaintdevicewindow.h>
 #include <qpaintengine.h>
 #include <qpainter.h>
 #include <qpainterpath.h>
-#include <qpair.h>
 #include <qpalette.h>
 #include <qpdfwriter.h>
 #include <qpen.h>
@@ -62,21 +62,20 @@
 #include <qprintdialog.h>
 #include <qprintengine.h>
 #include <qprinter.h>
-#include <qprinterinfo.h>
-#include <qprintpreviewdialog.h>
-#include <qprintpreviewwidget.h>
 #include <qrect.h>
 #include <qregexp.h>
 #include <qregion.h>
+#include <qscreen.h>
 #include <qscrollbar.h>
 #include <qsize.h>
 #include <qsizepolicy.h>
 #include <qstatictext.h>
-#include <qstringlist.h>
 #include <qstyle.h>
 #include <qstyleoption.h>
+#include <qsurfaceformat.h>
 #include <qtextcursor.h>
 #include <qtextdocument.h>
+#include <qtextedit.h>
 #include <qtextformat.h>
 #include <qtextlayout.h>
 #include <qtextobject.h>
@@ -90,26 +89,202 @@
 
 
 
-class PythonQtShell_QPagedPaintDevice : public QPagedPaintDevice
+class PythonQtWrapper_QPageLayout : public QObject
+{ Q_OBJECT
+public:
+Q_ENUMS(Mode Orientation Unit )
+enum Mode{
+  StandardMode = QPageLayout::StandardMode,   FullPageMode = QPageLayout::FullPageMode};
+enum Orientation{
+  Portrait = QPageLayout::Portrait,   Landscape = QPageLayout::Landscape};
+enum Unit{
+  Millimeter = QPageLayout::Millimeter,   Point = QPageLayout::Point,   Inch = QPageLayout::Inch,   Pica = QPageLayout::Pica,   Didot = QPageLayout::Didot,   Cicero = QPageLayout::Cicero};
+public slots:
+QPageLayout* new_QPageLayout();
+QPageLayout* new_QPageLayout(const QPageLayout&  other);
+QPageLayout* new_QPageLayout(const QPageSize&  pageSize, QPageLayout::Orientation  orientation, const QMarginsF&  margins, QPageLayout::Unit  units = QPageLayout::Point, const QMarginsF&  minMargins = QMarginsF(0, 0, 0, 0));
+void delete_QPageLayout(QPageLayout* obj) { delete obj; }
+   QRectF  fullRect(QPageLayout* theWrappedObject) const;
+   QRectF  fullRect(QPageLayout* theWrappedObject, QPageLayout::Unit  units) const;
+   QRect  fullRectPixels(QPageLayout* theWrappedObject, int  resolution) const;
+   QRect  fullRectPoints(QPageLayout* theWrappedObject) const;
+   bool  isEquivalentTo(QPageLayout* theWrappedObject, const QPageLayout&  other) const;
+   bool  isValid(QPageLayout* theWrappedObject) const;
+   QMarginsF  margins(QPageLayout* theWrappedObject) const;
+   QMarginsF  margins(QPageLayout* theWrappedObject, QPageLayout::Unit  units) const;
+   QMargins  marginsPixels(QPageLayout* theWrappedObject, int  resolution) const;
+   QMargins  marginsPoints(QPageLayout* theWrappedObject) const;
+   QMarginsF  maximumMargins(QPageLayout* theWrappedObject) const;
+   QMarginsF  minimumMargins(QPageLayout* theWrappedObject) const;
+   QPageLayout::Mode  mode(QPageLayout* theWrappedObject) const;
+   bool  __ne__(QPageLayout* theWrappedObject, const QPageLayout&  rhs);
+   QPageLayout*  operator_assign(QPageLayout* theWrappedObject, const QPageLayout&  other);
+   bool  __eq__(QPageLayout* theWrappedObject, const QPageLayout&  rhs);
+   QPageLayout::Orientation  orientation(QPageLayout* theWrappedObject) const;
+   QPageSize  pageSize(QPageLayout* theWrappedObject) const;
+   QRectF  paintRect(QPageLayout* theWrappedObject) const;
+   QRectF  paintRect(QPageLayout* theWrappedObject, QPageLayout::Unit  units) const;
+   QRect  paintRectPixels(QPageLayout* theWrappedObject, int  resolution) const;
+   QRect  paintRectPoints(QPageLayout* theWrappedObject) const;
+   bool  setBottomMargin(QPageLayout* theWrappedObject, qreal  bottomMargin);
+   bool  setLeftMargin(QPageLayout* theWrappedObject, qreal  leftMargin);
+   bool  setMargins(QPageLayout* theWrappedObject, const QMarginsF&  margins);
+   void setMinimumMargins(QPageLayout* theWrappedObject, const QMarginsF&  minMargins);
+   void setMode(QPageLayout* theWrappedObject, QPageLayout::Mode  mode);
+   void setOrientation(QPageLayout* theWrappedObject, QPageLayout::Orientation  orientation);
+   void setPageSize(QPageLayout* theWrappedObject, const QPageSize&  pageSize, const QMarginsF&  minMargins = QMarginsF(0, 0, 0, 0));
+   bool  setRightMargin(QPageLayout* theWrappedObject, qreal  rightMargin);
+   bool  setTopMargin(QPageLayout* theWrappedObject, qreal  topMargin);
+   void setUnits(QPageLayout* theWrappedObject, QPageLayout::Unit  units);
+   void swap(QPageLayout* theWrappedObject, QPageLayout&  other);
+   QPageLayout::Unit  units(QPageLayout* theWrappedObject) const;
+    QString py_toString(QPageLayout*);
+    bool __nonzero__(QPageLayout* obj) { return obj->isValid(); }
+};
+
+
+
+
+
+class PythonQtShell_QPageSetupDialog : public QPageSetupDialog
 {
 public:
-    PythonQtShell_QPagedPaintDevice():QPagedPaintDevice(),_wrapper(nullptr) {};
+    PythonQtShell_QPageSetupDialog(QPrinter*  printer, QWidget*  parent = nullptr):QPageSetupDialog(printer, parent),_wrapper(nullptr) {};
+    PythonQtShell_QPageSetupDialog(QWidget*  parent = nullptr):QPageSetupDialog(parent),_wrapper(nullptr) {};
 
-   ~PythonQtShell_QPagedPaintDevice() override;
+   ~PythonQtShell_QPageSetupDialog() override;
 
+void accept() override;
+void actionEvent(QActionEvent*  event) override;
+void changeEvent(QEvent*  arg__1) override;
+void childEvent(QChildEvent*  event) override;
+void closeEvent(QCloseEvent*  arg__1) override;
+void contextMenuEvent(QContextMenuEvent*  arg__1) override;
+void customEvent(QEvent*  event) override;
 int  devType() const override;
+void done(int  result) override;
+void dragEnterEvent(QDragEnterEvent*  event) override;
+void dragLeaveEvent(QDragLeaveEvent*  event) override;
+void dragMoveEvent(QDragMoveEvent*  event) override;
+void dropEvent(QDropEvent*  event) override;
+void enterEvent(QEvent*  event) override;
+bool  event(QEvent*  event) override;
+bool  eventFilter(QObject*  arg__1, QEvent*  arg__2) override;
+int  exec() override;
+void focusInEvent(QFocusEvent*  event) override;
+bool  focusNextPrevChild(bool  next) override;
+void focusOutEvent(QFocusEvent*  event) override;
+bool  hasHeightForWidth() const override;
+int  heightForWidth(int  arg__1) const override;
+void hideEvent(QHideEvent*  event) override;
 void initPainter(QPainter*  painter) const override;
-int  metric(QPaintDevice::PaintDeviceMetric  metric) const override;
-bool  newPage() override;
+void inputMethodEvent(QInputMethodEvent*  arg__1) override;
+QVariant  inputMethodQuery(Qt::InputMethodQuery  arg__1) const override;
+void keyPressEvent(QKeyEvent*  arg__1) override;
+void keyReleaseEvent(QKeyEvent*  event) override;
+void leaveEvent(QEvent*  event) override;
+int  metric(QPaintDevice::PaintDeviceMetric  arg__1) const override;
+QSize  minimumSizeHint() const override;
+void mouseDoubleClickEvent(QMouseEvent*  event) override;
+void mouseMoveEvent(QMouseEvent*  event) override;
+void mousePressEvent(QMouseEvent*  event) override;
+void mouseReleaseEvent(QMouseEvent*  event) override;
+void moveEvent(QMoveEvent*  event) override;
+bool  nativeEvent(const QByteArray&  eventType, void*  message, long*  result) override;
 QPaintEngine*  paintEngine() const override;
+void paintEvent(QPaintEvent*  event) override;
 QPaintDevice*  redirected(QPoint*  offset) const override;
-void setMargins(const QPagedPaintDevice::Margins&  margins) override;
-void setPageSize(QPagedPaintDevice::PageSize  size) override;
-void setPageSizeMM(const QSizeF&  size) override;
+void reject() override;
+void resizeEvent(QResizeEvent*  arg__1) override;
+void setVisible(bool  visible) override;
 QPainter*  sharedPainter() const override;
+void showEvent(QShowEvent*  arg__1) override;
+QSize  sizeHint() const override;
+void tabletEvent(QTabletEvent*  event) override;
+void timerEvent(QTimerEvent*  event) override;
+void wheelEvent(QWheelEvent*  event) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  const QMetaObject* metaObject() const override;
+  int qt_metacall(QMetaObject::Call call, int id, void** args) override;
+  PythonQtInstanceWrapper* _wrapper;
 };
+
+class PythonQtPublicPromoter_QPageSetupDialog : public QPageSetupDialog
+{ public:
+inline void py_q_done(int  result) { QPageSetupDialog::done(result); }
+inline int  py_q_exec() { return QPageSetupDialog::exec(); }
+};
+
+class PythonQtWrapper_QPageSetupDialog : public QObject
+{ Q_OBJECT
+public:
+public slots:
+QPageSetupDialog* new_QPageSetupDialog(QPrinter*  printer, QWidget*  parent = nullptr);
+QPageSetupDialog* new_QPageSetupDialog(QWidget*  parent = nullptr);
+void delete_QPageSetupDialog(QPageSetupDialog* obj) { delete obj; }
+   void py_q_done(QPageSetupDialog* theWrappedObject, int  result){  (((PythonQtPublicPromoter_QPageSetupDialog*)theWrappedObject)->py_q_done(result));}
+   int  py_q_exec(QPageSetupDialog* theWrappedObject){  return (((PythonQtPublicPromoter_QPageSetupDialog*)theWrappedObject)->py_q_exec());}
+   void open(QPageSetupDialog* theWrappedObject, QObject*  receiver, const char*  member);
+   QPrinter*  printer(QPageSetupDialog* theWrappedObject);
+};
+
+
+
+
+
+class PythonQtWrapper_QPageSize : public QObject
+{ Q_OBJECT
+public:
+Q_ENUMS(PageSizeId SizeMatchPolicy Unit )
+enum PageSizeId{
+  A4 = QPageSize::A4,   B5 = QPageSize::B5,   Letter = QPageSize::Letter,   Legal = QPageSize::Legal,   Executive = QPageSize::Executive,   A0 = QPageSize::A0,   A1 = QPageSize::A1,   A2 = QPageSize::A2,   A3 = QPageSize::A3,   A5 = QPageSize::A5,   A6 = QPageSize::A6,   A7 = QPageSize::A7,   A8 = QPageSize::A8,   A9 = QPageSize::A9,   B0 = QPageSize::B0,   B1 = QPageSize::B1,   B10 = QPageSize::B10,   B2 = QPageSize::B2,   B3 = QPageSize::B3,   B4 = QPageSize::B4,   B6 = QPageSize::B6,   B7 = QPageSize::B7,   B8 = QPageSize::B8,   B9 = QPageSize::B9,   C5E = QPageSize::C5E,   Comm10E = QPageSize::Comm10E,   DLE = QPageSize::DLE,   Folio = QPageSize::Folio,   Ledger = QPageSize::Ledger,   Tabloid = QPageSize::Tabloid,   Custom = QPageSize::Custom,   A10 = QPageSize::A10,   A3Extra = QPageSize::A3Extra,   A4Extra = QPageSize::A4Extra,   A4Plus = QPageSize::A4Plus,   A4Small = QPageSize::A4Small,   A5Extra = QPageSize::A5Extra,   B5Extra = QPageSize::B5Extra,   JisB0 = QPageSize::JisB0,   JisB1 = QPageSize::JisB1,   JisB2 = QPageSize::JisB2,   JisB3 = QPageSize::JisB3,   JisB4 = QPageSize::JisB4,   JisB5 = QPageSize::JisB5,   JisB6 = QPageSize::JisB6,   JisB7 = QPageSize::JisB7,   JisB8 = QPageSize::JisB8,   JisB9 = QPageSize::JisB9,   JisB10 = QPageSize::JisB10,   AnsiC = QPageSize::AnsiC,   AnsiD = QPageSize::AnsiD,   AnsiE = QPageSize::AnsiE,   LegalExtra = QPageSize::LegalExtra,   LetterExtra = QPageSize::LetterExtra,   LetterPlus = QPageSize::LetterPlus,   LetterSmall = QPageSize::LetterSmall,   TabloidExtra = QPageSize::TabloidExtra,   ArchA = QPageSize::ArchA,   ArchB = QPageSize::ArchB,   ArchC = QPageSize::ArchC,   ArchD = QPageSize::ArchD,   ArchE = QPageSize::ArchE,   Imperial7x9 = QPageSize::Imperial7x9,   Imperial8x10 = QPageSize::Imperial8x10,   Imperial9x11 = QPageSize::Imperial9x11,   Imperial9x12 = QPageSize::Imperial9x12,   Imperial10x11 = QPageSize::Imperial10x11,   Imperial10x13 = QPageSize::Imperial10x13,   Imperial10x14 = QPageSize::Imperial10x14,   Imperial12x11 = QPageSize::Imperial12x11,   Imperial15x11 = QPageSize::Imperial15x11,   ExecutiveStandard = QPageSize::ExecutiveStandard,   Note = QPageSize::Note,   Quarto = QPageSize::Quarto,   Statement = QPageSize::Statement,   SuperA = QPageSize::SuperA,   SuperB = QPageSize::SuperB,   Postcard = QPageSize::Postcard,   DoublePostcard = QPageSize::DoublePostcard,   Prc16K = QPageSize::Prc16K,   Prc32K = QPageSize::Prc32K,   Prc32KBig = QPageSize::Prc32KBig,   FanFoldUS = QPageSize::FanFoldUS,   FanFoldGerman = QPageSize::FanFoldGerman,   FanFoldGermanLegal = QPageSize::FanFoldGermanLegal,   EnvelopeB4 = QPageSize::EnvelopeB4,   EnvelopeB5 = QPageSize::EnvelopeB5,   EnvelopeB6 = QPageSize::EnvelopeB6,   EnvelopeC0 = QPageSize::EnvelopeC0,   EnvelopeC1 = QPageSize::EnvelopeC1,   EnvelopeC2 = QPageSize::EnvelopeC2,   EnvelopeC3 = QPageSize::EnvelopeC3,   EnvelopeC4 = QPageSize::EnvelopeC4,   EnvelopeC6 = QPageSize::EnvelopeC6,   EnvelopeC65 = QPageSize::EnvelopeC65,   EnvelopeC7 = QPageSize::EnvelopeC7,   Envelope9 = QPageSize::Envelope9,   Envelope11 = QPageSize::Envelope11,   Envelope12 = QPageSize::Envelope12,   Envelope14 = QPageSize::Envelope14,   EnvelopeMonarch = QPageSize::EnvelopeMonarch,   EnvelopePersonal = QPageSize::EnvelopePersonal,   EnvelopeChou3 = QPageSize::EnvelopeChou3,   EnvelopeChou4 = QPageSize::EnvelopeChou4,   EnvelopeInvite = QPageSize::EnvelopeInvite,   EnvelopeItalian = QPageSize::EnvelopeItalian,   EnvelopeKaku2 = QPageSize::EnvelopeKaku2,   EnvelopeKaku3 = QPageSize::EnvelopeKaku3,   EnvelopePrc1 = QPageSize::EnvelopePrc1,   EnvelopePrc2 = QPageSize::EnvelopePrc2,   EnvelopePrc3 = QPageSize::EnvelopePrc3,   EnvelopePrc4 = QPageSize::EnvelopePrc4,   EnvelopePrc5 = QPageSize::EnvelopePrc5,   EnvelopePrc6 = QPageSize::EnvelopePrc6,   EnvelopePrc7 = QPageSize::EnvelopePrc7,   EnvelopePrc8 = QPageSize::EnvelopePrc8,   EnvelopePrc9 = QPageSize::EnvelopePrc9,   EnvelopePrc10 = QPageSize::EnvelopePrc10,   EnvelopeYou4 = QPageSize::EnvelopeYou4,   LastPageSize = QPageSize::LastPageSize,   NPageSize = QPageSize::NPageSize,   NPaperSize = QPageSize::NPaperSize,   AnsiA = QPageSize::AnsiA,   AnsiB = QPageSize::AnsiB,   EnvelopeC5 = QPageSize::EnvelopeC5,   EnvelopeDL = QPageSize::EnvelopeDL,   Envelope10 = QPageSize::Envelope10};
+enum SizeMatchPolicy{
+  FuzzyMatch = QPageSize::FuzzyMatch,   FuzzyOrientationMatch = QPageSize::FuzzyOrientationMatch,   ExactMatch = QPageSize::ExactMatch};
+enum Unit{
+  Millimeter = QPageSize::Millimeter,   Point = QPageSize::Point,   Inch = QPageSize::Inch,   Pica = QPageSize::Pica,   Didot = QPageSize::Didot,   Cicero = QPageSize::Cicero};
+public slots:
+QPageSize* new_QPageSize();
+QPageSize* new_QPageSize(QPageSize::PageSizeId  pageSizeId);
+QPageSize* new_QPageSize(const QPageSize&  other);
+QPageSize* new_QPageSize(const QSize&  pointSize, const QString&  name = QString(), QPageSize::SizeMatchPolicy  matchPolicy = QPageSize::FuzzyMatch);
+QPageSize* new_QPageSize(const QSizeF&  size, QPageSize::Unit  units, const QString&  name = QString(), QPageSize::SizeMatchPolicy  matchPolicy = QPageSize::FuzzyMatch);
+void delete_QPageSize(QPageSize* obj) { delete obj; }
+   QSizeF  definitionSize(QPageSize* theWrappedObject) const;
+   QSizeF  static_QPageSize_definitionSize(QPageSize::PageSizeId  pageSizeId);
+   QPageSize::Unit  definitionUnits(QPageSize* theWrappedObject) const;
+   QPageSize::Unit  static_QPageSize_definitionUnits(QPageSize::PageSizeId  pageSizeId);
+   QPageSize::PageSizeId  id(QPageSize* theWrappedObject) const;
+   QPageSize::PageSizeId  static_QPageSize_id(const QSize&  pointSize, QPageSize::SizeMatchPolicy  matchPolicy = QPageSize::FuzzyMatch);
+   QPageSize::PageSizeId  static_QPageSize_id(const QSizeF&  size, QPageSize::Unit  units, QPageSize::SizeMatchPolicy  matchPolicy = QPageSize::FuzzyMatch);
+   QPageSize::PageSizeId  static_QPageSize_id(int  windowsId);
+   bool  isEquivalentTo(QPageSize* theWrappedObject, const QPageSize&  other) const;
+   bool  isValid(QPageSize* theWrappedObject) const;
+   QString  key(QPageSize* theWrappedObject) const;
+   QString  static_QPageSize_key(QPageSize::PageSizeId  pageSizeId);
+   QString  name(QPageSize* theWrappedObject) const;
+   QString  static_QPageSize_name(QPageSize::PageSizeId  pageSizeId);
+   bool  __ne__(QPageSize* theWrappedObject, const QPageSize&  rhs);
+   QPageSize*  operator_assign(QPageSize* theWrappedObject, const QPageSize&  other);
+   bool  __eq__(QPageSize* theWrappedObject, const QPageSize&  rhs);
+   QRectF  rect(QPageSize* theWrappedObject, QPageSize::Unit  units) const;
+   QRect  rectPixels(QPageSize* theWrappedObject, int  resolution) const;
+   QRect  rectPoints(QPageSize* theWrappedObject) const;
+   QSizeF  static_QPageSize_size(QPageSize::PageSizeId  pageSizeId, QPageSize::Unit  units);
+   QSizeF  size(QPageSize* theWrappedObject, QPageSize::Unit  units) const;
+   QSize  static_QPageSize_sizePixels(QPageSize::PageSizeId  pageSizeId, int  resolution);
+   QSize  sizePixels(QPageSize* theWrappedObject, int  resolution) const;
+   QSize  sizePoints(QPageSize* theWrappedObject) const;
+   QSize  static_QPageSize_sizePoints(QPageSize::PageSizeId  pageSizeId);
+   void swap(QPageSize* theWrappedObject, QPageSize&  other);
+   int  windowsId(QPageSize* theWrappedObject) const;
+   int  static_QPageSize_windowsId(QPageSize::PageSizeId  pageSizeId);
+    QString py_toString(QPageSize*);
+    bool __nonzero__(QPageSize* obj) { return obj->isValid(); }
+};
+
+
+
+
 
 class PythonQtPublicPromoter_QPagedPaintDevice : public QPagedPaintDevice
 { public:
@@ -129,7 +304,6 @@ enum PageSize{
 enum PdfVersion{
   PdfVersion_1_4 = QPagedPaintDevice::PdfVersion_1_4,   PdfVersion_A1b = QPagedPaintDevice::PdfVersion_A1b,   PdfVersion_1_6 = QPagedPaintDevice::PdfVersion_1_6};
 public slots:
-QPagedPaintDevice* new_QPagedPaintDevice();
 void delete_QPagedPaintDevice(QPagedPaintDevice* obj) { delete obj; }
    QPageLayout*  devicePageLayout(QPagedPaintDevice* theWrappedObject);
    QPagedPaintDevice::Margins  margins(QPagedPaintDevice* theWrappedObject) const;
@@ -163,7 +337,7 @@ public:
    ~PythonQtShell_QPagedPaintDevice__Margins();
 
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QPagedPaintDevice__Margins : public QObject
@@ -204,7 +378,7 @@ QPaintEngine*  paintEngine() const override;
 QPaintDevice*  redirected(QPoint*  offset) const override;
 QPainter*  sharedPainter() const override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QPaintDevice : public QPaintDevice
@@ -262,6 +436,36 @@ void delete_QPaintDevice(QPaintDevice* obj) { delete obj; }
 
 
 
+class PythonQtPublicPromoter_QPaintDeviceWindow : public QPaintDeviceWindow
+{ public:
+inline bool  promoted_event(QEvent*  event) { return this->event(event); }
+inline void promoted_exposeEvent(QExposeEvent*  arg__1) { this->exposeEvent(arg__1); }
+inline int  promoted_metric(QPaintDevice::PaintDeviceMetric  metric) const { return this->metric(metric); }
+inline void promoted_paintEvent(QPaintEvent*  event) { this->paintEvent(event); }
+inline bool  py_q_event(QEvent*  event) { return QPaintDeviceWindow::event(event); }
+inline void py_q_exposeEvent(QExposeEvent*  arg__1) { QPaintDeviceWindow::exposeEvent(arg__1); }
+inline int  py_q_metric(QPaintDevice::PaintDeviceMetric  metric) const { return QPaintDeviceWindow::metric(metric); }
+inline void py_q_paintEvent(QPaintEvent*  event) { QPaintDeviceWindow::paintEvent(event); }
+};
+
+class PythonQtWrapper_QPaintDeviceWindow : public QObject
+{ Q_OBJECT
+public:
+public slots:
+void delete_QPaintDeviceWindow(QPaintDeviceWindow* obj) { delete obj; }
+   bool  py_q_event(QPaintDeviceWindow* theWrappedObject, QEvent*  event){  return (((PythonQtPublicPromoter_QPaintDeviceWindow*)theWrappedObject)->py_q_event(event));}
+   void py_q_exposeEvent(QPaintDeviceWindow* theWrappedObject, QExposeEvent*  arg__1){  (((PythonQtPublicPromoter_QPaintDeviceWindow*)theWrappedObject)->py_q_exposeEvent(arg__1));}
+   int  py_q_metric(QPaintDeviceWindow* theWrappedObject, QPaintDevice::PaintDeviceMetric  metric) const{  return (((PythonQtPublicPromoter_QPaintDeviceWindow*)theWrappedObject)->py_q_metric(metric));}
+   void paintEvent(QPaintDeviceWindow* theWrappedObject, QPaintEvent*  event);
+   void py_q_paintEvent(QPaintDeviceWindow* theWrappedObject, QPaintEvent*  event){  (((PythonQtPublicPromoter_QPaintDeviceWindow*)theWrappedObject)->py_q_paintEvent(event));}
+   void update(QPaintDeviceWindow* theWrappedObject, const QRect&  rect);
+   void update(QPaintDeviceWindow* theWrappedObject, const QRegion&  region);
+};
+
+
+
+
+
 class PythonQtShell_QPaintEngine : public QPaintEngine
 {
 public:
@@ -290,7 +494,7 @@ bool  end() override;
 QPaintEngine::Type  type() const override;
 void updateState(const QPaintEngineState&  state) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QPaintEngine : public QPaintEngine
@@ -403,7 +607,7 @@ public:
    ~PythonQtShell_QPaintEngineState();
 
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QPaintEngineState : public QObject
@@ -446,7 +650,7 @@ public:
    ~PythonQtShell_QPaintEvent() override;
 
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QPaintEvent : public QObject
@@ -595,12 +799,15 @@ void delete_QPainter(QPainter* obj) { delete obj; }
    void fillPath(QPainter* theWrappedObject, const QPainterPath&  path, const QBrush&  brush);
    void fillRect(QPainter* theWrappedObject, const QRect&  arg__1, const QBrush&  arg__2);
    void fillRect(QPainter* theWrappedObject, const QRect&  arg__1, const QColor&  color);
+   void fillRect(QPainter* theWrappedObject, const QRect&  r, QGradient::Preset  preset);
    void fillRect(QPainter* theWrappedObject, const QRect&  r, Qt::BrushStyle  style);
    void fillRect(QPainter* theWrappedObject, const QRect&  r, Qt::GlobalColor  c);
    void fillRect(QPainter* theWrappedObject, const QRectF&  arg__1, const QBrush&  arg__2);
    void fillRect(QPainter* theWrappedObject, const QRectF&  arg__1, const QColor&  color);
+   void fillRect(QPainter* theWrappedObject, const QRectF&  r, QGradient::Preset  preset);
    void fillRect(QPainter* theWrappedObject, const QRectF&  r, Qt::BrushStyle  style);
    void fillRect(QPainter* theWrappedObject, const QRectF&  r, Qt::GlobalColor  c);
+   void fillRect(QPainter* theWrappedObject, int  x, int  y, int  w, int  h, QGradient::Preset  preset);
    void fillRect(QPainter* theWrappedObject, int  x, int  y, int  w, int  h, Qt::BrushStyle  style);
    void fillRect(QPainter* theWrappedObject, int  x, int  y, int  w, int  h, Qt::GlobalColor  c);
    void fillRect(QPainter* theWrappedObject, int  x, int  y, int  w, int  h, const QBrush&  arg__5);
@@ -810,7 +1017,7 @@ public:
    ~PythonQtShell_QPainterPath__Element();
 
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QPainterPath__Element : public QObject
@@ -849,7 +1056,7 @@ public:
    ~PythonQtShell_QPainter__PixmapFragment();
 
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QPainter__PixmapFragment : public QObject
@@ -904,7 +1111,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QPanGesture : public QObject
@@ -952,7 +1159,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QPdfWriter : public QPdfWriter
@@ -1009,7 +1216,7 @@ QPaintEngine*  paintEngine() const override;
 QPaintDevice*  redirected(QPoint*  offset) const override;
 QPainter*  sharedPainter() const override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QPicture : public QPicture
@@ -1068,7 +1275,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QPictureFormatPlugin : public QPictureFormatPlugin
@@ -1149,7 +1356,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QPinchGesture : public QObject
@@ -1228,6 +1435,8 @@ void delete_QPixelFormat(QPixelFormat* obj) { delete obj; }
    uchar  hueSize(QPixelFormat* theWrappedObject) const;
    uchar  lightnessSize(QPixelFormat* theWrappedObject) const;
    uchar  magentaSize(QPixelFormat* theWrappedObject) const;
+   bool  __ne__(QPixelFormat* theWrappedObject, QPixelFormat  fmt2);
+   bool  __eq__(QPixelFormat* theWrappedObject, QPixelFormat  fmt2);
    QPixelFormat::AlphaPremultiplied  premultiplied(QPixelFormat* theWrappedObject) const;
    uchar  redSize(QPixelFormat* theWrappedObject) const;
    uchar  saturationSize(QPixelFormat* theWrappedObject) const;
@@ -1249,7 +1458,7 @@ public:
    ~PythonQtShell_QPixmapCache();
 
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QPixmapCache : public QObject
@@ -1318,7 +1527,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QPlainTextDocumentLayout : public QPlainTextDocumentLayout
@@ -1421,7 +1630,7 @@ void wheelEvent(QWheelEvent*  e) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QPlainTextEdit : public QPlainTextEdit
@@ -1605,7 +1814,7 @@ public:
    ~PythonQtShell_QPlatformSurfaceEvent() override;
 
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QPlatformSurfaceEvent : public QObject
@@ -1672,7 +1881,6 @@ void delete_QPolygonF(QPolygonF* obj) { delete obj; }
    void readFrom(QPolygonF* theWrappedObject, QDataStream&  stream);
    void pop_back(QPolygonF* theWrappedObject);
    void pop_front(QPolygonF* theWrappedObject);
-   void prepend(QPolygonF* theWrappedObject, QPointF&  t);
    void prepend(QPolygonF* theWrappedObject, const QPointF&  t);
    void push_back(QPolygonF* theWrappedObject, const QPointF&  t);
    void push_front(QPolygonF* theWrappedObject, const QPointF&  t);
@@ -1773,7 +1981,7 @@ void wheelEvent(QWheelEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QPrintDialog : public QPrintDialog
@@ -1820,7 +2028,7 @@ QPrinter::PrinterState  printerState() const override;
 QVariant  property(QPrintEngine::PrintEnginePropertyKey  key) const override;
 void setProperty(QPrintEngine::PrintEnginePropertyKey  key, const QVariant&  value) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QPrintEngine : public QPrintEngine
@@ -1854,362 +2062,6 @@ void delete_QPrintEngine(QPrintEngine* obj) { delete obj; }
    QVariant  py_q_property(QPrintEngine* theWrappedObject, QPrintEngine::PrintEnginePropertyKey  key) const{  return (((PythonQtPublicPromoter_QPrintEngine*)theWrappedObject)->py_q_property(key));}
    void setProperty(QPrintEngine* theWrappedObject, QPrintEngine::PrintEnginePropertyKey  key, const QVariant&  value);
    void py_q_setProperty(QPrintEngine* theWrappedObject, QPrintEngine::PrintEnginePropertyKey  key, const QVariant&  value){  (((PythonQtPublicPromoter_QPrintEngine*)theWrappedObject)->py_q_setProperty(key, value));}
-};
-
-
-
-
-
-class PythonQtShell_QPrintPreviewDialog : public QPrintPreviewDialog
-{
-public:
-    PythonQtShell_QPrintPreviewDialog(QPrinter*  printer, QWidget*  parent = nullptr, Qt::WindowFlags  flags = Qt::WindowFlags()):QPrintPreviewDialog(printer, parent, flags),_wrapper(nullptr) {};
-    PythonQtShell_QPrintPreviewDialog(QWidget*  parent = nullptr, Qt::WindowFlags  flags = Qt::WindowFlags()):QPrintPreviewDialog(parent, flags),_wrapper(nullptr) {};
-
-   ~PythonQtShell_QPrintPreviewDialog() override;
-
-void accept() override;
-void actionEvent(QActionEvent*  event) override;
-void changeEvent(QEvent*  arg__1) override;
-void childEvent(QChildEvent*  event) override;
-void closeEvent(QCloseEvent*  arg__1) override;
-void contextMenuEvent(QContextMenuEvent*  arg__1) override;
-void customEvent(QEvent*  event) override;
-int  devType() const override;
-void done(int  result) override;
-void dragEnterEvent(QDragEnterEvent*  event) override;
-void dragLeaveEvent(QDragLeaveEvent*  event) override;
-void dragMoveEvent(QDragMoveEvent*  event) override;
-void dropEvent(QDropEvent*  event) override;
-void enterEvent(QEvent*  event) override;
-bool  event(QEvent*  event) override;
-bool  eventFilter(QObject*  arg__1, QEvent*  arg__2) override;
-int  exec() override;
-void focusInEvent(QFocusEvent*  event) override;
-bool  focusNextPrevChild(bool  next) override;
-void focusOutEvent(QFocusEvent*  event) override;
-bool  hasHeightForWidth() const override;
-int  heightForWidth(int  arg__1) const override;
-void hideEvent(QHideEvent*  event) override;
-void initPainter(QPainter*  painter) const override;
-void inputMethodEvent(QInputMethodEvent*  arg__1) override;
-QVariant  inputMethodQuery(Qt::InputMethodQuery  arg__1) const override;
-void keyPressEvent(QKeyEvent*  arg__1) override;
-void keyReleaseEvent(QKeyEvent*  event) override;
-void leaveEvent(QEvent*  event) override;
-int  metric(QPaintDevice::PaintDeviceMetric  arg__1) const override;
-QSize  minimumSizeHint() const override;
-void mouseDoubleClickEvent(QMouseEvent*  event) override;
-void mouseMoveEvent(QMouseEvent*  event) override;
-void mousePressEvent(QMouseEvent*  event) override;
-void mouseReleaseEvent(QMouseEvent*  event) override;
-void moveEvent(QMoveEvent*  event) override;
-bool  nativeEvent(const QByteArray&  eventType, void*  message, long*  result) override;
-QPaintEngine*  paintEngine() const override;
-void paintEvent(QPaintEvent*  event) override;
-QPaintDevice*  redirected(QPoint*  offset) const override;
-void reject() override;
-void resizeEvent(QResizeEvent*  arg__1) override;
-void setVisible(bool  visible) override;
-QPainter*  sharedPainter() const override;
-void showEvent(QShowEvent*  arg__1) override;
-QSize  sizeHint() const override;
-void tabletEvent(QTabletEvent*  event) override;
-void timerEvent(QTimerEvent*  event) override;
-void wheelEvent(QWheelEvent*  event) override;
-
-  const QMetaObject* metaObject() const override;
-  int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
-};
-
-class PythonQtPublicPromoter_QPrintPreviewDialog : public QPrintPreviewDialog
-{ public:
-inline void py_q_done(int  result) { QPrintPreviewDialog::done(result); }
-inline void py_q_setVisible(bool  visible) { QPrintPreviewDialog::setVisible(visible); }
-};
-
-class PythonQtWrapper_QPrintPreviewDialog : public QObject
-{ Q_OBJECT
-public:
-public slots:
-QPrintPreviewDialog* new_QPrintPreviewDialog(QPrinter*  printer, QWidget*  parent = nullptr, Qt::WindowFlags  flags = Qt::WindowFlags());
-QPrintPreviewDialog* new_QPrintPreviewDialog(QWidget*  parent = nullptr, Qt::WindowFlags  flags = Qt::WindowFlags());
-void delete_QPrintPreviewDialog(QPrintPreviewDialog* obj) { delete obj; }
-   void py_q_done(QPrintPreviewDialog* theWrappedObject, int  result){  (((PythonQtPublicPromoter_QPrintPreviewDialog*)theWrappedObject)->py_q_done(result));}
-   void open(QPrintPreviewDialog* theWrappedObject, QObject*  receiver, const char*  member);
-   QPrinter*  printer(QPrintPreviewDialog* theWrappedObject);
-   void py_q_setVisible(QPrintPreviewDialog* theWrappedObject, bool  visible){  (((PythonQtPublicPromoter_QPrintPreviewDialog*)theWrappedObject)->py_q_setVisible(visible));}
-};
-
-
-
-
-
-class PythonQtShell_QPrintPreviewWidget : public QPrintPreviewWidget
-{
-public:
-    PythonQtShell_QPrintPreviewWidget(QPrinter*  printer, QWidget*  parent = nullptr, Qt::WindowFlags  flags = Qt::WindowFlags()):QPrintPreviewWidget(printer, parent, flags),_wrapper(nullptr) {};
-    PythonQtShell_QPrintPreviewWidget(QWidget*  parent = nullptr, Qt::WindowFlags  flags = Qt::WindowFlags()):QPrintPreviewWidget(parent, flags),_wrapper(nullptr) {};
-
-   ~PythonQtShell_QPrintPreviewWidget() override;
-
-void actionEvent(QActionEvent*  event) override;
-void changeEvent(QEvent*  arg__1) override;
-void childEvent(QChildEvent*  event) override;
-void closeEvent(QCloseEvent*  event) override;
-void contextMenuEvent(QContextMenuEvent*  event) override;
-void customEvent(QEvent*  event) override;
-int  devType() const override;
-void dragEnterEvent(QDragEnterEvent*  event) override;
-void dragLeaveEvent(QDragLeaveEvent*  event) override;
-void dragMoveEvent(QDragMoveEvent*  event) override;
-void dropEvent(QDropEvent*  event) override;
-void enterEvent(QEvent*  event) override;
-bool  event(QEvent*  event) override;
-bool  eventFilter(QObject*  watched, QEvent*  event) override;
-void focusInEvent(QFocusEvent*  event) override;
-bool  focusNextPrevChild(bool  next) override;
-void focusOutEvent(QFocusEvent*  event) override;
-bool  hasHeightForWidth() const override;
-int  heightForWidth(int  arg__1) const override;
-void hideEvent(QHideEvent*  event) override;
-void initPainter(QPainter*  painter) const override;
-void inputMethodEvent(QInputMethodEvent*  arg__1) override;
-QVariant  inputMethodQuery(Qt::InputMethodQuery  arg__1) const override;
-void keyPressEvent(QKeyEvent*  event) override;
-void keyReleaseEvent(QKeyEvent*  event) override;
-void leaveEvent(QEvent*  event) override;
-int  metric(QPaintDevice::PaintDeviceMetric  arg__1) const override;
-QSize  minimumSizeHint() const override;
-void mouseDoubleClickEvent(QMouseEvent*  event) override;
-void mouseMoveEvent(QMouseEvent*  event) override;
-void mousePressEvent(QMouseEvent*  event) override;
-void mouseReleaseEvent(QMouseEvent*  event) override;
-void moveEvent(QMoveEvent*  event) override;
-bool  nativeEvent(const QByteArray&  eventType, void*  message, long*  result) override;
-QPaintEngine*  paintEngine() const override;
-void paintEvent(QPaintEvent*  event) override;
-QPaintDevice*  redirected(QPoint*  offset) const override;
-void resizeEvent(QResizeEvent*  event) override;
-void setVisible(bool  visible) override;
-QPainter*  sharedPainter() const override;
-void showEvent(QShowEvent*  event) override;
-QSize  sizeHint() const override;
-void tabletEvent(QTabletEvent*  event) override;
-void timerEvent(QTimerEvent*  event) override;
-void wheelEvent(QWheelEvent*  event) override;
-
-  const QMetaObject* metaObject() const override;
-  int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
-};
-
-class PythonQtPublicPromoter_QPrintPreviewWidget : public QPrintPreviewWidget
-{ public:
-inline void py_q_setVisible(bool  visible) { QPrintPreviewWidget::setVisible(visible); }
-};
-
-class PythonQtWrapper_QPrintPreviewWidget : public QObject
-{ Q_OBJECT
-public:
-Q_ENUMS(ViewMode ZoomMode )
-enum ViewMode{
-  SinglePageView = QPrintPreviewWidget::SinglePageView,   FacingPagesView = QPrintPreviewWidget::FacingPagesView,   AllPagesView = QPrintPreviewWidget::AllPagesView};
-enum ZoomMode{
-  CustomZoom = QPrintPreviewWidget::CustomZoom,   FitToWidth = QPrintPreviewWidget::FitToWidth,   FitInView = QPrintPreviewWidget::FitInView};
-public slots:
-QPrintPreviewWidget* new_QPrintPreviewWidget(QPrinter*  printer, QWidget*  parent = nullptr, Qt::WindowFlags  flags = Qt::WindowFlags());
-QPrintPreviewWidget* new_QPrintPreviewWidget(QWidget*  parent = nullptr, Qt::WindowFlags  flags = Qt::WindowFlags());
-void delete_QPrintPreviewWidget(QPrintPreviewWidget* obj) { delete obj; }
-   int  currentPage(QPrintPreviewWidget* theWrappedObject) const;
-   QPrinter::Orientation  orientation(QPrintPreviewWidget* theWrappedObject) const;
-   int  pageCount(QPrintPreviewWidget* theWrappedObject) const;
-   void py_q_setVisible(QPrintPreviewWidget* theWrappedObject, bool  visible){  (((PythonQtPublicPromoter_QPrintPreviewWidget*)theWrappedObject)->py_q_setVisible(visible));}
-   QPrintPreviewWidget::ViewMode  viewMode(QPrintPreviewWidget* theWrappedObject) const;
-   qreal  zoomFactor(QPrintPreviewWidget* theWrappedObject) const;
-   QPrintPreviewWidget::ZoomMode  zoomMode(QPrintPreviewWidget* theWrappedObject) const;
-};
-
-
-
-
-
-class PythonQtShell_QPrinter : public QPrinter
-{
-public:
-    PythonQtShell_QPrinter(QPrinter::PrinterMode  mode = QPrinter::ScreenResolution):QPrinter(mode),_wrapper(nullptr) {};
-    PythonQtShell_QPrinter(const QPrinterInfo&  printer, QPrinter::PrinterMode  mode = QPrinter::ScreenResolution):QPrinter(printer, mode),_wrapper(nullptr) {};
-
-   ~PythonQtShell_QPrinter() override;
-
-int  devType() const override;
-void initPainter(QPainter*  painter) const override;
-int  metric(QPaintDevice::PaintDeviceMetric  arg__1) const override;
-bool  newPage() override;
-QPaintEngine*  paintEngine() const override;
-QPaintDevice*  redirected(QPoint*  offset) const override;
-void setMargins(const QPagedPaintDevice::Margins&  m) override;
-void setPageSize(QPagedPaintDevice::PageSize  arg__1) override;
-void setPageSizeMM(const QSizeF&  size) override;
-QPainter*  sharedPainter() const override;
-
-  PythonQtInstanceWrapper* _wrapper; 
-};
-
-class PythonQtPublicPromoter_QPrinter : public QPrinter
-{ public:
-inline int  promoted_metric(QPaintDevice::PaintDeviceMetric  arg__1) const { return this->metric(arg__1); }
-inline void promoted_setEngines(QPrintEngine*  printEngine, QPaintEngine*  paintEngine) { this->setEngines(printEngine, paintEngine); }
-inline int  py_q_devType() const { return QPrinter::devType(); }
-inline int  py_q_metric(QPaintDevice::PaintDeviceMetric  arg__1) const { return QPrinter::metric(arg__1); }
-inline bool  py_q_newPage() { return QPrinter::newPage(); }
-inline QPaintEngine*  py_q_paintEngine() const { return QPrinter::paintEngine(); }
-inline void py_q_setMargins(const QPagedPaintDevice::Margins&  m) { QPrinter::setMargins(m); }
-inline void py_q_setPageSize(QPagedPaintDevice::PageSize  arg__1) { QPrinter::setPageSize(arg__1); }
-inline void py_q_setPageSizeMM(const QSizeF&  size) { QPrinter::setPageSizeMM(size); }
-};
-
-class PythonQtWrapper_QPrinter : public QObject
-{ Q_OBJECT
-public:
-Q_ENUMS(ColorMode DuplexMode Orientation OutputFormat PageOrder PaperSource PrintRange PrinterMode PrinterState Unit )
-enum ColorMode{
-  GrayScale = QPrinter::GrayScale,   Color = QPrinter::Color};
-enum DuplexMode{
-  DuplexNone = QPrinter::DuplexNone,   DuplexAuto = QPrinter::DuplexAuto,   DuplexLongSide = QPrinter::DuplexLongSide,   DuplexShortSide = QPrinter::DuplexShortSide};
-enum Orientation{
-  Portrait = QPrinter::Portrait,   Landscape = QPrinter::Landscape};
-enum OutputFormat{
-  NativeFormat = QPrinter::NativeFormat,   PdfFormat = QPrinter::PdfFormat};
-enum PageOrder{
-  FirstPageFirst = QPrinter::FirstPageFirst,   LastPageFirst = QPrinter::LastPageFirst};
-enum PaperSource{
-  OnlyOne = QPrinter::OnlyOne,   Lower = QPrinter::Lower,   Middle = QPrinter::Middle,   Manual = QPrinter::Manual,   Envelope = QPrinter::Envelope,   EnvelopeManual = QPrinter::EnvelopeManual,   Auto = QPrinter::Auto,   Tractor = QPrinter::Tractor,   SmallFormat = QPrinter::SmallFormat,   LargeFormat = QPrinter::LargeFormat,   LargeCapacity = QPrinter::LargeCapacity,   Cassette = QPrinter::Cassette,   FormSource = QPrinter::FormSource,   MaxPageSource = QPrinter::MaxPageSource,   CustomSource = QPrinter::CustomSource,   LastPaperSource = QPrinter::LastPaperSource,   Upper = QPrinter::Upper};
-enum PrintRange{
-  AllPages = QPrinter::AllPages,   Selection = QPrinter::Selection,   PageRange = QPrinter::PageRange,   CurrentPage = QPrinter::CurrentPage};
-enum PrinterMode{
-  ScreenResolution = QPrinter::ScreenResolution,   PrinterResolution = QPrinter::PrinterResolution,   HighResolution = QPrinter::HighResolution};
-enum PrinterState{
-  Idle = QPrinter::Idle,   Active = QPrinter::Active,   Aborted = QPrinter::Aborted,   Error = QPrinter::Error};
-enum Unit{
-  Millimeter = QPrinter::Millimeter,   Point = QPrinter::Point,   Inch = QPrinter::Inch,   Pica = QPrinter::Pica,   Didot = QPrinter::Didot,   Cicero = QPrinter::Cicero,   DevicePixel = QPrinter::DevicePixel};
-public slots:
-QPrinter* new_QPrinter(QPrinter::PrinterMode  mode = QPrinter::ScreenResolution);
-QPrinter* new_QPrinter(const QPrinterInfo&  printer, QPrinter::PrinterMode  mode = QPrinter::ScreenResolution);
-void delete_QPrinter(QPrinter* obj) { delete obj; }
-   bool  abort(QPrinter* theWrappedObject);
-   int  actualNumCopies(QPrinter* theWrappedObject) const;
-   bool  collateCopies(QPrinter* theWrappedObject) const;
-   QPrinter::ColorMode  colorMode(QPrinter* theWrappedObject) const;
-   int  copyCount(QPrinter* theWrappedObject) const;
-   QString  creator(QPrinter* theWrappedObject) const;
-   int  py_q_devType(QPrinter* theWrappedObject) const{  return (((PythonQtPublicPromoter_QPrinter*)theWrappedObject)->py_q_devType());}
-   QString  docName(QPrinter* theWrappedObject) const;
-   bool  doubleSidedPrinting(QPrinter* theWrappedObject) const;
-   QPrinter::DuplexMode  duplex(QPrinter* theWrappedObject) const;
-   bool  fontEmbeddingEnabled(QPrinter* theWrappedObject) const;
-   int  fromPage(QPrinter* theWrappedObject) const;
-   bool  fullPage(QPrinter* theWrappedObject) const;
-   void getPageMargins(QPrinter* theWrappedObject, qreal*  left, qreal*  top, qreal*  right, qreal*  bottom, QPrinter::Unit  unit) const;
-   bool  isValid(QPrinter* theWrappedObject) const;
-   int  py_q_metric(QPrinter* theWrappedObject, QPaintDevice::PaintDeviceMetric  arg__1) const{  return (((PythonQtPublicPromoter_QPrinter*)theWrappedObject)->py_q_metric(arg__1));}
-   bool  py_q_newPage(QPrinter* theWrappedObject){  return (((PythonQtPublicPromoter_QPrinter*)theWrappedObject)->py_q_newPage());}
-   int  numCopies(QPrinter* theWrappedObject) const;
-   QPrinter::Orientation  orientation(QPrinter* theWrappedObject) const;
-   QString  outputFileName(QPrinter* theWrappedObject) const;
-   QPrinter::OutputFormat  outputFormat(QPrinter* theWrappedObject) const;
-   QPrinter::PageOrder  pageOrder(QPrinter* theWrappedObject) const;
-   QRect  pageRect(QPrinter* theWrappedObject) const;
-   QRectF  pageRect(QPrinter* theWrappedObject, QPrinter::Unit  arg__1) const;
-   QPagedPaintDevice::PageSize  pageSize(QPrinter* theWrappedObject) const;
-   QPaintEngine*  py_q_paintEngine(QPrinter* theWrappedObject) const{  return (((PythonQtPublicPromoter_QPrinter*)theWrappedObject)->py_q_paintEngine());}
-   QString  paperName(QPrinter* theWrappedObject) const;
-   QRect  paperRect(QPrinter* theWrappedObject) const;
-   QRectF  paperRect(QPrinter* theWrappedObject, QPrinter::Unit  arg__1) const;
-   QPagedPaintDevice::PageSize  paperSize(QPrinter* theWrappedObject) const;
-   QSizeF  paperSize(QPrinter* theWrappedObject, QPrinter::Unit  unit) const;
-   QPrinter::PaperSource  paperSource(QPrinter* theWrappedObject) const;
-   QPagedPaintDevice::PdfVersion  pdfVersion(QPrinter* theWrappedObject) const;
-   QPrintEngine*  printEngine(QPrinter* theWrappedObject) const;
-   QString  printProgram(QPrinter* theWrappedObject) const;
-   QPrinter::PrintRange  printRange(QPrinter* theWrappedObject) const;
-   QString  printerName(QPrinter* theWrappedObject) const;
-   QPrinter::PrinterState  printerState(QPrinter* theWrappedObject) const;
-   int  resolution(QPrinter* theWrappedObject) const;
-   void setCollateCopies(QPrinter* theWrappedObject, bool  collate);
-   void setColorMode(QPrinter* theWrappedObject, QPrinter::ColorMode  arg__1);
-   void setCopyCount(QPrinter* theWrappedObject, int  arg__1);
-   void setCreator(QPrinter* theWrappedObject, const QString&  arg__1);
-   void setDocName(QPrinter* theWrappedObject, const QString&  arg__1);
-   void setDoubleSidedPrinting(QPrinter* theWrappedObject, bool  enable);
-   void setDuplex(QPrinter* theWrappedObject, QPrinter::DuplexMode  duplex);
-   void setEngines(QPrinter* theWrappedObject, QPrintEngine*  printEngine, QPaintEngine*  paintEngine);
-   void setFontEmbeddingEnabled(QPrinter* theWrappedObject, bool  enable);
-   void setFromTo(QPrinter* theWrappedObject, int  fromPage, int  toPage);
-   void setFullPage(QPrinter* theWrappedObject, bool  arg__1);
-   void py_q_setMargins(QPrinter* theWrappedObject, const QPagedPaintDevice::Margins&  m){  (((PythonQtPublicPromoter_QPrinter*)theWrappedObject)->py_q_setMargins(m));}
-   void setNumCopies(QPrinter* theWrappedObject, int  arg__1);
-   void setOrientation(QPrinter* theWrappedObject, QPrinter::Orientation  arg__1);
-   void setOutputFileName(QPrinter* theWrappedObject, const QString&  arg__1);
-   void setOutputFormat(QPrinter* theWrappedObject, QPrinter::OutputFormat  format);
-   void setPageMargins(QPrinter* theWrappedObject, qreal  left, qreal  top, qreal  right, qreal  bottom, QPrinter::Unit  unit);
-   void setPageOrder(QPrinter* theWrappedObject, QPrinter::PageOrder  arg__1);
-   void py_q_setPageSize(QPrinter* theWrappedObject, QPagedPaintDevice::PageSize  arg__1){  (((PythonQtPublicPromoter_QPrinter*)theWrappedObject)->py_q_setPageSize(arg__1));}
-   void py_q_setPageSizeMM(QPrinter* theWrappedObject, const QSizeF&  size){  (((PythonQtPublicPromoter_QPrinter*)theWrappedObject)->py_q_setPageSizeMM(size));}
-   void setPaperName(QPrinter* theWrappedObject, const QString&  paperName);
-   void setPaperSize(QPrinter* theWrappedObject, QPagedPaintDevice::PageSize  arg__1);
-   void setPaperSize(QPrinter* theWrappedObject, const QSizeF&  paperSize, QPrinter::Unit  unit);
-   void setPaperSource(QPrinter* theWrappedObject, QPrinter::PaperSource  arg__1);
-   void setPdfVersion(QPrinter* theWrappedObject, QPagedPaintDevice::PdfVersion  version);
-   void setPrintProgram(QPrinter* theWrappedObject, const QString&  arg__1);
-   void setPrintRange(QPrinter* theWrappedObject, QPrinter::PrintRange  range);
-   void setPrinterName(QPrinter* theWrappedObject, const QString&  arg__1);
-   void setResolution(QPrinter* theWrappedObject, int  arg__1);
-   void setWinPageSize(QPrinter* theWrappedObject, int  winPageSize);
-   QList<int >  supportedResolutions(QPrinter* theWrappedObject) const;
-   bool  supportsMultipleCopies(QPrinter* theWrappedObject) const;
-   int  toPage(QPrinter* theWrappedObject) const;
-   int  winPageSize(QPrinter* theWrappedObject) const;
-    bool __nonzero__(QPrinter* obj) { return obj->isValid(); }
-};
-
-
-
-
-
-class PythonQtWrapper_QPrinterInfo : public QObject
-{ Q_OBJECT
-public:
-public slots:
-QPrinterInfo* new_QPrinterInfo();
-QPrinterInfo* new_QPrinterInfo(const QPrinter&  printer);
-QPrinterInfo* new_QPrinterInfo(const QPrinterInfo&  other);
-void delete_QPrinterInfo(QPrinterInfo* obj) { delete obj; }
-   QStringList  static_QPrinterInfo_availablePrinterNames();
-   QList<QPrinterInfo >  static_QPrinterInfo_availablePrinters();
-   QPrinter::DuplexMode  defaultDuplexMode(QPrinterInfo* theWrappedObject) const;
-   QPageSize  defaultPageSize(QPrinterInfo* theWrappedObject) const;
-   QPrinterInfo  static_QPrinterInfo_defaultPrinter();
-   QString  static_QPrinterInfo_defaultPrinterName();
-   QString  description(QPrinterInfo* theWrappedObject) const;
-   bool  isDefault(QPrinterInfo* theWrappedObject) const;
-   bool  isNull(QPrinterInfo* theWrappedObject) const;
-   bool  isRemote(QPrinterInfo* theWrappedObject) const;
-   QString  location(QPrinterInfo* theWrappedObject) const;
-   QString  makeAndModel(QPrinterInfo* theWrappedObject) const;
-   QPageSize  maximumPhysicalPageSize(QPrinterInfo* theWrappedObject) const;
-   QPageSize  minimumPhysicalPageSize(QPrinterInfo* theWrappedObject) const;
-   QPrinterInfo  static_QPrinterInfo_printerInfo(const QString&  printerName);
-   QString  printerName(QPrinterInfo* theWrappedObject) const;
-   QPrinter::PrinterState  state(QPrinterInfo* theWrappedObject) const;
-   QList<QPrinter::DuplexMode >  supportedDuplexModes(QPrinterInfo* theWrappedObject) const;
-   QList<QPageSize >  supportedPageSizes(QPrinterInfo* theWrappedObject) const;
-   QList<QPagedPaintDevice::PageSize >  supportedPaperSizes(QPrinterInfo* theWrappedObject) const;
-   QList<int >  supportedResolutions(QPrinterInfo* theWrappedObject) const;
-   QList<QPair<QString , QSizeF >  >  supportedSizesWithNames(QPrinterInfo* theWrappedObject) const;
-   bool  supportsCustomPageSizes(QPrinterInfo* theWrappedObject) const;
-    bool __nonzero__(QPrinterInfo* obj) { return !obj->isNull(); }
 };
 
 

@@ -70,7 +70,6 @@ void delete_QXmlStreamAttributes(QXmlStreamAttributes* obj) { delete obj; }
    void move(QXmlStreamAttributes* theWrappedObject, int  from, int  to);
    bool  __ne__(QXmlStreamAttributes* theWrappedObject, const QVector<QXmlStreamAttribute >&  v) const;
    bool  __eq__(QXmlStreamAttributes* theWrappedObject, const QVector<QXmlStreamAttribute >&  v) const;
-   void prepend(QXmlStreamAttributes* theWrappedObject, QXmlStreamAttribute&  t);
    void prepend(QXmlStreamAttributes* theWrappedObject, const QXmlStreamAttribute&  t);
    void remove(QXmlStreamAttributes* theWrappedObject, int  i);
    void remove(QXmlStreamAttributes* theWrappedObject, int  i, int  n);

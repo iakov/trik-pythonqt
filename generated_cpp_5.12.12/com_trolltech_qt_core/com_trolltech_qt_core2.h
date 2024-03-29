@@ -1,21 +1,26 @@
 #include <PythonQt.h>
 #include <QObject>
 #include <QStringList>
+#include <QUrl>
 #include <QVarLengthArray>
 #include <QVariant>
 #include <qabstractanimation.h>
 #include <qabstractitemmodel.h>
-#include <qabstractstate.h>
-#include <qabstracttransition.h>
 #include <qanimationgroup.h>
 #include <qbytearray.h>
 #include <qcoreevent.h>
 #include <qdatastream.h>
 #include <qdatetime.h>
 #include <qeasingcurve.h>
+#include <qfileinfo.h>
+#include <qiodevice.h>
 #include <qlist.h>
 #include <qlocale.h>
 #include <qmetaobject.h>
+#include <qmetatype.h>
+#include <qmimedata.h>
+#include <qmimedatabase.h>
+#include <qmimetype.h>
 #include <qmutex.h>
 #include <qobject.h>
 #include <qoperatingsystemversion.h>
@@ -33,18 +38,295 @@
 #include <qsemaphore.h>
 #include <qsequentialanimationgroup.h>
 #include <qsettings.h>
-#include <qsharedmemory.h>
-#include <qsignalmapper.h>
-#include <qsignaltransition.h>
-#include <qsocketnotifier.h>
-#include <qstandardpaths.h>
-#include <qstate.h>
-#include <qstatemachine.h>
 #include <qstringlist.h>
 #include <qtextcodec.h>
 #include <qthread.h>
+#include <qurl.h>
 #include <qvector.h>
-#include <qwidget.h>
+
+
+
+class PythonQtWrapper_QMetaEnum : public QObject
+{ Q_OBJECT
+public:
+public slots:
+QMetaEnum* new_QMetaEnum();
+void delete_QMetaEnum(QMetaEnum* obj) { delete obj; }
+   const QMetaObject*  enclosingMetaObject(QMetaEnum* theWrappedObject) const;
+   const char*  enumName(QMetaEnum* theWrappedObject) const;
+   bool  isFlag(QMetaEnum* theWrappedObject) const;
+   bool  isScoped(QMetaEnum* theWrappedObject) const;
+   bool  isValid(QMetaEnum* theWrappedObject) const;
+   const char*  key(QMetaEnum* theWrappedObject, int  index) const;
+   int  keyCount(QMetaEnum* theWrappedObject) const;
+   int  keyToValue(QMetaEnum* theWrappedObject, const char*  key, bool*  ok = nullptr) const;
+   int  keysToValue(QMetaEnum* theWrappedObject, const char*  keys, bool*  ok = nullptr) const;
+   const char*  name(QMetaEnum* theWrappedObject) const;
+   const char*  scope(QMetaEnum* theWrappedObject) const;
+   int  value(QMetaEnum* theWrappedObject, int  index) const;
+   const char*  valueToKey(QMetaEnum* theWrappedObject, int  value) const;
+   QByteArray  valueToKeys(QMetaEnum* theWrappedObject, int  value) const;
+    bool __nonzero__(QMetaEnum* obj) { return obj->isValid(); }
+};
+
+
+
+
+
+class PythonQtWrapper_QMetaMethod : public QObject
+{ Q_OBJECT
+public:
+Q_ENUMS(Access Attributes MethodType )
+enum Access{
+  Private = QMetaMethod::Private,   Protected = QMetaMethod::Protected,   Public = QMetaMethod::Public};
+enum Attributes{
+  Compatibility = QMetaMethod::Compatibility,   Cloned = QMetaMethod::Cloned,   Scriptable = QMetaMethod::Scriptable};
+enum MethodType{
+  Method = QMetaMethod::Method,   Signal = QMetaMethod::Signal,   Slot = QMetaMethod::Slot,   Constructor = QMetaMethod::Constructor};
+public slots:
+QMetaMethod* new_QMetaMethod();
+void delete_QMetaMethod(QMetaMethod* obj) { delete obj; }
+   QMetaMethod::Access  access(QMetaMethod* theWrappedObject) const;
+   int  attributes(QMetaMethod* theWrappedObject) const;
+   const QMetaObject*  enclosingMetaObject(QMetaMethod* theWrappedObject) const;
+   void getParameterTypes(QMetaMethod* theWrappedObject, int*  types) const;
+   bool  isValid(QMetaMethod* theWrappedObject) const;
+   int  methodIndex(QMetaMethod* theWrappedObject) const;
+   QByteArray  methodSignature(QMetaMethod* theWrappedObject) const;
+   QMetaMethod::MethodType  methodType(QMetaMethod* theWrappedObject) const;
+   QByteArray  name(QMetaMethod* theWrappedObject) const;
+   bool  __ne__(QMetaMethod* theWrappedObject, const QMetaMethod&  m2);
+   bool  __eq__(QMetaMethod* theWrappedObject, const QMetaMethod&  m2);
+   int  parameterCount(QMetaMethod* theWrappedObject) const;
+   QList<QByteArray >  parameterNames(QMetaMethod* theWrappedObject) const;
+   int  parameterType(QMetaMethod* theWrappedObject, int  index) const;
+   QList<QByteArray >  parameterTypes(QMetaMethod* theWrappedObject) const;
+   int  returnType(QMetaMethod* theWrappedObject) const;
+   int  revision(QMetaMethod* theWrappedObject) const;
+   const char*  tag(QMetaMethod* theWrappedObject) const;
+   const char*  typeName(QMetaMethod* theWrappedObject) const;
+    bool __nonzero__(QMetaMethod* obj) { return obj->isValid(); }
+};
+
+
+
+
+
+class PythonQtWrapper_QMetaProperty : public QObject
+{ Q_OBJECT
+public:
+public slots:
+QMetaProperty* new_QMetaProperty();
+void delete_QMetaProperty(QMetaProperty* obj) { delete obj; }
+   const QMetaObject*  enclosingMetaObject(QMetaProperty* theWrappedObject) const;
+   QMetaEnum  enumerator(QMetaProperty* theWrappedObject) const;
+   bool  hasNotifySignal(QMetaProperty* theWrappedObject) const;
+   bool  hasStdCppSet(QMetaProperty* theWrappedObject) const;
+   bool  isConstant(QMetaProperty* theWrappedObject) const;
+   bool  isDesignable(QMetaProperty* theWrappedObject, const QObject*  obj = nullptr) const;
+   bool  isEditable(QMetaProperty* theWrappedObject, const QObject*  obj = nullptr) const;
+   bool  isEnumType(QMetaProperty* theWrappedObject) const;
+   bool  isFinal(QMetaProperty* theWrappedObject) const;
+   bool  isFlagType(QMetaProperty* theWrappedObject) const;
+   bool  isReadable(QMetaProperty* theWrappedObject) const;
+   bool  isResettable(QMetaProperty* theWrappedObject) const;
+   bool  isScriptable(QMetaProperty* theWrappedObject, const QObject*  obj = nullptr) const;
+   bool  isStored(QMetaProperty* theWrappedObject, const QObject*  obj = nullptr) const;
+   bool  isUser(QMetaProperty* theWrappedObject, const QObject*  obj = nullptr) const;
+   bool  isValid(QMetaProperty* theWrappedObject) const;
+   bool  isWritable(QMetaProperty* theWrappedObject) const;
+   const char*  name(QMetaProperty* theWrappedObject) const;
+   QMetaMethod  notifySignal(QMetaProperty* theWrappedObject) const;
+   int  notifySignalIndex(QMetaProperty* theWrappedObject) const;
+   int  propertyIndex(QMetaProperty* theWrappedObject) const;
+   QVariant  read(QMetaProperty* theWrappedObject, const QObject*  obj) const;
+   QVariant  readOnGadget(QMetaProperty* theWrappedObject, const void*  gadget) const;
+   bool  reset(QMetaProperty* theWrappedObject, QObject*  obj) const;
+   bool  resetOnGadget(QMetaProperty* theWrappedObject, void*  gadget) const;
+   int  revision(QMetaProperty* theWrappedObject) const;
+   QVariant::Type  type(QMetaProperty* theWrappedObject) const;
+   const char*  typeName(QMetaProperty* theWrappedObject) const;
+   int  userType(QMetaProperty* theWrappedObject) const;
+   bool  write(QMetaProperty* theWrappedObject, QObject*  obj, const QVariant&  value) const;
+   bool  writeOnGadget(QMetaProperty* theWrappedObject, void*  gadget, const QVariant&  value) const;
+    bool __nonzero__(QMetaProperty* obj) { return obj->isValid(); }
+};
+
+
+
+
+
+class PythonQtWrapper_QMetaType : public QObject
+{ Q_OBJECT
+public:
+Q_ENUMS(TypeFlag )
+Q_FLAGS(TypeFlags )
+enum TypeFlag{
+  NeedsConstruction = QMetaType::NeedsConstruction,   NeedsDestruction = QMetaType::NeedsDestruction,   MovableType = QMetaType::MovableType,   PointerToQObject = QMetaType::PointerToQObject,   IsEnumeration = QMetaType::IsEnumeration,   SharedPointerToQObject = QMetaType::SharedPointerToQObject,   WeakPointerToQObject = QMetaType::WeakPointerToQObject,   TrackingPointerToQObject = QMetaType::TrackingPointerToQObject,   WasDeclaredAsMetaType = QMetaType::WasDeclaredAsMetaType,   IsGadget = QMetaType::IsGadget,   PointerToGadget = QMetaType::PointerToGadget};
+Q_DECLARE_FLAGS(TypeFlags, TypeFlag)
+public slots:
+QMetaType* new_QMetaType(const int  type);
+void delete_QMetaType(QMetaType* obj) { delete obj; }
+   bool  static_QMetaType_compare(const void*  lhs, const void*  rhs, int  typeId, int*  result);
+   void*  static_QMetaType_construct(int  type, void*  where, const void*  copy);
+   void*  construct(QMetaType* theWrappedObject, void*  where, const void*  copy = nullptr) const;
+   bool  static_QMetaType_convert(const void*  from, int  fromTypeId, void*  to, int  toTypeId);
+   void*  create(QMetaType* theWrappedObject, const void*  copy = nullptr) const;
+   void*  static_QMetaType_create(int  type, const void*  copy = nullptr);
+   void static_QMetaType_destroy(int  type, void*  data);
+   void destroy(QMetaType* theWrappedObject, void*  data) const;
+   void static_QMetaType_destruct(int  type, void*  where);
+   void destruct(QMetaType* theWrappedObject, void*  data) const;
+   bool  static_QMetaType_equals(const void*  lhs, const void*  rhs, int  typeId, int*  result);
+   QMetaType::TypeFlags  flags(QMetaType* theWrappedObject) const;
+   bool  static_QMetaType_hasRegisteredComparators(int  typeId);
+   bool  static_QMetaType_hasRegisteredConverterFunction(int  fromTypeId, int  toTypeId);
+   bool  static_QMetaType_hasRegisteredDebugStreamOperator(int  typeId);
+   bool  isRegistered(QMetaType* theWrappedObject) const;
+   bool  static_QMetaType_isRegistered(int  type);
+   bool  isValid(QMetaType* theWrappedObject) const;
+   bool  static_QMetaType_load(QDataStream&  stream, int  type, void*  data);
+   const QMetaObject*  metaObject(QMetaType* theWrappedObject) const;
+   const QMetaObject*  static_QMetaType_metaObjectForType(int  type);
+   int  static_QMetaType_registerNormalizedTypedef(const QByteArray&  normalizedTypeName, int  aliasId);
+   int  static_QMetaType_registerTypedef(const char*  typeName, int  aliasId);
+   bool  static_QMetaType_save(QDataStream&  stream, int  type, const void*  data);
+   int  sizeOf(QMetaType* theWrappedObject) const;
+   int  static_QMetaType_sizeOf(int  type);
+   int  static_QMetaType_type(const QByteArray&  typeName);
+   int  static_QMetaType_type(const char*  typeName);
+   QMetaType::TypeFlags  static_QMetaType_typeFlags(int  type);
+   const char*  static_QMetaType_typeName(int  type);
+   bool  static_QMetaType_unregisterType(int  type);
+    bool __nonzero__(QMetaType* obj) { return obj->isValid(); }
+};
+
+
+
+
+
+class PythonQtShell_QMimeData : public QMimeData
+{
+public:
+    PythonQtShell_QMimeData():QMimeData(),_wrapper(nullptr) {};
+
+   ~PythonQtShell_QMimeData() override;
+
+void childEvent(QChildEvent*  event) override;
+void customEvent(QEvent*  event) override;
+bool  event(QEvent*  event) override;
+bool  eventFilter(QObject*  watched, QEvent*  event) override;
+QStringList  formats() const override;
+bool  hasFormat(const QString&  mimetype) const override;
+QVariant  retrieveData(const QString&  mimetype, QVariant::Type  preferredType) const override;
+void timerEvent(QTimerEvent*  event) override;
+
+  const QMetaObject* metaObject() const override;
+  int qt_metacall(QMetaObject::Call call, int id, void** args) override;
+  PythonQtInstanceWrapper* _wrapper;
+};
+
+class PythonQtPublicPromoter_QMimeData : public QMimeData
+{ public:
+inline QVariant  promoted_retrieveData(const QString&  mimetype, QVariant::Type  preferredType) const { return this->retrieveData(mimetype, preferredType); }
+inline QStringList  py_q_formats() const { return QMimeData::formats(); }
+inline bool  py_q_hasFormat(const QString&  mimetype) const { return QMimeData::hasFormat(mimetype); }
+inline QVariant  py_q_retrieveData(const QString&  mimetype, QVariant::Type  preferredType) const { return QMimeData::retrieveData(mimetype, preferredType); }
+};
+
+class PythonQtWrapper_QMimeData : public QObject
+{ Q_OBJECT
+public:
+public slots:
+QMimeData* new_QMimeData();
+void delete_QMimeData(QMimeData* obj) { delete obj; }
+   void clear(QMimeData* theWrappedObject);
+   QVariant  colorData(QMimeData* theWrappedObject) const;
+   QByteArray  data(QMimeData* theWrappedObject, const QString&  mimetype) const;
+   QStringList  formats(QMimeData* theWrappedObject) const;
+   QStringList  py_q_formats(QMimeData* theWrappedObject) const{  return (((PythonQtPublicPromoter_QMimeData*)theWrappedObject)->py_q_formats());}
+   bool  hasColor(QMimeData* theWrappedObject) const;
+   bool  hasFormat(QMimeData* theWrappedObject, const QString&  mimetype) const;
+   bool  py_q_hasFormat(QMimeData* theWrappedObject, const QString&  mimetype) const{  return (((PythonQtPublicPromoter_QMimeData*)theWrappedObject)->py_q_hasFormat(mimetype));}
+   bool  hasHtml(QMimeData* theWrappedObject) const;
+   bool  hasImage(QMimeData* theWrappedObject) const;
+   bool  hasText(QMimeData* theWrappedObject) const;
+   bool  hasUrls(QMimeData* theWrappedObject) const;
+   QString  html(QMimeData* theWrappedObject) const;
+   QVariant  imageData(QMimeData* theWrappedObject) const;
+   void removeFormat(QMimeData* theWrappedObject, const QString&  mimetype);
+   QVariant  retrieveData(QMimeData* theWrappedObject, const QString&  mimetype, QVariant::Type  preferredType) const;
+   QVariant  py_q_retrieveData(QMimeData* theWrappedObject, const QString&  mimetype, QVariant::Type  preferredType) const{  return (((PythonQtPublicPromoter_QMimeData*)theWrappedObject)->py_q_retrieveData(mimetype, preferredType));}
+   void setColorData(QMimeData* theWrappedObject, const QVariant&  color);
+   void setData(QMimeData* theWrappedObject, const QString&  mimetype, const QByteArray&  data);
+   void setHtml(QMimeData* theWrappedObject, const QString&  html);
+   void setImageData(QMimeData* theWrappedObject, const QVariant&  image);
+   void setText(QMimeData* theWrappedObject, const QString&  text);
+   void setUrls(QMimeData* theWrappedObject, const QList<QUrl >&  urls);
+   QString  text(QMimeData* theWrappedObject) const;
+   QList<QUrl >  urls(QMimeData* theWrappedObject) const;
+};
+
+
+
+
+
+class PythonQtWrapper_QMimeDatabase : public QObject
+{ Q_OBJECT
+public:
+Q_ENUMS(MatchMode )
+enum MatchMode{
+  MatchDefault = QMimeDatabase::MatchDefault,   MatchExtension = QMimeDatabase::MatchExtension,   MatchContent = QMimeDatabase::MatchContent};
+public slots:
+QMimeDatabase* new_QMimeDatabase();
+void delete_QMimeDatabase(QMimeDatabase* obj) { delete obj; }
+   QList<QMimeType >  allMimeTypes(QMimeDatabase* theWrappedObject) const;
+   QMimeType  mimeTypeForData(QMimeDatabase* theWrappedObject, QIODevice*  device) const;
+   QMimeType  mimeTypeForData(QMimeDatabase* theWrappedObject, const QByteArray&  data) const;
+   QMimeType  mimeTypeForFile(QMimeDatabase* theWrappedObject, const QFileInfo&  fileInfo, QMimeDatabase::MatchMode  mode = QMimeDatabase::MatchDefault) const;
+   QMimeType  mimeTypeForFile(QMimeDatabase* theWrappedObject, const QString&  fileName, QMimeDatabase::MatchMode  mode = QMimeDatabase::MatchDefault) const;
+   QMimeType  mimeTypeForFileNameAndData(QMimeDatabase* theWrappedObject, const QString&  fileName, QIODevice*  device) const;
+   QMimeType  mimeTypeForFileNameAndData(QMimeDatabase* theWrappedObject, const QString&  fileName, const QByteArray&  data) const;
+   QMimeType  mimeTypeForName(QMimeDatabase* theWrappedObject, const QString&  nameOrAlias) const;
+   QMimeType  mimeTypeForUrl(QMimeDatabase* theWrappedObject, const QUrl&  url) const;
+   QList<QMimeType >  mimeTypesForFileName(QMimeDatabase* theWrappedObject, const QString&  fileName) const;
+   QString  suffixForFileName(QMimeDatabase* theWrappedObject, const QString&  fileName) const;
+};
+
+
+
+
+
+class PythonQtWrapper_QMimeType : public QObject
+{ Q_OBJECT
+public:
+public slots:
+QMimeType* new_QMimeType();
+QMimeType* new_QMimeType(const QMimeType&  other);
+void delete_QMimeType(QMimeType* obj) { delete obj; }
+   QStringList  aliases(QMimeType* theWrappedObject) const;
+   QStringList  allAncestors(QMimeType* theWrappedObject) const;
+   QString  comment(QMimeType* theWrappedObject) const;
+   QString  filterString(QMimeType* theWrappedObject) const;
+   QString  genericIconName(QMimeType* theWrappedObject) const;
+   QStringList  globPatterns(QMimeType* theWrappedObject) const;
+   QString  iconName(QMimeType* theWrappedObject) const;
+   bool  inherits(QMimeType* theWrappedObject, const QString&  mimeTypeName) const;
+   bool  isDefault(QMimeType* theWrappedObject) const;
+   bool  isValid(QMimeType* theWrappedObject) const;
+   QString  name(QMimeType* theWrappedObject) const;
+   bool  __ne__(QMimeType* theWrappedObject, const QMimeType&  other) const;
+   QMimeType*  operator_assign(QMimeType* theWrappedObject, const QMimeType&  other);
+   bool  __eq__(QMimeType* theWrappedObject, const QMimeType&  other) const;
+   QStringList  parentMimeTypes(QMimeType* theWrappedObject) const;
+   QString  preferredSuffix(QMimeType* theWrappedObject) const;
+   QStringList  suffixes(QMimeType* theWrappedObject) const;
+   void swap(QMimeType* theWrappedObject, QMimeType&  other);
+    QString py_toString(QMimeType*);
+    bool __nonzero__(QMimeType* obj) { return obj->isValid(); }
+};
+
+
 
 
 
@@ -106,14 +388,14 @@ class PythonQtWrapper_QMutexLocker : public QObject
 { Q_OBJECT
 public:
 public slots:
-QMutexLocker* new_QMutexLocker(QMutex*  arg__1);
+QMutexLocker* new_QMutexLocker(QBasicMutex*  m);
 void delete_QMutexLocker(QMutexLocker* obj) { delete obj; }
    QMutex*  mutex(QMutexLocker* theWrappedObject) const;
    void relock(QMutexLocker* theWrappedObject);
    void unlock(QMutexLocker* theWrappedObject);
 
-    void __enter__(QMutexLocker* self) {}
-    void __exit__(QMutexLocker* self, PyObject* type, PyObject* value, PyObject* traceback) { self->unlock(); }
+    void __enter__(QMutexLocker* /*self*/) {}
+    void __exit__(QMutexLocker* self, PyObject* /*type*/, PyObject* /*value*/, PyObject* /*traceback*/) { self->unlock(); }
     
 };
 
@@ -136,7 +418,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QObject : public QObject
@@ -205,7 +487,7 @@ public:
    ~PythonQtShell_QOperatingSystemVersion();
 
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QOperatingSystemVersion : public QObject
@@ -223,6 +505,10 @@ void delete_QOperatingSystemVersion(QOperatingSystemVersion* obj) { delete obj; 
    int  microVersion(QOperatingSystemVersion* theWrappedObject) const;
    int  minorVersion(QOperatingSystemVersion* theWrappedObject) const;
    QString  name(QOperatingSystemVersion* theWrappedObject) const;
+   bool  __lt__(QOperatingSystemVersion* theWrappedObject, const QOperatingSystemVersion&  rhs);
+   bool  __le__(QOperatingSystemVersion* theWrappedObject, const QOperatingSystemVersion&  rhs);
+   bool  __gt__(QOperatingSystemVersion* theWrappedObject, const QOperatingSystemVersion&  rhs);
+   bool  __ge__(QOperatingSystemVersion* theWrappedObject, const QOperatingSystemVersion&  rhs);
    int  segmentCount(QOperatingSystemVersion* theWrappedObject) const;
    QOperatingSystemVersion::OSType  type(QOperatingSystemVersion* theWrappedObject) const;
     QString py_toString(QOperatingSystemVersion*);
@@ -251,7 +537,7 @@ void updateState(QAbstractAnimation::State  newState, QAbstractAnimation::State 
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QParallelAnimationGroup : public QParallelAnimationGroup
@@ -304,7 +590,7 @@ void updateState(QAbstractAnimation::State  newState, QAbstractAnimation::State 
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QPauseAnimation : public QPauseAnimation
@@ -398,7 +684,7 @@ qint64  writeData(const char*  data, qint64  len) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QProcess : public QProcess
@@ -539,7 +825,7 @@ void updateState(QAbstractAnimation::State  newState, QAbstractAnimation::State 
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QPropertyAnimation : public QPropertyAnimation
@@ -578,6 +864,7 @@ public:
 public slots:
 QRandomGenerator* new_QRandomGenerator(const QRandomGenerator&  other);
 QRandomGenerator* new_QRandomGenerator(const unsigned int*  begin, const unsigned int*  end);
+QRandomGenerator* new_QRandomGenerator(const unsigned int*  seedBuffer, qsizetype  len);
 QRandomGenerator* new_QRandomGenerator(unsigned int  seedValue = 1);
 void delete_QRandomGenerator(QRandomGenerator* obj) { delete obj; }
    double  bounded(QRandomGenerator* theWrappedObject, double  highest);
@@ -593,6 +880,7 @@ void delete_QRandomGenerator(QRandomGenerator* obj) { delete obj; }
    QRandomGenerator*  static_QRandomGenerator_global();
    unsigned int  static_QRandomGenerator_max();
    unsigned int  static_QRandomGenerator_min();
+   bool  __ne__(QRandomGenerator* theWrappedObject, const QRandomGenerator&  rng2);
    unsigned int  operator_cast_(QRandomGenerator* theWrappedObject);
    QRandomGenerator*  operator_assign(QRandomGenerator* theWrappedObject, const QRandomGenerator&  other);
    QRandomGenerator  static_QRandomGenerator_securelySeeded();
@@ -610,6 +898,7 @@ public:
 public slots:
 QRandomGenerator64* new_QRandomGenerator64(const QRandomGenerator&  other);
 QRandomGenerator64* new_QRandomGenerator64(const unsigned int*  begin, const unsigned int*  end);
+QRandomGenerator64* new_QRandomGenerator64(const unsigned int*  seedBuffer, qsizetype  len);
 QRandomGenerator64* new_QRandomGenerator64(unsigned int  seedValue = 1);
 void delete_QRandomGenerator64(QRandomGenerator64* obj) { delete obj; }
    void discard(QRandomGenerator64* theWrappedObject, quint64  z);
@@ -620,6 +909,25 @@ void delete_QRandomGenerator64(QRandomGenerator64* obj) { delete obj; }
    quint64  operator_cast_(QRandomGenerator64* theWrappedObject);
    QRandomGenerator64  static_QRandomGenerator64_securelySeeded();
    QRandomGenerator64*  static_QRandomGenerator64_system();
+};
+
+
+
+
+
+class PythonQtWrapper_QReadLocker : public QObject
+{ Q_OBJECT
+public:
+public slots:
+QReadLocker* new_QReadLocker(QReadWriteLock*  readWriteLock);
+void delete_QReadLocker(QReadLocker* obj) { delete obj; }
+   QReadWriteLock*  readWriteLock(QReadLocker* theWrappedObject) const;
+   void relock(QReadLocker* theWrappedObject);
+   void unlock(QReadLocker* theWrappedObject);
+
+    void __enter__(QReadLocker* /*self*/) {}
+    void __exit__(QReadLocker* self, PyObject* /*type*/, PyObject* /*value*/, PyObject* /*traceback*/) { self->unlock(); }
+    
 };
 
 
@@ -648,55 +956,6 @@ void delete_QReadWriteLock(QReadWriteLock* obj) { delete obj; }
 
 
 
-class PythonQtWrapper_QRegularExpression : public QObject
-{ Q_OBJECT
-public:
-Q_ENUMS(MatchOption MatchType PatternOption )
-Q_FLAGS(MatchOptions PatternOptions )
-enum MatchOption{
-  NoMatchOption = QRegularExpression::NoMatchOption,   AnchoredMatchOption = QRegularExpression::AnchoredMatchOption,   DontCheckSubjectStringMatchOption = QRegularExpression::DontCheckSubjectStringMatchOption};
-enum MatchType{
-  NormalMatch = QRegularExpression::NormalMatch,   PartialPreferCompleteMatch = QRegularExpression::PartialPreferCompleteMatch,   PartialPreferFirstMatch = QRegularExpression::PartialPreferFirstMatch,   NoMatch = QRegularExpression::NoMatch};
-enum PatternOption{
-  NoPatternOption = QRegularExpression::NoPatternOption,   CaseInsensitiveOption = QRegularExpression::CaseInsensitiveOption,   DotMatchesEverythingOption = QRegularExpression::DotMatchesEverythingOption,   MultilineOption = QRegularExpression::MultilineOption,   ExtendedPatternSyntaxOption = QRegularExpression::ExtendedPatternSyntaxOption,   InvertedGreedinessOption = QRegularExpression::InvertedGreedinessOption,   DontCaptureOption = QRegularExpression::DontCaptureOption,   UseUnicodePropertiesOption = QRegularExpression::UseUnicodePropertiesOption,   OptimizeOnFirstUsageOption = QRegularExpression::OptimizeOnFirstUsageOption,   DontAutomaticallyOptimizeOption = QRegularExpression::DontAutomaticallyOptimizeOption};
-Q_DECLARE_FLAGS(MatchOptions, MatchOption)
-Q_DECLARE_FLAGS(PatternOptions, PatternOption)
-public slots:
-QRegularExpression* new_QRegularExpression();
-QRegularExpression* new_QRegularExpression(const QRegularExpression&  re);
-QRegularExpression* new_QRegularExpression(const QString&  pattern, QRegularExpression::PatternOptions  options = QRegularExpression::NoPatternOption);
-void delete_QRegularExpression(QRegularExpression* obj) { delete obj; }
-   QString  static_QRegularExpression_anchoredPattern(const QString&  expression);
-   int  captureCount(QRegularExpression* theWrappedObject) const;
-   QString  errorString(QRegularExpression* theWrappedObject) const;
-   QString  static_QRegularExpression_escape(const QString&  str);
-   QRegularExpressionMatchIterator  globalMatch(QRegularExpression* theWrappedObject, const QString&  subject, int  offset = 0, QRegularExpression::MatchType  matchType = QRegularExpression::NormalMatch, QRegularExpression::MatchOptions  matchOptions = QRegularExpression::NoMatchOption) const;
-   QRegularExpressionMatchIterator  globalMatch(QRegularExpression* theWrappedObject, const QStringRef&  subjectRef, int  offset = 0, QRegularExpression::MatchType  matchType = QRegularExpression::NormalMatch, QRegularExpression::MatchOptions  matchOptions = QRegularExpression::NoMatchOption) const;
-   bool  isValid(QRegularExpression* theWrappedObject) const;
-   QRegularExpressionMatch  match(QRegularExpression* theWrappedObject, const QString&  subject, int  offset = 0, QRegularExpression::MatchType  matchType = QRegularExpression::NormalMatch, QRegularExpression::MatchOptions  matchOptions = QRegularExpression::NoMatchOption) const;
-   QRegularExpressionMatch  match(QRegularExpression* theWrappedObject, const QStringRef&  subjectRef, int  offset = 0, QRegularExpression::MatchType  matchType = QRegularExpression::NormalMatch, QRegularExpression::MatchOptions  matchOptions = QRegularExpression::NoMatchOption) const;
-   QStringList  namedCaptureGroups(QRegularExpression* theWrappedObject) const;
-   bool  __ne__(QRegularExpression* theWrappedObject, const QRegularExpression&  re) const;
-   void writeTo(QRegularExpression* theWrappedObject, QDataStream&  out);
-   QRegularExpression*  operator_assign(QRegularExpression* theWrappedObject, const QRegularExpression&  re);
-   bool  __eq__(QRegularExpression* theWrappedObject, const QRegularExpression&  re) const;
-   void readFrom(QRegularExpression* theWrappedObject, QDataStream&  in);
-   void optimize(QRegularExpression* theWrappedObject) const;
-   QString  pattern(QRegularExpression* theWrappedObject) const;
-   int  patternErrorOffset(QRegularExpression* theWrappedObject) const;
-   QRegularExpression::PatternOptions  patternOptions(QRegularExpression* theWrappedObject) const;
-   void setPattern(QRegularExpression* theWrappedObject, const QString&  pattern);
-   void setPatternOptions(QRegularExpression* theWrappedObject, QRegularExpression::PatternOptions  options);
-   void swap(QRegularExpression* theWrappedObject, QRegularExpression&  other);
-   QString  static_QRegularExpression_wildcardToRegularExpression(const QString&  str);
-    QString py_toString(QRegularExpression*);
-    bool __nonzero__(QRegularExpression* obj) { return obj->isValid(); }
-};
-
-
-
-
-
 class PythonQtWrapper_QRegularExpressionMatch : public QObject
 { Q_OBJECT
 public:
@@ -715,6 +974,8 @@ void delete_QRegularExpressionMatch(QRegularExpressionMatch* obj) { delete obj; 
    int  capturedStart(QRegularExpressionMatch* theWrappedObject, const QString&  name) const;
    int  capturedStart(QRegularExpressionMatch* theWrappedObject, int  nth = 0) const;
    QStringList  capturedTexts(QRegularExpressionMatch* theWrappedObject) const;
+   QStringView  capturedView(QRegularExpressionMatch* theWrappedObject, QStringView  name) const;
+   QStringView  capturedView(QRegularExpressionMatch* theWrappedObject, int  nth = 0) const;
    bool  hasMatch(QRegularExpressionMatch* theWrappedObject) const;
    bool  hasPartialMatch(QRegularExpressionMatch* theWrappedObject) const;
    bool  isValid(QRegularExpressionMatch* theWrappedObject) const;
@@ -763,7 +1024,7 @@ public:
    ~PythonQtShell_QResource();
 
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QResource : public QResource
@@ -814,7 +1075,7 @@ public:
 
 void run() override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QRunnable : public QRunnable
@@ -874,7 +1135,7 @@ qint64  writeData(const char*  data, qint64  len) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QSaveFile : public QSaveFile
@@ -943,7 +1204,7 @@ void updateState(QAbstractAnimation::State  newState, QAbstractAnimation::State 
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QSequentialAnimationGroup : public QSequentialAnimationGroup
@@ -998,7 +1259,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QSettings : public QSettings
@@ -1051,367 +1312,6 @@ void delete_QSettings(QSettings* obj) { delete obj; }
    QSettings::Status  status(QSettings* theWrappedObject) const;
    void sync(QSettings* theWrappedObject);
    QVariant  value(QSettings* theWrappedObject, const QString&  key, const QVariant&  defaultValue = QVariant()) const;
-};
-
-
-
-
-
-class PythonQtShell_QSharedMemory : public QSharedMemory
-{
-public:
-    PythonQtShell_QSharedMemory(QObject*  parent = nullptr):QSharedMemory(parent),_wrapper(nullptr) {};
-    PythonQtShell_QSharedMemory(const QString&  key, QObject*  parent = nullptr):QSharedMemory(key, parent),_wrapper(nullptr) {};
-
-   ~PythonQtShell_QSharedMemory() override;
-
-void childEvent(QChildEvent*  event) override;
-void customEvent(QEvent*  event) override;
-bool  event(QEvent*  event) override;
-bool  eventFilter(QObject*  watched, QEvent*  event) override;
-void timerEvent(QTimerEvent*  event) override;
-
-  const QMetaObject* metaObject() const override;
-  int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
-};
-
-class PythonQtWrapper_QSharedMemory : public QObject
-{ Q_OBJECT
-public:
-Q_ENUMS(AccessMode SharedMemoryError )
-enum AccessMode{
-  ReadOnly = QSharedMemory::ReadOnly,   ReadWrite = QSharedMemory::ReadWrite};
-enum SharedMemoryError{
-  NoError = QSharedMemory::NoError,   PermissionDenied = QSharedMemory::PermissionDenied,   InvalidSize = QSharedMemory::InvalidSize,   KeyError = QSharedMemory::KeyError,   AlreadyExists = QSharedMemory::AlreadyExists,   NotFound = QSharedMemory::NotFound,   LockError = QSharedMemory::LockError,   OutOfResources = QSharedMemory::OutOfResources,   UnknownError = QSharedMemory::UnknownError};
-public slots:
-QSharedMemory* new_QSharedMemory(QObject*  parent = nullptr);
-QSharedMemory* new_QSharedMemory(const QString&  key, QObject*  parent = nullptr);
-void delete_QSharedMemory(QSharedMemory* obj) { delete obj; }
-   bool  attach(QSharedMemory* theWrappedObject, QSharedMemory::AccessMode  mode = QSharedMemory::ReadWrite);
-   const void*  constData(QSharedMemory* theWrappedObject) const;
-   bool  create(QSharedMemory* theWrappedObject, int  size, QSharedMemory::AccessMode  mode = QSharedMemory::ReadWrite);
-   void*  data(QSharedMemory* theWrappedObject);
-   const void*  data(QSharedMemory* theWrappedObject) const;
-   QSharedMemory::SharedMemoryError  error(QSharedMemory* theWrappedObject) const;
-   QString  errorString(QSharedMemory* theWrappedObject) const;
-   bool  isAttached(QSharedMemory* theWrappedObject) const;
-   QString  key(QSharedMemory* theWrappedObject) const;
-   bool  lock(QSharedMemory* theWrappedObject);
-   QString  nativeKey(QSharedMemory* theWrappedObject) const;
-   void setKey(QSharedMemory* theWrappedObject, const QString&  key);
-   void setNativeKey(QSharedMemory* theWrappedObject, const QString&  key);
-   int  size(QSharedMemory* theWrappedObject) const;
-   bool  unlock(QSharedMemory* theWrappedObject);
-};
-
-
-
-
-
-class PythonQtShell_QSignalMapper : public QSignalMapper
-{
-public:
-    PythonQtShell_QSignalMapper(QObject*  parent = nullptr):QSignalMapper(parent),_wrapper(nullptr) {};
-
-   ~PythonQtShell_QSignalMapper() override;
-
-void childEvent(QChildEvent*  event) override;
-void customEvent(QEvent*  event) override;
-bool  event(QEvent*  event) override;
-bool  eventFilter(QObject*  watched, QEvent*  event) override;
-void timerEvent(QTimerEvent*  event) override;
-
-  const QMetaObject* metaObject() const override;
-  int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
-};
-
-class PythonQtWrapper_QSignalMapper : public QObject
-{ Q_OBJECT
-public:
-public slots:
-QSignalMapper* new_QSignalMapper(QObject*  parent = nullptr);
-void delete_QSignalMapper(QSignalMapper* obj) { delete obj; }
-   QObject*  mapping(QSignalMapper* theWrappedObject, QObject*  object) const;
-   QObject*  mapping(QSignalMapper* theWrappedObject, QWidget*  widget) const;
-   QObject*  mapping(QSignalMapper* theWrappedObject, const QString&  text) const;
-   QObject*  mapping(QSignalMapper* theWrappedObject, int  id) const;
-   void removeMappings(QSignalMapper* theWrappedObject, QObject*  sender);
-   void setMapping(QSignalMapper* theWrappedObject, QObject*  sender, QObject*  object);
-   void setMapping(QSignalMapper* theWrappedObject, QObject*  sender, QWidget*  widget);
-   void setMapping(QSignalMapper* theWrappedObject, QObject*  sender, const QString&  text);
-   void setMapping(QSignalMapper* theWrappedObject, QObject*  sender, int  id);
-};
-
-
-
-
-
-class PythonQtShell_QSignalTransition : public QSignalTransition
-{
-public:
-    PythonQtShell_QSignalTransition(QState*  sourceState = nullptr):QSignalTransition(sourceState),_wrapper(nullptr) {};
-    PythonQtShell_QSignalTransition(const QObject*  sender, const char*  signal, QState*  sourceState = nullptr):QSignalTransition(sender, signal, sourceState),_wrapper(nullptr) {};
-
-   ~PythonQtShell_QSignalTransition() override;
-
-void childEvent(QChildEvent*  event) override;
-void customEvent(QEvent*  event) override;
-bool  event(QEvent*  e) override;
-bool  eventFilter(QObject*  watched, QEvent*  event) override;
-bool  eventTest(QEvent*  event) override;
-void onTransition(QEvent*  event) override;
-void timerEvent(QTimerEvent*  event) override;
-
-  const QMetaObject* metaObject() const override;
-  int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
-};
-
-class PythonQtPublicPromoter_QSignalTransition : public QSignalTransition
-{ public:
-inline bool  promoted_event(QEvent*  e) { return this->event(e); }
-inline bool  promoted_eventTest(QEvent*  event) { return this->eventTest(event); }
-inline void promoted_onTransition(QEvent*  event) { this->onTransition(event); }
-inline bool  py_q_event(QEvent*  e) { return QSignalTransition::event(e); }
-inline bool  py_q_eventTest(QEvent*  event) { return QSignalTransition::eventTest(event); }
-inline void py_q_onTransition(QEvent*  event) { QSignalTransition::onTransition(event); }
-};
-
-class PythonQtWrapper_QSignalTransition : public QObject
-{ Q_OBJECT
-public:
-public slots:
-QSignalTransition* new_QSignalTransition(QState*  sourceState = nullptr);
-QSignalTransition* new_QSignalTransition(const QObject*  sender, const char*  signal, QState*  sourceState = nullptr);
-void delete_QSignalTransition(QSignalTransition* obj) { delete obj; }
-   bool  py_q_event(QSignalTransition* theWrappedObject, QEvent*  e){  return (((PythonQtPublicPromoter_QSignalTransition*)theWrappedObject)->py_q_event(e));}
-   bool  py_q_eventTest(QSignalTransition* theWrappedObject, QEvent*  event){  return (((PythonQtPublicPromoter_QSignalTransition*)theWrappedObject)->py_q_eventTest(event));}
-   void py_q_onTransition(QSignalTransition* theWrappedObject, QEvent*  event){  (((PythonQtPublicPromoter_QSignalTransition*)theWrappedObject)->py_q_onTransition(event));}
-   QObject*  senderObject(QSignalTransition* theWrappedObject) const;
-   void setSenderObject(QSignalTransition* theWrappedObject, const QObject*  sender);
-   void setSignal(QSignalTransition* theWrappedObject, const QByteArray&  signal);
-   QByteArray  signal(QSignalTransition* theWrappedObject) const;
-};
-
-
-
-
-
-class PythonQtShell_QSocketNotifier : public QSocketNotifier
-{
-public:
-    PythonQtShell_QSocketNotifier(qintptr  socket, QSocketNotifier::Type  arg__2, QObject*  parent = nullptr):QSocketNotifier(socket, arg__2, parent),_wrapper(nullptr) {};
-
-   ~PythonQtShell_QSocketNotifier() override;
-
-void childEvent(QChildEvent*  event) override;
-void customEvent(QEvent*  event) override;
-bool  event(QEvent*  arg__1) override;
-bool  eventFilter(QObject*  watched, QEvent*  event) override;
-void timerEvent(QTimerEvent*  event) override;
-
-  const QMetaObject* metaObject() const override;
-  int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
-};
-
-class PythonQtPublicPromoter_QSocketNotifier : public QSocketNotifier
-{ public:
-inline bool  promoted_event(QEvent*  arg__1) { return this->event(arg__1); }
-inline bool  py_q_event(QEvent*  arg__1) { return QSocketNotifier::event(arg__1); }
-};
-
-class PythonQtWrapper_QSocketNotifier : public QObject
-{ Q_OBJECT
-public:
-Q_ENUMS(Type )
-enum Type{
-  Read = QSocketNotifier::Read,   Write = QSocketNotifier::Write,   Exception = QSocketNotifier::Exception};
-public slots:
-QSocketNotifier* new_QSocketNotifier(qintptr  socket, QSocketNotifier::Type  arg__2, QObject*  parent = nullptr);
-void delete_QSocketNotifier(QSocketNotifier* obj) { delete obj; }
-   bool  py_q_event(QSocketNotifier* theWrappedObject, QEvent*  arg__1){  return (((PythonQtPublicPromoter_QSocketNotifier*)theWrappedObject)->py_q_event(arg__1));}
-   bool  isEnabled(QSocketNotifier* theWrappedObject) const;
-   qintptr  socket(QSocketNotifier* theWrappedObject) const;
-   QSocketNotifier::Type  type(QSocketNotifier* theWrappedObject) const;
-};
-
-
-
-
-
-class PythonQtWrapper_QStandardPaths : public QObject
-{ Q_OBJECT
-public:
-Q_ENUMS(LocateOption StandardLocation )
-Q_FLAGS(LocateOptions )
-enum LocateOption{
-  LocateFile = QStandardPaths::LocateFile,   LocateDirectory = QStandardPaths::LocateDirectory};
-enum StandardLocation{
-  DesktopLocation = QStandardPaths::DesktopLocation,   DocumentsLocation = QStandardPaths::DocumentsLocation,   FontsLocation = QStandardPaths::FontsLocation,   ApplicationsLocation = QStandardPaths::ApplicationsLocation,   MusicLocation = QStandardPaths::MusicLocation,   MoviesLocation = QStandardPaths::MoviesLocation,   PicturesLocation = QStandardPaths::PicturesLocation,   TempLocation = QStandardPaths::TempLocation,   HomeLocation = QStandardPaths::HomeLocation,   DataLocation = QStandardPaths::DataLocation,   CacheLocation = QStandardPaths::CacheLocation,   GenericDataLocation = QStandardPaths::GenericDataLocation,   RuntimeLocation = QStandardPaths::RuntimeLocation,   ConfigLocation = QStandardPaths::ConfigLocation,   DownloadLocation = QStandardPaths::DownloadLocation,   GenericCacheLocation = QStandardPaths::GenericCacheLocation,   GenericConfigLocation = QStandardPaths::GenericConfigLocation,   AppDataLocation = QStandardPaths::AppDataLocation,   AppConfigLocation = QStandardPaths::AppConfigLocation,   AppLocalDataLocation = QStandardPaths::AppLocalDataLocation};
-Q_DECLARE_FLAGS(LocateOptions, LocateOption)
-public slots:
-   QString  static_QStandardPaths_displayName(QStandardPaths::StandardLocation  type);
-   void static_QStandardPaths_enableTestMode(bool  testMode);
-   QString  static_QStandardPaths_findExecutable(const QString&  executableName, const QStringList&  paths = QStringList());
-   bool  static_QStandardPaths_isTestModeEnabled();
-   QString  static_QStandardPaths_locate(QStandardPaths::StandardLocation  type, const QString&  fileName, QStandardPaths::LocateOptions  options = QStandardPaths::LocateFile);
-   QStringList  static_QStandardPaths_locateAll(QStandardPaths::StandardLocation  type, const QString&  fileName, QStandardPaths::LocateOptions  options = QStandardPaths::LocateFile);
-   void static_QStandardPaths_setTestModeEnabled(bool  testMode);
-   QStringList  static_QStandardPaths_standardLocations(QStandardPaths::StandardLocation  type);
-   QString  static_QStandardPaths_writableLocation(QStandardPaths::StandardLocation  type);
-};
-
-
-
-
-
-class PythonQtShell_QState : public QState
-{
-public:
-    PythonQtShell_QState(QState*  parent = nullptr):QState(parent),_wrapper(nullptr) {};
-    PythonQtShell_QState(QState::ChildMode  childMode, QState*  parent = nullptr):QState(childMode, parent),_wrapper(nullptr) {};
-
-   ~PythonQtShell_QState() override;
-
-void childEvent(QChildEvent*  event) override;
-void customEvent(QEvent*  event) override;
-bool  event(QEvent*  e) override;
-bool  eventFilter(QObject*  watched, QEvent*  event) override;
-void onEntry(QEvent*  event) override;
-void onExit(QEvent*  event) override;
-void timerEvent(QTimerEvent*  event) override;
-
-  const QMetaObject* metaObject() const override;
-  int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
-};
-
-class PythonQtPublicPromoter_QState : public QState
-{ public:
-inline bool  promoted_event(QEvent*  e) { return this->event(e); }
-inline void promoted_onEntry(QEvent*  event) { this->onEntry(event); }
-inline void promoted_onExit(QEvent*  event) { this->onExit(event); }
-inline bool  py_q_event(QEvent*  e) { return QState::event(e); }
-inline void py_q_onEntry(QEvent*  event) { QState::onEntry(event); }
-inline void py_q_onExit(QEvent*  event) { QState::onExit(event); }
-};
-
-class PythonQtWrapper_QState : public QObject
-{ Q_OBJECT
-public:
-public slots:
-QState* new_QState(QState*  parent = nullptr);
-QState* new_QState(QState::ChildMode  childMode, QState*  parent = nullptr);
-void delete_QState(QState* obj) { delete obj; }
-   QAbstractTransition*  addTransition(QState* theWrappedObject, PythonQtPassOwnershipToCPP<QAbstractState* >  target);
-   void addTransition(QState* theWrappedObject, PythonQtPassOwnershipToCPP<QAbstractTransition* >  transition);
-   QSignalTransition*  addTransition(QState* theWrappedObject, const QObject*  sender, const char*  signal, QAbstractState*  target);
-   void assignProperty(QState* theWrappedObject, QObject*  object, const char*  name, const QVariant&  value);
-   QState::ChildMode  childMode(QState* theWrappedObject) const;
-   QAbstractState*  errorState(QState* theWrappedObject) const;
-   bool  py_q_event(QState* theWrappedObject, QEvent*  e){  return (((PythonQtPublicPromoter_QState*)theWrappedObject)->py_q_event(e));}
-   QAbstractState*  initialState(QState* theWrappedObject) const;
-   void py_q_onEntry(QState* theWrappedObject, QEvent*  event){  (((PythonQtPublicPromoter_QState*)theWrappedObject)->py_q_onEntry(event));}
-   void py_q_onExit(QState* theWrappedObject, QEvent*  event){  (((PythonQtPublicPromoter_QState*)theWrappedObject)->py_q_onExit(event));}
-   void removeTransition(QState* theWrappedObject, PythonQtPassOwnershipToPython<QAbstractTransition* >  transition);
-   void setChildMode(QState* theWrappedObject, QState::ChildMode  mode);
-   void setErrorState(QState* theWrappedObject, QAbstractState*  state);
-   void setInitialState(QState* theWrappedObject, QAbstractState*  state);
-   QList<QAbstractTransition* >  transitions(QState* theWrappedObject) const;
-};
-
-
-
-
-
-class PythonQtShell_QStateMachine : public QStateMachine
-{
-public:
-    PythonQtShell_QStateMachine(QObject*  parent = nullptr):QStateMachine(parent),_wrapper(nullptr) {};
-    PythonQtShell_QStateMachine(QState::ChildMode  childMode, QObject*  parent = nullptr):QStateMachine(childMode, parent),_wrapper(nullptr) {};
-
-   ~PythonQtShell_QStateMachine() override;
-
-void beginMicrostep(QEvent*  event) override;
-void beginSelectTransitions(QEvent*  event) override;
-void childEvent(QChildEvent*  event) override;
-void customEvent(QEvent*  event) override;
-void endMicrostep(QEvent*  event) override;
-void endSelectTransitions(QEvent*  event) override;
-bool  event(QEvent*  e) override;
-bool  eventFilter(QObject*  watched, QEvent*  event) override;
-void onEntry(QEvent*  event) override;
-void onExit(QEvent*  event) override;
-void timerEvent(QTimerEvent*  event) override;
-
-  const QMetaObject* metaObject() const override;
-  int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
-};
-
-class PythonQtPublicPromoter_QStateMachine : public QStateMachine
-{ public:
-inline void promoted_beginMicrostep(QEvent*  event) { this->beginMicrostep(event); }
-inline void promoted_beginSelectTransitions(QEvent*  event) { this->beginSelectTransitions(event); }
-inline void promoted_endMicrostep(QEvent*  event) { this->endMicrostep(event); }
-inline void promoted_endSelectTransitions(QEvent*  event) { this->endSelectTransitions(event); }
-inline bool  promoted_event(QEvent*  e) { return this->event(e); }
-inline void promoted_onEntry(QEvent*  event) { this->onEntry(event); }
-inline void promoted_onExit(QEvent*  event) { this->onExit(event); }
-inline void py_q_beginMicrostep(QEvent*  event) { QStateMachine::beginMicrostep(event); }
-inline void py_q_beginSelectTransitions(QEvent*  event) { QStateMachine::beginSelectTransitions(event); }
-inline void py_q_endMicrostep(QEvent*  event) { QStateMachine::endMicrostep(event); }
-inline void py_q_endSelectTransitions(QEvent*  event) { QStateMachine::endSelectTransitions(event); }
-inline bool  py_q_event(QEvent*  e) { return QStateMachine::event(e); }
-inline bool  py_q_eventFilter(QObject*  watched, QEvent*  event) { return QStateMachine::eventFilter(watched, event); }
-inline void py_q_onEntry(QEvent*  event) { QStateMachine::onEntry(event); }
-inline void py_q_onExit(QEvent*  event) { QStateMachine::onExit(event); }
-};
-
-class PythonQtWrapper_QStateMachine : public QObject
-{ Q_OBJECT
-public:
-Q_ENUMS(Error EventPriority )
-enum Error{
-  NoError = QStateMachine::NoError,   NoInitialStateError = QStateMachine::NoInitialStateError,   NoDefaultStateInHistoryStateError = QStateMachine::NoDefaultStateInHistoryStateError,   NoCommonAncestorForTransitionError = QStateMachine::NoCommonAncestorForTransitionError};
-enum EventPriority{
-  NormalPriority = QStateMachine::NormalPriority,   HighPriority = QStateMachine::HighPriority};
-public slots:
-QStateMachine* new_QStateMachine(QObject*  parent = nullptr);
-QStateMachine* new_QStateMachine(QState::ChildMode  childMode, QObject*  parent = nullptr);
-void delete_QStateMachine(QStateMachine* obj) { delete obj; }
-   void addDefaultAnimation(QStateMachine* theWrappedObject, QAbstractAnimation*  animation);
-   void addState(QStateMachine* theWrappedObject, PythonQtPassOwnershipToCPP<QAbstractState* >  state);
-   void beginMicrostep(QStateMachine* theWrappedObject, QEvent*  event);
-   void py_q_beginMicrostep(QStateMachine* theWrappedObject, QEvent*  event){  (((PythonQtPublicPromoter_QStateMachine*)theWrappedObject)->py_q_beginMicrostep(event));}
-   void beginSelectTransitions(QStateMachine* theWrappedObject, QEvent*  event);
-   void py_q_beginSelectTransitions(QStateMachine* theWrappedObject, QEvent*  event){  (((PythonQtPublicPromoter_QStateMachine*)theWrappedObject)->py_q_beginSelectTransitions(event));}
-   bool  cancelDelayedEvent(QStateMachine* theWrappedObject, int  id);
-   void clearError(QStateMachine* theWrappedObject);
-   QSet<QAbstractState* >  configuration(QStateMachine* theWrappedObject) const;
-   QList<QAbstractAnimation* >  defaultAnimations(QStateMachine* theWrappedObject) const;
-   void endMicrostep(QStateMachine* theWrappedObject, QEvent*  event);
-   void py_q_endMicrostep(QStateMachine* theWrappedObject, QEvent*  event){  (((PythonQtPublicPromoter_QStateMachine*)theWrappedObject)->py_q_endMicrostep(event));}
-   void endSelectTransitions(QStateMachine* theWrappedObject, QEvent*  event);
-   void py_q_endSelectTransitions(QStateMachine* theWrappedObject, QEvent*  event){  (((PythonQtPublicPromoter_QStateMachine*)theWrappedObject)->py_q_endSelectTransitions(event));}
-   QStateMachine::Error  error(QStateMachine* theWrappedObject) const;
-   QString  errorString(QStateMachine* theWrappedObject) const;
-   bool  py_q_event(QStateMachine* theWrappedObject, QEvent*  e){  return (((PythonQtPublicPromoter_QStateMachine*)theWrappedObject)->py_q_event(e));}
-   bool  py_q_eventFilter(QStateMachine* theWrappedObject, QObject*  watched, QEvent*  event){  return (((PythonQtPublicPromoter_QStateMachine*)theWrappedObject)->py_q_eventFilter(watched, event));}
-   QState::RestorePolicy  globalRestorePolicy(QStateMachine* theWrappedObject) const;
-   bool  isAnimated(QStateMachine* theWrappedObject) const;
-   bool  isRunning(QStateMachine* theWrappedObject) const;
-   void py_q_onEntry(QStateMachine* theWrappedObject, QEvent*  event){  (((PythonQtPublicPromoter_QStateMachine*)theWrappedObject)->py_q_onEntry(event));}
-   void py_q_onExit(QStateMachine* theWrappedObject, QEvent*  event){  (((PythonQtPublicPromoter_QStateMachine*)theWrappedObject)->py_q_onExit(event));}
-   int  postDelayedEvent(QStateMachine* theWrappedObject, QEvent*  event, int  delay);
-   void postEvent(QStateMachine* theWrappedObject, QEvent*  event, QStateMachine::EventPriority  priority = QStateMachine::NormalPriority);
-   void removeDefaultAnimation(QStateMachine* theWrappedObject, QAbstractAnimation*  animation);
-   void removeState(QStateMachine* theWrappedObject, PythonQtPassOwnershipToPython<QAbstractState* >  state);
-   void setAnimated(QStateMachine* theWrappedObject, bool  enabled);
-   void setGlobalRestorePolicy(QStateMachine* theWrappedObject, QState::RestorePolicy  restorePolicy);
 };
 
 

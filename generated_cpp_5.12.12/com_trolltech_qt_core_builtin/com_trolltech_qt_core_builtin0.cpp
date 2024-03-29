@@ -16,12 +16,15 @@
 #include <qmargins.h>
 #include <qmatrix.h>
 #include <qmatrix4x4.h>
+#include <qnamespace.h>
 #include <qpoint.h>
 #include <qrect.h>
 #include <qregexp.h>
+#include <qregularexpression.h>
 #include <qsize.h>
 #include <qstringlist.h>
 #include <qtextcodec.h>
+#include <qtextdocument.h>
 #include <qtimezone.h>
 #include <qtransform.h>
 #include <qurl.h>
@@ -77,6 +80,11 @@ void PythonQtWrapper_QBitArray::fill(QBitArray* theWrappedObject, bool  val, int
 bool  PythonQtWrapper_QBitArray::fill(QBitArray* theWrappedObject, bool  val, int  size)
 {
   return ( theWrappedObject->fill(val, size));
+}
+
+QBitArray  PythonQtWrapper_QBitArray::static_QBitArray_fromBits(const char*  data, qsizetype  len)
+{
+  return (QBitArray::fromBits(data, len));
 }
 
 bool  PythonQtWrapper_QBitArray::isEmpty(QBitArray* theWrappedObject) const
@@ -240,11 +248,6 @@ char  PythonQtWrapper_QByteArray::at(QByteArray* theWrappedObject, int  i) const
   return ( theWrappedObject->at(i));
 }
 
-QByteRef  PythonQtWrapper_QByteArray::back(QByteArray* theWrappedObject)
-{
-  return ( theWrappedObject->back());
-}
-
 char  PythonQtWrapper_QByteArray::back(QByteArray* theWrappedObject) const
 {
   return ( theWrappedObject->back());
@@ -253,16 +256,6 @@ char  PythonQtWrapper_QByteArray::back(QByteArray* theWrappedObject) const
 int  PythonQtWrapper_QByteArray::capacity(QByteArray* theWrappedObject) const
 {
   return ( theWrappedObject->capacity());
-}
-
-const char*  PythonQtWrapper_QByteArray::cbegin(QByteArray* theWrappedObject) const
-{
-  return ( theWrappedObject->cbegin());
-}
-
-const char*  PythonQtWrapper_QByteArray::cend(QByteArray* theWrappedObject) const
-{
-  return ( theWrappedObject->cend());
 }
 
 void PythonQtWrapper_QByteArray::chop(QByteArray* theWrappedObject, int  n)
@@ -348,11 +341,6 @@ QByteArray  PythonQtWrapper_QByteArray::static_QByteArray_fromHex(const QByteArr
 QByteArray  PythonQtWrapper_QByteArray::static_QByteArray_fromPercentEncoding(const QByteArray&  pctEncoded, char  percent)
 {
   return (QByteArray::fromPercentEncoding(pctEncoded, percent));
-}
-
-QByteRef  PythonQtWrapper_QByteArray::front(QByteArray* theWrappedObject)
-{
-  return ( theWrappedObject->front());
 }
 
 char  PythonQtWrapper_QByteArray::front(QByteArray* theWrappedObject) const
@@ -1011,10 +999,6 @@ QString PythonQtWrapper_QDate::py_toString(QDate* obj) { return obj->toString();
 QDateTime* PythonQtWrapper_QDateTime::new_QDateTime()
 { 
 return new QDateTime(); }
-
-QDateTime* PythonQtWrapper_QDateTime::new_QDateTime(QDateTime&  other)
-{ 
-return new QDateTime(other); }
 
 QDateTime* PythonQtWrapper_QDateTime::new_QDateTime(const QDate&  arg__1)
 { 
@@ -1870,11 +1854,6 @@ QString  PythonQtWrapper_QLocale::quoteString(QLocale* theWrappedObject, const Q
   return ( theWrappedObject->quoteString(str, style));
 }
 
-QString  PythonQtWrapper_QLocale::quoteString(QLocale* theWrappedObject, const QStringRef&  str, QLocale::QuotationStyle  style) const
-{
-  return ( theWrappedObject->quoteString(str, style));
-}
-
 QLocale::Script  PythonQtWrapper_QLocale::script(QLocale* theWrappedObject) const
 {
   return ( theWrappedObject->script());
@@ -2000,17 +1979,7 @@ double  PythonQtWrapper_QLocale::toDouble(QLocale* theWrappedObject, const QStri
   return ( theWrappedObject->toDouble(s, ok));
 }
 
-double  PythonQtWrapper_QLocale::toDouble(QLocale* theWrappedObject, const QStringRef&  s, bool*  ok) const
-{
-  return ( theWrappedObject->toDouble(s, ok));
-}
-
 float  PythonQtWrapper_QLocale::toFloat(QLocale* theWrappedObject, const QString&  s, bool*  ok) const
-{
-  return ( theWrappedObject->toFloat(s, ok));
-}
-
-float  PythonQtWrapper_QLocale::toFloat(QLocale* theWrappedObject, const QStringRef&  s, bool*  ok) const
 {
   return ( theWrappedObject->toFloat(s, ok));
 }
@@ -2020,17 +1989,7 @@ int  PythonQtWrapper_QLocale::toInt(QLocale* theWrappedObject, const QString&  s
   return ( theWrappedObject->toInt(s, ok));
 }
 
-int  PythonQtWrapper_QLocale::toInt(QLocale* theWrappedObject, const QStringRef&  s, bool*  ok) const
-{
-  return ( theWrappedObject->toInt(s, ok));
-}
-
 qlonglong  PythonQtWrapper_QLocale::toLongLong(QLocale* theWrappedObject, const QString&  s, bool*  ok) const
-{
-  return ( theWrappedObject->toLongLong(s, ok));
-}
-
-qlonglong  PythonQtWrapper_QLocale::toLongLong(QLocale* theWrappedObject, const QStringRef&  s, bool*  ok) const
 {
   return ( theWrappedObject->toLongLong(s, ok));
 }
@@ -2041,11 +2000,6 @@ QString  PythonQtWrapper_QLocale::toLower(QLocale* theWrappedObject, const QStri
 }
 
 short  PythonQtWrapper_QLocale::toShort(QLocale* theWrappedObject, const QString&  s, bool*  ok) const
-{
-  return ( theWrappedObject->toShort(s, ok));
-}
-
-short  PythonQtWrapper_QLocale::toShort(QLocale* theWrappedObject, const QStringRef&  s, bool*  ok) const
 {
   return ( theWrappedObject->toShort(s, ok));
 }
@@ -2120,27 +2074,12 @@ uint  PythonQtWrapper_QLocale::toUInt(QLocale* theWrappedObject, const QString& 
   return ( theWrappedObject->toUInt(s, ok));
 }
 
-uint  PythonQtWrapper_QLocale::toUInt(QLocale* theWrappedObject, const QStringRef&  s, bool*  ok) const
-{
-  return ( theWrappedObject->toUInt(s, ok));
-}
-
 qulonglong  PythonQtWrapper_QLocale::toULongLong(QLocale* theWrappedObject, const QString&  s, bool*  ok) const
 {
   return ( theWrappedObject->toULongLong(s, ok));
 }
 
-qulonglong  PythonQtWrapper_QLocale::toULongLong(QLocale* theWrappedObject, const QStringRef&  s, bool*  ok) const
-{
-  return ( theWrappedObject->toULongLong(s, ok));
-}
-
 ushort  PythonQtWrapper_QLocale::toUShort(QLocale* theWrappedObject, const QString&  s, bool*  ok) const
-{
-  return ( theWrappedObject->toUShort(s, ok));
-}
-
-ushort  PythonQtWrapper_QLocale::toUShort(QLocale* theWrappedObject, const QStringRef&  s, bool*  ok) const
 {
   return ( theWrappedObject->toUShort(s, ok));
 }
@@ -3374,6 +3313,132 @@ void PythonQtWrapper_QRegExp::swap(QRegExp* theWrappedObject, QRegExp&  other)
 }
 
 QString PythonQtWrapper_QRegExp::py_toString(QRegExp* obj) {
+  QString result;
+  QDebug d(&result);
+  d << *obj;
+  return result;
+}
+
+
+
+QRegularExpression* PythonQtWrapper_QRegularExpression::new_QRegularExpression()
+{ 
+return new QRegularExpression(); }
+
+QRegularExpression* PythonQtWrapper_QRegularExpression::new_QRegularExpression(const QRegularExpression&  re)
+{ 
+return new QRegularExpression(re); }
+
+QRegularExpression* PythonQtWrapper_QRegularExpression::new_QRegularExpression(const QString&  pattern, QRegularExpression::PatternOptions  options)
+{ 
+return new QRegularExpression(pattern, options); }
+
+QString  PythonQtWrapper_QRegularExpression::static_QRegularExpression_anchoredPattern(const QString&  expression)
+{
+  return (QRegularExpression::anchoredPattern(expression));
+}
+
+int  PythonQtWrapper_QRegularExpression::captureCount(QRegularExpression* theWrappedObject) const
+{
+  return ( theWrappedObject->captureCount());
+}
+
+QString  PythonQtWrapper_QRegularExpression::errorString(QRegularExpression* theWrappedObject) const
+{
+  return ( theWrappedObject->errorString());
+}
+
+QString  PythonQtWrapper_QRegularExpression::static_QRegularExpression_escape(const QString&  str)
+{
+  return (QRegularExpression::escape(str));
+}
+
+QRegularExpressionMatchIterator  PythonQtWrapper_QRegularExpression::globalMatch(QRegularExpression* theWrappedObject, const QString&  subject, int  offset, QRegularExpression::MatchType  matchType, QRegularExpression::MatchOptions  matchOptions) const
+{
+  return ( theWrappedObject->globalMatch(subject, offset, matchType, matchOptions));
+}
+
+bool  PythonQtWrapper_QRegularExpression::isValid(QRegularExpression* theWrappedObject) const
+{
+  return ( theWrappedObject->isValid());
+}
+
+QRegularExpressionMatch  PythonQtWrapper_QRegularExpression::match(QRegularExpression* theWrappedObject, const QString&  subject, int  offset, QRegularExpression::MatchType  matchType, QRegularExpression::MatchOptions  matchOptions) const
+{
+  return ( theWrappedObject->match(subject, offset, matchType, matchOptions));
+}
+
+QStringList  PythonQtWrapper_QRegularExpression::namedCaptureGroups(QRegularExpression* theWrappedObject) const
+{
+  return ( theWrappedObject->namedCaptureGroups());
+}
+
+bool  PythonQtWrapper_QRegularExpression::__ne__(QRegularExpression* theWrappedObject, const QRegularExpression&  re) const
+{
+  return ( (*theWrappedObject)!= re);
+}
+
+void PythonQtWrapper_QRegularExpression::writeTo(QRegularExpression* theWrappedObject, QDataStream&  out)
+{
+  out <<  (*theWrappedObject);
+}
+
+QRegularExpression*  PythonQtWrapper_QRegularExpression::operator_assign(QRegularExpression* theWrappedObject, const QRegularExpression&  re)
+{
+  return &( (*theWrappedObject)= re);
+}
+
+bool  PythonQtWrapper_QRegularExpression::__eq__(QRegularExpression* theWrappedObject, const QRegularExpression&  re) const
+{
+  return ( (*theWrappedObject)== re);
+}
+
+void PythonQtWrapper_QRegularExpression::readFrom(QRegularExpression* theWrappedObject, QDataStream&  in)
+{
+  in >>  (*theWrappedObject);
+}
+
+void PythonQtWrapper_QRegularExpression::optimize(QRegularExpression* theWrappedObject) const
+{
+  ( theWrappedObject->optimize());
+}
+
+QString  PythonQtWrapper_QRegularExpression::pattern(QRegularExpression* theWrappedObject) const
+{
+  return ( theWrappedObject->pattern());
+}
+
+int  PythonQtWrapper_QRegularExpression::patternErrorOffset(QRegularExpression* theWrappedObject) const
+{
+  return ( theWrappedObject->patternErrorOffset());
+}
+
+QRegularExpression::PatternOptions  PythonQtWrapper_QRegularExpression::patternOptions(QRegularExpression* theWrappedObject) const
+{
+  return ( theWrappedObject->patternOptions());
+}
+
+void PythonQtWrapper_QRegularExpression::setPattern(QRegularExpression* theWrappedObject, const QString&  pattern)
+{
+  ( theWrappedObject->setPattern(pattern));
+}
+
+void PythonQtWrapper_QRegularExpression::setPatternOptions(QRegularExpression* theWrappedObject, QRegularExpression::PatternOptions  options)
+{
+  ( theWrappedObject->setPatternOptions(options));
+}
+
+void PythonQtWrapper_QRegularExpression::swap(QRegularExpression* theWrappedObject, QRegularExpression&  other)
+{
+  ( theWrappedObject->swap(other));
+}
+
+QString  PythonQtWrapper_QRegularExpression::static_QRegularExpression_wildcardToRegularExpression(const QString&  str)
+{
+  return (QRegularExpression::wildcardToRegularExpression(str));
+}
+
+QString PythonQtWrapper_QRegularExpression::py_toString(QRegularExpression* obj) {
   QString result;
   QDebug d(&result);
   d << *obj;

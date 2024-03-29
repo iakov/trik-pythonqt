@@ -6,6 +6,7 @@
 #include <qbytearray.h>
 #include <qcoreevent.h>
 #include <qdatetime.h>
+#include <qdtls.h>
 #include <qhostaddress.h>
 #include <qiodevice.h>
 #include <qlist.h>
@@ -25,6 +26,7 @@
 #include <qsslcertificateextension.h>
 #include <qsslcipher.h>
 #include <qsslconfiguration.h>
+#include <qssldiffiehellmanparameters.h>
 #include <qsslellipticcurve.h>
 #include <qsslerror.h>
 #include <qsslkey.h>
@@ -37,6 +39,129 @@
 #include <qudpsocket.h>
 #include <qurl.h>
 #include <qvector.h>
+
+
+
+class PythonQtWrapper_QNetworkProxy : public QObject
+{ Q_OBJECT
+public:
+Q_ENUMS(Capability ProxyType )
+Q_FLAGS(Capabilities )
+enum Capability{
+  TunnelingCapability = QNetworkProxy::TunnelingCapability,   ListeningCapability = QNetworkProxy::ListeningCapability,   UdpTunnelingCapability = QNetworkProxy::UdpTunnelingCapability,   CachingCapability = QNetworkProxy::CachingCapability,   HostNameLookupCapability = QNetworkProxy::HostNameLookupCapability,   SctpTunnelingCapability = QNetworkProxy::SctpTunnelingCapability,   SctpListeningCapability = QNetworkProxy::SctpListeningCapability};
+enum ProxyType{
+  DefaultProxy = QNetworkProxy::DefaultProxy,   Socks5Proxy = QNetworkProxy::Socks5Proxy,   NoProxy = QNetworkProxy::NoProxy,   HttpProxy = QNetworkProxy::HttpProxy,   HttpCachingProxy = QNetworkProxy::HttpCachingProxy,   FtpCachingProxy = QNetworkProxy::FtpCachingProxy};
+Q_DECLARE_FLAGS(Capabilities, Capability)
+public slots:
+QNetworkProxy* new_QNetworkProxy();
+QNetworkProxy* new_QNetworkProxy(QNetworkProxy::ProxyType  type, const QString&  hostName = QString(), unsigned short  port = 0, const QString&  user = QString(), const QString&  password = QString());
+QNetworkProxy* new_QNetworkProxy(const QNetworkProxy&  other);
+void delete_QNetworkProxy(QNetworkProxy* obj) { delete obj; }
+   QNetworkProxy  static_QNetworkProxy_applicationProxy();
+   QNetworkProxy::Capabilities  capabilities(QNetworkProxy* theWrappedObject) const;
+   bool  hasRawHeader(QNetworkProxy* theWrappedObject, const QByteArray&  headerName) const;
+   QVariant  header(QNetworkProxy* theWrappedObject, QNetworkRequest::KnownHeaders  header) const;
+   QString  hostName(QNetworkProxy* theWrappedObject) const;
+   bool  isCachingProxy(QNetworkProxy* theWrappedObject) const;
+   bool  isTransparentProxy(QNetworkProxy* theWrappedObject) const;
+   bool  __ne__(QNetworkProxy* theWrappedObject, const QNetworkProxy&  other) const;
+   bool  __eq__(QNetworkProxy* theWrappedObject, const QNetworkProxy&  other) const;
+   QString  password(QNetworkProxy* theWrappedObject) const;
+   unsigned short  port(QNetworkProxy* theWrappedObject) const;
+   QByteArray  rawHeader(QNetworkProxy* theWrappedObject, const QByteArray&  headerName) const;
+   QList<QByteArray >  rawHeaderList(QNetworkProxy* theWrappedObject) const;
+   void static_QNetworkProxy_setApplicationProxy(const QNetworkProxy&  proxy);
+   void setCapabilities(QNetworkProxy* theWrappedObject, QNetworkProxy::Capabilities  capab);
+   void setHeader(QNetworkProxy* theWrappedObject, QNetworkRequest::KnownHeaders  header, const QVariant&  value);
+   void setHostName(QNetworkProxy* theWrappedObject, const QString&  hostName);
+   void setPassword(QNetworkProxy* theWrappedObject, const QString&  password);
+   void setPort(QNetworkProxy* theWrappedObject, unsigned short  port);
+   void setRawHeader(QNetworkProxy* theWrappedObject, const QByteArray&  headerName, const QByteArray&  value);
+   void setType(QNetworkProxy* theWrappedObject, QNetworkProxy::ProxyType  type);
+   void setUser(QNetworkProxy* theWrappedObject, const QString&  userName);
+   void swap(QNetworkProxy* theWrappedObject, QNetworkProxy&  other);
+   QNetworkProxy::ProxyType  type(QNetworkProxy* theWrappedObject) const;
+   QString  user(QNetworkProxy* theWrappedObject) const;
+    QString py_toString(QNetworkProxy*);
+};
+
+
+
+
+
+class PythonQtShell_QNetworkProxyFactory : public QNetworkProxyFactory
+{
+public:
+    PythonQtShell_QNetworkProxyFactory():QNetworkProxyFactory(),_wrapper(nullptr) {};
+
+   ~PythonQtShell_QNetworkProxyFactory() override;
+
+QList<QNetworkProxy >  queryProxy(const QNetworkProxyQuery&  query = QNetworkProxyQuery()) override;
+
+  PythonQtInstanceWrapper* _wrapper;
+};
+
+class PythonQtPublicPromoter_QNetworkProxyFactory : public QNetworkProxyFactory
+{ public:
+inline QList<QNetworkProxy >  py_q_queryProxy(const QNetworkProxyQuery&  query = QNetworkProxyQuery()) { return this->queryProxy(query); }
+};
+
+class PythonQtWrapper_QNetworkProxyFactory : public QObject
+{ Q_OBJECT
+public:
+public slots:
+QNetworkProxyFactory* new_QNetworkProxyFactory();
+void delete_QNetworkProxyFactory(QNetworkProxyFactory* obj) { delete obj; }
+   QList<QNetworkProxy >  static_QNetworkProxyFactory_proxyForQuery(const QNetworkProxyQuery&  query);
+   QList<QNetworkProxy >  queryProxy(QNetworkProxyFactory* theWrappedObject, const QNetworkProxyQuery&  query = QNetworkProxyQuery());
+   QList<QNetworkProxy >  py_q_queryProxy(QNetworkProxyFactory* theWrappedObject, const QNetworkProxyQuery&  query = QNetworkProxyQuery()){  return (((PythonQtPublicPromoter_QNetworkProxyFactory*)theWrappedObject)->py_q_queryProxy(query));}
+   void static_QNetworkProxyFactory_setApplicationProxyFactory(QNetworkProxyFactory*  factory);
+   void static_QNetworkProxyFactory_setUseSystemConfiguration(bool  enable);
+   QList<QNetworkProxy >  static_QNetworkProxyFactory_systemProxyForQuery(const QNetworkProxyQuery&  query = QNetworkProxyQuery());
+   bool  static_QNetworkProxyFactory_usesSystemConfiguration();
+};
+
+
+
+
+
+class PythonQtWrapper_QNetworkProxyQuery : public QObject
+{ Q_OBJECT
+public:
+Q_ENUMS(QueryType )
+enum QueryType{
+  TcpSocket = QNetworkProxyQuery::TcpSocket,   UdpSocket = QNetworkProxyQuery::UdpSocket,   SctpSocket = QNetworkProxyQuery::SctpSocket,   TcpServer = QNetworkProxyQuery::TcpServer,   UrlRequest = QNetworkProxyQuery::UrlRequest,   SctpServer = QNetworkProxyQuery::SctpServer};
+public slots:
+QNetworkProxyQuery* new_QNetworkProxyQuery();
+QNetworkProxyQuery* new_QNetworkProxyQuery(const QNetworkConfiguration&  networkConfiguration, const QString&  hostname, int  port, const QString&  protocolTag = QString(), QNetworkProxyQuery::QueryType  queryType = QNetworkProxyQuery::TcpSocket);
+QNetworkProxyQuery* new_QNetworkProxyQuery(const QNetworkConfiguration&  networkConfiguration, const QUrl&  requestUrl, QNetworkProxyQuery::QueryType  queryType = QNetworkProxyQuery::UrlRequest);
+QNetworkProxyQuery* new_QNetworkProxyQuery(const QNetworkConfiguration&  networkConfiguration, unsigned short  bindPort, const QString&  protocolTag = QString(), QNetworkProxyQuery::QueryType  queryType = QNetworkProxyQuery::TcpServer);
+QNetworkProxyQuery* new_QNetworkProxyQuery(const QNetworkProxyQuery&  other);
+QNetworkProxyQuery* new_QNetworkProxyQuery(const QString&  hostname, int  port, const QString&  protocolTag = QString(), QNetworkProxyQuery::QueryType  queryType = QNetworkProxyQuery::TcpSocket);
+QNetworkProxyQuery* new_QNetworkProxyQuery(const QUrl&  requestUrl, QNetworkProxyQuery::QueryType  queryType = QNetworkProxyQuery::UrlRequest);
+QNetworkProxyQuery* new_QNetworkProxyQuery(unsigned short  bindPort, const QString&  protocolTag = QString(), QNetworkProxyQuery::QueryType  queryType = QNetworkProxyQuery::TcpServer);
+void delete_QNetworkProxyQuery(QNetworkProxyQuery* obj) { delete obj; }
+   int  localPort(QNetworkProxyQuery* theWrappedObject) const;
+   QNetworkConfiguration  networkConfiguration(QNetworkProxyQuery* theWrappedObject) const;
+   bool  __ne__(QNetworkProxyQuery* theWrappedObject, const QNetworkProxyQuery&  other) const;
+   bool  __eq__(QNetworkProxyQuery* theWrappedObject, const QNetworkProxyQuery&  other) const;
+   QString  peerHostName(QNetworkProxyQuery* theWrappedObject) const;
+   int  peerPort(QNetworkProxyQuery* theWrappedObject) const;
+   QString  protocolTag(QNetworkProxyQuery* theWrappedObject) const;
+   QNetworkProxyQuery::QueryType  queryType(QNetworkProxyQuery* theWrappedObject) const;
+   void setLocalPort(QNetworkProxyQuery* theWrappedObject, int  port);
+   void setNetworkConfiguration(QNetworkProxyQuery* theWrappedObject, const QNetworkConfiguration&  networkConfiguration);
+   void setPeerHostName(QNetworkProxyQuery* theWrappedObject, const QString&  hostname);
+   void setPeerPort(QNetworkProxyQuery* theWrappedObject, int  port);
+   void setProtocolTag(QNetworkProxyQuery* theWrappedObject, const QString&  protocolTag);
+   void setQueryType(QNetworkProxyQuery* theWrappedObject, QNetworkProxyQuery::QueryType  type);
+   void setUrl(QNetworkProxyQuery* theWrappedObject, const QUrl&  url);
+   void swap(QNetworkProxyQuery* theWrappedObject, QNetworkProxyQuery&  other);
+   QUrl  url(QNetworkProxyQuery* theWrappedObject) const;
+    QString py_toString(QNetworkProxyQuery*);
+};
+
+
 
 
 
@@ -77,7 +202,7 @@ qint64  writeData(const char*  data, qint64  len) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QNetworkReply : public QNetworkReply
@@ -139,9 +264,11 @@ void delete_QNetworkReply(QNetworkReply* obj) { delete obj; }
    void setReadBufferSize(QNetworkReply* theWrappedObject, qint64  size);
    void py_q_setReadBufferSize(QNetworkReply* theWrappedObject, qint64  size){  (((PythonQtPublicPromoter_QNetworkReply*)theWrappedObject)->py_q_setReadBufferSize(size));}
    void setRequest(QNetworkReply* theWrappedObject, const QNetworkRequest&  request);
+   void setSslConfiguration(QNetworkReply* theWrappedObject, const QSslConfiguration&  configuration);
    void setSslConfigurationImplementation(QNetworkReply* theWrappedObject, const QSslConfiguration&  arg__1);
    void py_q_setSslConfigurationImplementation(QNetworkReply* theWrappedObject, const QSslConfiguration&  arg__1){  (((PythonQtPublicPromoter_QNetworkReply*)theWrappedObject)->py_q_setSslConfigurationImplementation(arg__1));}
    void setUrl(QNetworkReply* theWrappedObject, const QUrl&  url);
+   QSslConfiguration  sslConfiguration(QNetworkReply* theWrappedObject) const;
    void sslConfigurationImplementation(QNetworkReply* theWrappedObject, QSslConfiguration&  arg__1) const;
    void py_q_sslConfigurationImplementation(QNetworkReply* theWrappedObject, QSslConfiguration&  arg__1) const{  (((PythonQtPublicPromoter_QNetworkReply*)theWrappedObject)->py_q_sslConfigurationImplementation(arg__1));}
    QUrl  url(QNetworkReply* theWrappedObject) const;
@@ -188,7 +315,9 @@ void delete_QNetworkRequest(QNetworkRequest* obj) { delete obj; }
    void setOriginatingObject(QNetworkRequest* theWrappedObject, QObject*  object);
    void setPriority(QNetworkRequest* theWrappedObject, QNetworkRequest::Priority  priority);
    void setRawHeader(QNetworkRequest* theWrappedObject, const QByteArray&  headerName, const QByteArray&  value);
+   void setSslConfiguration(QNetworkRequest* theWrappedObject, const QSslConfiguration&  configuration);
    void setUrl(QNetworkRequest* theWrappedObject, const QUrl&  url);
+   QSslConfiguration  sslConfiguration(QNetworkRequest* theWrappedObject) const;
    void swap(QNetworkRequest* theWrappedObject, QNetworkRequest&  other);
    QUrl  url(QNetworkRequest* theWrappedObject) const;
 };
@@ -214,7 +343,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QNetworkSession : public QNetworkSession
@@ -412,7 +541,7 @@ public:
    ~PythonQtShell_QSslConfiguration();
 
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QSslConfiguration : public QObject
@@ -430,6 +559,9 @@ void delete_QSslConfiguration(QSslConfiguration* obj) { delete obj; }
    QList<QSslCertificate >  caCertificates(QSslConfiguration* theWrappedObject) const;
    QList<QSslCipher >  ciphers(QSslConfiguration* theWrappedObject) const;
    QSslConfiguration  static_QSslConfiguration_defaultConfiguration();
+   QSslConfiguration  static_QSslConfiguration_defaultDtlsConfiguration();
+   QSslDiffieHellmanParameters  diffieHellmanParameters(QSslConfiguration* theWrappedObject) const;
+   bool  dtlsCookieVerificationEnabled(QSslConfiguration* theWrappedObject) const;
    QVector<QSslEllipticCurve >  ellipticCurves(QSslConfiguration* theWrappedObject) const;
    QSslKey  ephemeralServerKey(QSslConfiguration* theWrappedObject) const;
    bool  isNull(QSslConfiguration* theWrappedObject) const;
@@ -457,6 +589,9 @@ void delete_QSslConfiguration(QSslConfiguration* obj) { delete obj; }
    void setCaCertificates(QSslConfiguration* theWrappedObject, const QList<QSslCertificate >&  certificates);
    void setCiphers(QSslConfiguration* theWrappedObject, const QList<QSslCipher >&  ciphers);
    void static_QSslConfiguration_setDefaultConfiguration(const QSslConfiguration&  configuration);
+   void static_QSslConfiguration_setDefaultDtlsConfiguration(const QSslConfiguration&  configuration);
+   void setDiffieHellmanParameters(QSslConfiguration* theWrappedObject, const QSslDiffieHellmanParameters&  dhparams);
+   void setDtlsCookieVerificationEnabled(QSslConfiguration* theWrappedObject, bool  enable);
    void setEllipticCurves(QSslConfiguration* theWrappedObject, const QVector<QSslEllipticCurve >&  curves);
    void setLocalCertificate(QSslConfiguration* theWrappedObject, const QSslCertificate&  certificate);
    void setLocalCertificateChain(QSslConfiguration* theWrappedObject, const QList<QSslCertificate >&  localChain);
@@ -473,6 +608,38 @@ void delete_QSslConfiguration(QSslConfiguration* obj) { delete obj; }
    QList<QSslCertificate >  static_QSslConfiguration_systemCaCertificates();
    bool  testSslOption(QSslConfiguration* theWrappedObject, QSsl::SslOption  option) const;
     bool __nonzero__(QSslConfiguration* obj) { return !obj->isNull(); }
+};
+
+#endif
+
+
+
+
+
+#ifndef QT_NO_SSL
+class PythonQtWrapper_QSslDiffieHellmanParameters : public QObject
+{ Q_OBJECT
+public:
+Q_ENUMS(Error )
+enum Error{
+  NoError = QSslDiffieHellmanParameters::NoError,   InvalidInputDataError = QSslDiffieHellmanParameters::InvalidInputDataError,   UnsafeParametersError = QSslDiffieHellmanParameters::UnsafeParametersError};
+public slots:
+QSslDiffieHellmanParameters* new_QSslDiffieHellmanParameters();
+QSslDiffieHellmanParameters* new_QSslDiffieHellmanParameters(const QSslDiffieHellmanParameters&  other);
+void delete_QSslDiffieHellmanParameters(QSslDiffieHellmanParameters* obj) { delete obj; }
+   QSslDiffieHellmanParameters  static_QSslDiffieHellmanParameters_defaultParameters();
+   QSslDiffieHellmanParameters::Error  error(QSslDiffieHellmanParameters* theWrappedObject) const;
+   QString  errorString(QSslDiffieHellmanParameters* theWrappedObject) const;
+   QSslDiffieHellmanParameters  static_QSslDiffieHellmanParameters_fromEncoded(QIODevice*  device, QSsl::EncodingFormat  format = QSsl::Pem);
+   QSslDiffieHellmanParameters  static_QSslDiffieHellmanParameters_fromEncoded(const QByteArray&  encoded, QSsl::EncodingFormat  format = QSsl::Pem);
+   bool  isEmpty(QSslDiffieHellmanParameters* theWrappedObject) const;
+   bool  isValid(QSslDiffieHellmanParameters* theWrappedObject) const;
+   bool  __ne__(QSslDiffieHellmanParameters* theWrappedObject, const QSslDiffieHellmanParameters&  rhs);
+   QSslDiffieHellmanParameters*  operator_assign(QSslDiffieHellmanParameters* theWrappedObject, const QSslDiffieHellmanParameters&  other);
+   bool  __eq__(QSslDiffieHellmanParameters* theWrappedObject, const QSslDiffieHellmanParameters&  rhs);
+   void swap(QSslDiffieHellmanParameters* theWrappedObject, QSslDiffieHellmanParameters&  other);
+    QString py_toString(QSslDiffieHellmanParameters*);
+    bool __nonzero__(QSslDiffieHellmanParameters* obj) { return !obj->isEmpty(); }
 };
 
 #endif
@@ -636,7 +803,7 @@ qint64  writeData(const char*  data, qint64  len) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QSslSocket : public QSslSocket
@@ -774,7 +941,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QTcpServer : public QTcpServer
@@ -863,7 +1030,7 @@ qint64  writeData(const char*  data, qint64  len) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QTcpSocket : public QObject
@@ -921,7 +1088,7 @@ qint64  writeData(const char*  data, qint64  len) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QUdpSocket : public QObject
@@ -943,6 +1110,19 @@ void delete_QUdpSocket(QUdpSocket* obj) { delete obj; }
    qint64  writeDatagram(QUdpSocket* theWrappedObject, const QByteArray&  datagram, const QHostAddress&  host, unsigned short  port);
    qint64  writeDatagram(QUdpSocket* theWrappedObject, const QNetworkDatagram&  datagram);
     bool __nonzero__(QUdpSocket* obj) { return obj->isValid(); }
+};
+
+
+
+
+
+class PythonQtWrapper_QtNetwork : public QObject
+{ Q_OBJECT
+public:
+Q_ENUMS(QDtlsError )
+enum class QDtlsError{
+  NoError = static_cast<int>(::QDtlsError::NoError),   InvalidInputParameters = static_cast<int>(::QDtlsError::InvalidInputParameters),   InvalidOperation = static_cast<int>(::QDtlsError::InvalidOperation),   UnderlyingSocketError = static_cast<int>(::QDtlsError::UnderlyingSocketError),   RemoteClosedConnectionError = static_cast<int>(::QDtlsError::RemoteClosedConnectionError),   PeerVerificationError = static_cast<int>(::QDtlsError::PeerVerificationError),   TlsInitializationError = static_cast<int>(::QDtlsError::TlsInitializationError),   TlsFatalError = static_cast<int>(::QDtlsError::TlsFatalError),   TlsNonFatalError = static_cast<int>(::QDtlsError::TlsNonFatalError)};
+public slots:
 };
 
 

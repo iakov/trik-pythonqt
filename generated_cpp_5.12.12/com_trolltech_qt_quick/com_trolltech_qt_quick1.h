@@ -41,7 +41,7 @@ void leaveTransformNode(QSGTransformNode*  arg__1) override;
 void visitChildren(QSGNode*  n) override;
 void visitNode(QSGNode*  n) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QSGNodeVisitor : public QSGNodeVisitor
@@ -110,7 +110,7 @@ public:
 bool  isSubtreeBlocked() const override;
 void preprocess() override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QSGOpacityNode : public QSGOpacityNode
@@ -150,7 +150,7 @@ QRectF  rect() const override;
 void setColor(const QColor&  color) override;
 void setRect(const QRectF&  rect) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QSGRectangleNode : public QSGRectangleNode
@@ -195,7 +195,7 @@ QRectF  rect() const override;
 void releaseResources() override;
 void render(const QSGRenderNode::RenderState*  state) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QSGRenderNode : public QSGRenderNode
@@ -246,7 +246,7 @@ QRect  scissorRect() const override;
 bool  stencilEnabled() const override;
 int  stencilValue() const override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QSGRenderNode__RenderState : public QSGRenderNode::RenderState
@@ -296,7 +296,7 @@ public:
 bool  isSubtreeBlocked() const override;
 void preprocess() override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QSGRootNode : public QObject
@@ -335,7 +335,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QSGTexture : public QSGTexture
@@ -406,7 +406,7 @@ public:
 
 QSGMaterialType*  type() const override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QSGTextureMaterial : public QSGTextureMaterial
@@ -444,7 +444,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QSGTextureProvider : public QSGTextureProvider
@@ -476,7 +476,7 @@ public:
 bool  isSubtreeBlocked() const override;
 void preprocess() override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QSGTransformNode : public QObject

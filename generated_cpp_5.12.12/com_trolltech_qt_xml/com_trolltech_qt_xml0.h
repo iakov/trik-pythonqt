@@ -441,7 +441,7 @@ public:
    ~PythonQtShell_QXmlAttributes() override;
 
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QXmlAttributes : public QObject
@@ -496,7 +496,7 @@ bool  startDocument() override;
 bool  startElement(const QString&  namespaceURI, const QString&  localName, const QString&  qName, const QXmlAttributes&  atts) override;
 bool  startPrefixMapping(const QString&  prefix, const QString&  uri) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QXmlContentHandler : public QXmlContentHandler
@@ -562,7 +562,7 @@ QString  errorString() const override;
 bool  notationDecl(const QString&  name, const QString&  publicId, const QString&  systemId) override;
 bool  unparsedEntityDecl(const QString&  name, const QString&  publicId, const QString&  systemId, const QString&  notationName) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QXmlDTDHandler : public QXmlDTDHandler
@@ -602,7 +602,7 @@ QString  errorString() const override;
 bool  externalEntityDecl(const QString&  name, const QString&  publicId, const QString&  systemId) override;
 bool  internalEntityDecl(const QString&  name, const QString&  value) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QXmlDeclHandler : public QXmlDeclHandler
@@ -669,7 +669,7 @@ bool  startPrefixMapping(const QString&  prefix, const QString&  uri) override;
 bool  unparsedEntityDecl(const QString&  name, const QString&  publicId, const QString&  systemId, const QString&  notationName) override;
 bool  warning(const QXmlParseException&  exception) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QXmlDefaultHandler : public QXmlDefaultHandler
@@ -754,7 +754,7 @@ public:
 QString  errorString() const override;
 bool  resolveEntity(const QString&  publicId, const QString&  systemId, QXmlInputSource*&  ret) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QXmlEntityResolver : public QXmlEntityResolver
@@ -791,7 +791,7 @@ QString  errorString() const override;
 bool  fatalError(const QXmlParseException&  exception) override;
 bool  warning(const QXmlParseException&  exception) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QXmlErrorHandler : public QXmlErrorHandler
@@ -838,7 +838,7 @@ void reset() override;
 void setData(const QByteArray&  dat) override;
 void setData(const QString&  dat) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QXmlInputSource : public QXmlInputSource
@@ -896,7 +896,7 @@ bool  startCDATA() override;
 bool  startDTD(const QString&  name, const QString&  publicId, const QString&  systemId) override;
 bool  startEntity(const QString&  name) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QXmlLexicalHandler : public QXmlLexicalHandler
@@ -949,7 +949,7 @@ public:
 int  columnNumber() const override;
 int  lineNumber() const override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QXmlLocator : public QXmlLocator
@@ -1020,7 +1020,7 @@ void setFeature(const QString&  name, bool  value) override;
 void setLexicalHandler(QXmlLexicalHandler*  handler) override;
 void setProperty(const QString&  name, void*  value) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QXmlReader : public QXmlReader
@@ -1129,7 +1129,7 @@ void setFeature(const QString&  name, bool  value) override;
 void setLexicalHandler(QXmlLexicalHandler*  handler) override;
 void setProperty(const QString&  name, void*  value) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QXmlSimpleReader : public QXmlSimpleReader

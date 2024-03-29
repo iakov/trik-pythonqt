@@ -4,6 +4,7 @@
 #include "com_trolltech_qt_core1.h"
 #include "com_trolltech_qt_core2.h"
 #include "com_trolltech_qt_core3.h"
+#include "com_trolltech_qt_core4.h"
 
 static void* polymorphichandler_QEvent(const void *ptr, const char **class_name)
 {
@@ -57,6 +58,13 @@ PythonQt::priv()->registerCPPClass("QBasicMutex", "", "QtCore", PythonQtCreateOb
 PythonQt::priv()->registerCPPClass("QBasicTimer", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QBasicTimer>, nullptr, module, 0);
 PythonQt::priv()->registerClass(&QBuffer::staticMetaObject, "QtCore", PythonQtCreateObject<PythonQtWrapper_QBuffer>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_QBuffer>, module, 0);
 PythonQt::priv()->registerCPPClass("QByteArrayMatcher", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QByteArrayMatcher>, nullptr, module, 0);
+PythonQt::priv()->registerCPPClass("QCborArray", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QCborArray>, nullptr, module, PythonQt::Type_Add|PythonQt::Type_InplaceAdd|PythonQt::Type_NonZero|PythonQt::Type_RichCompare);
+PythonQt::priv()->registerCPPClass("QCborError", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QCborError>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_QCborError>, module, 0);
+PythonQt::priv()->registerCPPClass("QCborMap", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QCborMap>, nullptr, module, PythonQt::Type_NonZero|PythonQt::Type_RichCompare);
+PythonQt::priv()->registerCPPClass("QCborParserError", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QCborParserError>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_QCborParserError>, module, 0);
+PythonQt::priv()->registerCPPClass("QCborStreamReader", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QCborStreamReader>, nullptr, module, PythonQt::Type_NonZero);
+PythonQt::priv()->registerCPPClass("QCborStreamWriter", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QCborStreamWriter>, nullptr, module, 0);
+PythonQt::priv()->registerCPPClass("QCborValue", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QCborValue>, nullptr, module, PythonQt::Type_NonZero|PythonQt::Type_RichCompare);
 PythonQt::priv()->registerCPPClass("QChildEvent", "QEvent", "QtCore", PythonQtCreateObject<PythonQtWrapper_QChildEvent>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_QChildEvent>, module, 0);
 PythonQt::priv()->registerCPPClass("QCollator", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QCollator>, nullptr, module, 0);
 PythonQt::priv()->registerCPPClass("QCollatorSortKey", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QCollatorSortKey>, nullptr, module, PythonQt::Type_RichCompare);
@@ -65,7 +73,7 @@ PythonQt::priv()->registerCPPClass("QCommandLineParser", "", "QtCore", PythonQtC
 PythonQt::priv()->registerClass(&QCoreApplication::staticMetaObject, "QtCore", PythonQtCreateObject<PythonQtWrapper_QCoreApplication>, nullptr, module, 0);
 PythonQt::priv()->registerCPPClass("QCryptographicHash", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QCryptographicHash>, nullptr, module, 0);
 PythonQt::priv()->registerCPPClass("QDataStream", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QDataStream>, nullptr, module, 0);
-PythonQt::priv()->registerCPPClass("QDeadlineTimer", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QDeadlineTimer>, nullptr, module, PythonQt::Type_InplaceAdd|PythonQt::Type_InplaceSubtract);
+PythonQt::priv()->registerCPPClass("QDeadlineTimer", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QDeadlineTimer>, nullptr, module, PythonQt::Type_InplaceAdd|PythonQt::Type_InplaceSubtract|PythonQt::Type_RichCompare|PythonQt::Type_Subtract);
 PythonQt::priv()->registerCPPClass("QDeferredDeleteEvent", "QEvent", "QtCore", PythonQtCreateObject<PythonQtWrapper_QDeferredDeleteEvent>, nullptr, module, 0);
 PythonQt::priv()->registerCPPClass("QDir", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QDir>, nullptr, module, PythonQt::Type_NonZero|PythonQt::Type_RichCompare);
 PythonQt::priv()->registerCPPClass("QDirIterator", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QDirIterator>, nullptr, module, 0);
@@ -110,17 +118,17 @@ PythonQt::priv()->registerCPPClass("QModelIndex", "", "QtCore", PythonQtCreateOb
 PythonQt::priv()->registerCPPClass("QMutex", "QBasicMutex", "QtCore", PythonQtCreateObject<PythonQtWrapper_QMutex>, nullptr, module, 0);
 PythonQt::priv()->registerCPPClass("QMutexLocker", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QMutexLocker>, nullptr, module, PythonQt::Type_EnterExit);
 PythonQt::priv()->registerClass(&QObject::staticMetaObject, "QtCore", PythonQtCreateObject<PythonQtWrapper_QObject>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_QObject>, module, 0);
-PythonQt::priv()->registerCPPClass("QOperatingSystemVersion", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QOperatingSystemVersion>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_QOperatingSystemVersion>, module, 0);
+PythonQt::priv()->registerCPPClass("QOperatingSystemVersion", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QOperatingSystemVersion>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_QOperatingSystemVersion>, module, PythonQt::Type_RichCompare);
 PythonQt::priv()->registerClass(&QParallelAnimationGroup::staticMetaObject, "QtCore", PythonQtCreateObject<PythonQtWrapper_QParallelAnimationGroup>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_QParallelAnimationGroup>, module, 0);
 PythonQt::priv()->registerClass(&QPauseAnimation::staticMetaObject, "QtCore", PythonQtCreateObject<PythonQtWrapper_QPauseAnimation>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_QPauseAnimation>, module, 0);
 PythonQt::priv()->registerCPPClass("QPersistentModelIndex", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QPersistentModelIndex>, nullptr, module, PythonQt::Type_NonZero|PythonQt::Type_RichCompare);
 PythonQt::priv()->registerClass(&QProcess::staticMetaObject, "QtCore", PythonQtCreateObject<PythonQtWrapper_QProcess>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_QProcess>, module, 0);
 PythonQt::priv()->registerCPPClass("QProcessEnvironment", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QProcessEnvironment>, nullptr, module, PythonQt::Type_NonZero|PythonQt::Type_RichCompare);
 PythonQt::priv()->registerClass(&QPropertyAnimation::staticMetaObject, "QtCore", PythonQtCreateObject<PythonQtWrapper_QPropertyAnimation>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_QPropertyAnimation>, module, 0);
-PythonQt::priv()->registerCPPClass("QRandomGenerator", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QRandomGenerator>, nullptr, module, 0);
+PythonQt::priv()->registerCPPClass("QRandomGenerator", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QRandomGenerator>, nullptr, module, PythonQt::Type_RichCompare);
 PythonQt::priv()->registerCPPClass("QRandomGenerator64", "QRandomGenerator", "QtCore", PythonQtCreateObject<PythonQtWrapper_QRandomGenerator64>, nullptr, module, 0);
+PythonQt::priv()->registerCPPClass("QReadLocker", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QReadLocker>, nullptr, module, PythonQt::Type_EnterExit);
 PythonQt::priv()->registerCPPClass("QReadWriteLock", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QReadWriteLock>, nullptr, module, 0);
-PythonQt::priv()->registerCPPClass("QRegularExpression", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QRegularExpression>, nullptr, module, PythonQt::Type_NonZero|PythonQt::Type_RichCompare);
 PythonQt::priv()->registerCPPClass("QRegularExpressionMatch", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QRegularExpressionMatch>, nullptr, module, PythonQt::Type_NonZero);
 PythonQt::priv()->registerCPPClass("QRegularExpressionMatchIterator", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QRegularExpressionMatchIterator>, nullptr, module, PythonQt::Type_NonZero);
 PythonQt::priv()->registerCPPClass("QResource", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QResource>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_QResource>, module, PythonQt::Type_NonZero);
@@ -130,6 +138,7 @@ PythonQt::priv()->registerCPPClass("QSemaphore", "", "QtCore", PythonQtCreateObj
 PythonQt::priv()->registerClass(&QSequentialAnimationGroup::staticMetaObject, "QtCore", PythonQtCreateObject<PythonQtWrapper_QSequentialAnimationGroup>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_QSequentialAnimationGroup>, module, 0);
 PythonQt::priv()->registerClass(&QSettings::staticMetaObject, "QtCore", PythonQtCreateObject<PythonQtWrapper_QSettings>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_QSettings>, module, 0);
 PythonQt::priv()->registerClass(&QSharedMemory::staticMetaObject, "QtCore", PythonQtCreateObject<PythonQtWrapper_QSharedMemory>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_QSharedMemory>, module, 0);
+PythonQt::priv()->registerCPPClass("QSignalBlocker", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QSignalBlocker>, nullptr, module, 0);
 PythonQt::priv()->registerClass(&QSignalMapper::staticMetaObject, "QtCore", PythonQtCreateObject<PythonQtWrapper_QSignalMapper>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_QSignalMapper>, module, 0);
 PythonQt::priv()->registerClass(&QSignalTransition::staticMetaObject, "QtCore", PythonQtCreateObject<PythonQtWrapper_QSignalTransition>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_QSignalTransition>, module, 0);
 PythonQt::priv()->registerClass(&QSocketNotifier::staticMetaObject, "QtCore", PythonQtCreateObject<PythonQtWrapper_QSocketNotifier>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_QSocketNotifier>, module, 0);
@@ -160,7 +169,9 @@ PythonQt::priv()->registerCPPClass("QUrlQuery", "", "QtCore", PythonQtCreateObje
 PythonQt::priv()->registerCPPClass("QUuid", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QUuid>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_QUuid>, module, PythonQt::Type_NonZero|PythonQt::Type_RichCompare);
 PythonQt::priv()->registerClass(&QVariantAnimation::staticMetaObject, "QtCore", PythonQtCreateObject<PythonQtWrapper_QVariantAnimation>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_QVariantAnimation>, module, 0);
 PythonQt::priv()->registerCPPClass("QWaitCondition", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QWaitCondition>, nullptr, module, 0);
+PythonQt::priv()->registerCPPClass("QWriteLocker", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QWriteLocker>, nullptr, module, PythonQt::Type_EnterExit);
 PythonQt::priv()->registerCPPClass("QXmlStreamEntityResolver", "", "QtCore", PythonQtCreateObject<PythonQtWrapper_QXmlStreamEntityResolver>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_QXmlStreamEntityResolver>, module, 0);
+PythonQt::priv()->registerGlobalNamespace("QtCore", "QtCore", PythonQtCreateObject<PythonQtWrapper_QtCore>, PythonQtWrapper_QtCore::staticMetaObject, module); 
 
 PythonQt::self()->addPolymorphicHandler("QEvent", polymorphichandler_QEvent);
 
@@ -170,4 +181,5 @@ PythonQtRegisterListTemplateConverterForKnownClass(QList, QMimeType);
 PythonQtRegisterListTemplateConverterForKnownClass(QList, QModelIndex);
 PythonQtRegisterListTemplateConverterForKnownClass(QList, QPersistentModelIndex);
 PythonQtRegisterListTemplateConverterForKnownClass(QList, QStorageInfo);
+PythonQtRegisterListTemplateConverterForKnownClass(QVector, QCborValue);
 }

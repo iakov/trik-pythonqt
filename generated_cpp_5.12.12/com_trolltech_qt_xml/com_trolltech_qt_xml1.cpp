@@ -207,11 +207,6 @@ bool  PythonQtWrapper_QXmlStreamAttributes::__eq__(QXmlStreamAttributes* theWrap
   return ( (*theWrappedObject)== v);
 }
 
-void PythonQtWrapper_QXmlStreamAttributes::prepend(QXmlStreamAttributes* theWrappedObject, QXmlStreamAttribute&  t)
-{
-  ( theWrappedObject->prepend(t));
-}
-
 void PythonQtWrapper_QXmlStreamAttributes::prepend(QXmlStreamAttributes* theWrappedObject, const QXmlStreamAttribute&  t)
 {
   ( theWrappedObject->prepend(t));

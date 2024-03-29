@@ -32,6 +32,7 @@
 #include <qsqltablemodel.h>
 #include <qstringlist.h>
 #include <qthread.h>
+#include <qtsqlglobal.h>
 #include <qvector.h>
 
 
@@ -68,7 +69,7 @@ public:
    ~PythonQtShell_QSqlDatabase();
 
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QSqlDatabase : public QObject
@@ -168,7 +169,7 @@ bool  unsubscribeFromNotification(const QString&  name) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QSqlDriver : public QSqlDriver
@@ -286,7 +287,7 @@ public:
 
 QSqlDriver*  createObject() const override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QSqlDriverCreatorBase : public QSqlDriverCreatorBase
@@ -520,7 +521,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QSqlQueryModel : public QSqlQueryModel
@@ -728,7 +729,7 @@ bool  updateRowInTable(int  row, const QSqlRecord&  values) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QSqlRelationalTableModel : public QSqlRelationalTableModel
@@ -820,7 +821,7 @@ void setQuery(const QString&  query) override;
 void setSelect(bool  s) override;
 int  size() override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QSqlResult : public QSqlResult
@@ -1065,7 +1066,7 @@ bool  updateRowInTable(int  row, const QSqlRecord&  values) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QSqlTableModel : public QSqlTableModel

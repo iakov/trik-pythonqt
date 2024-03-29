@@ -61,7 +61,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QMediaPlaylist : public QMediaPlaylist
@@ -128,7 +128,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QMediaRecorder : public QMediaRecorder
@@ -211,7 +211,7 @@ qreal  volume() const override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QMediaRecorderControl : public QMediaRecorderControl
@@ -319,7 +319,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QMediaService : public QMediaService
@@ -354,7 +354,7 @@ public:
 int  cameraOrientation(const QByteArray&  device) const override;
 QCamera::Position  cameraPosition(const QByteArray&  device) const override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QMediaServiceCameraInfoInterface : public QMediaServiceCameraInfoInterface
@@ -388,7 +388,7 @@ public:
 
 QByteArray  defaultDevice(const QByteArray&  service) const override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QMediaServiceDefaultDeviceInterface : public QMediaServiceDefaultDeviceInterface
@@ -420,7 +420,7 @@ public:
 QMediaService*  create(const QString&  key) override;
 void release(QMediaService*  service) override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QMediaServiceProviderFactoryInterface : public QMediaServiceProviderFactoryInterface
@@ -488,7 +488,7 @@ void release(QMediaService*  service) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QMediaServiceProviderPlugin : public QMediaServiceProviderPlugin
@@ -523,7 +523,7 @@ public:
 QString  deviceDescription(const QByteArray&  service, const QByteArray&  device) override;
 QList<QByteArray >  devices(const QByteArray&  service) const override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QMediaServiceSupportedDevicesInterface : public QMediaServiceSupportedDevicesInterface
@@ -558,7 +558,7 @@ public:
 QMultimedia::SupportEstimate  hasSupport(const QString&  mimeType, const QStringList&  codecs) const override;
 QStringList  supportedMimeTypes() const override;
 
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QMediaServiceSupportedFormatsInterface : public QMediaServiceSupportedFormatsInterface
@@ -603,7 +603,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QMediaStreamsControl : public QMediaStreamsControl
@@ -653,6 +653,7 @@ void delete_QMediaTimeInterval(QMediaTimeInterval* obj) { delete obj; }
    bool  isNormal(QMediaTimeInterval* theWrappedObject) const;
    QMediaTimeInterval  normalized(QMediaTimeInterval* theWrappedObject) const;
    bool  __ne__(QMediaTimeInterval* theWrappedObject, const QMediaTimeInterval&  arg__2);
+   QMediaTimeInterval*  operator_assign(QMediaTimeInterval* theWrappedObject, const QMediaTimeInterval&  arg__1);
    bool  __eq__(QMediaTimeInterval* theWrappedObject, const QMediaTimeInterval&  arg__2);
    qint64  start(QMediaTimeInterval* theWrappedObject) const;
    QMediaTimeInterval  translated(QMediaTimeInterval* theWrappedObject, qint64  offset) const;
@@ -717,7 +718,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QMediaVideoProbeControl : public QObject
@@ -750,7 +751,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QMetaDataReaderControl : public QMetaDataReaderControl
@@ -798,7 +799,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QMetaDataWriterControl : public QMetaDataWriterControl
@@ -868,7 +869,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QRadioData : public QRadioData
@@ -925,7 +926,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QRadioDataControl : public QRadioDataControl
@@ -991,7 +992,7 @@ void unbind(QObject*  arg__1) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QRadioTuner : public QRadioTuner
@@ -1070,7 +1071,7 @@ int  volume() const override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QRadioTunerControl : public QRadioTunerControl
@@ -1182,7 +1183,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QSound : public QObject
@@ -1221,17 +1222,12 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QSoundEffect : public QObject
 { Q_OBJECT
 public:
-Q_ENUMS(Loop Status )
-enum Loop{
-  Infinite = QSoundEffect::Infinite};
-enum Status{
-  Null = QSoundEffect::Null,   Loading = QSoundEffect::Loading,   Ready = QSoundEffect::Ready,   Error = QSoundEffect::Error};
 public slots:
 QSoundEffect* new_QSoundEffect(QObject*  parent = nullptr);
 void delete_QSoundEffect(QSoundEffect* obj) { delete obj; }
@@ -1277,7 +1273,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QVideoDeviceSelectorControl : public QVideoDeviceSelectorControl
@@ -1369,7 +1365,7 @@ QVideoEncoderSettings  videoSettings() const override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtPublicPromoter_QVideoEncoderSettingsControl : public QVideoEncoderSettingsControl
@@ -1479,7 +1475,7 @@ void timerEvent(QTimerEvent*  event) override;
 
   const QMetaObject* metaObject() const override;
   int qt_metacall(QMetaObject::Call call, int id, void** args) override;
-  PythonQtInstanceWrapper* _wrapper; 
+  PythonQtInstanceWrapper* _wrapper;
 };
 
 class PythonQtWrapper_QVideoProbe : public QObject
