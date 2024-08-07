@@ -435,18 +435,36 @@ PythonQt::PythonQt(int flags, const QByteArray& pythonQtModuleName)
 PythonQt::~PythonQt() {
   delete _p;
   _p = nullptr;
+  Py_DECREF(&PythonQtStdInRedirectType);
+  Py_DECREF(&PythonQtStdOutRedirectType);
+  Py_DECREF(&PythonQtInstanceWrapper_Type);
+  Py_DECREF(&PythonQtClassWrapper_Type);
+  Py_DECREF(&PythonQtBoolResult_Type);
+  Py_DECREF(&PythonQtProperty_Type);
+  Py_DECREF(&PythonQtSlotDecorator_Type);
+  Py_DECREF(&PythonQtSignalFunction_Type);
+  Py_DECREF(&PythonQtSlotFunction_Type);
 }
 
 PythonQtPrivate::~PythonQtPrivate() {
+  PythonQtGILScope _;
   delete _defaultImporter;
   _defaultImporter = nullptr;
 
-  {
-	qDeleteAll(_knownClassInfos);
+  for (auto &&p: _packages) {
+	  Py_DECREF(p);
   }
-
+ // qDeleteAll(_knownClassInfos);
   PythonQtMethodInfo::cleanupCachedMethodInfos();
   PythonQtArgumentFrame::cleanupFreeList();
+
+  _pySourceFileLoader = nullptr;
+  _pySourcelessFileLoader = nullptr;
+  _pyEnsureFuture = nullptr;
+  _pyFutureClass = nullptr;
+  _pyTaskDoneCallback = nullptr;
+  _pythonQtModule = nullptr;
+
 }
 
 void PythonQtPrivate::setTaskDoneCallback(const PythonQtObjectPtr & callable)
@@ -1996,11 +2014,13 @@ void PythonQt::registerCPPClass(const char* typeName, const char* parentTypeName
   _p->registerCPPClass(typeName, parentTypeName, package, wrapperCreator, shell);
 }
 
+//#include <iostream>
 
 PythonQtClassInfo* PythonQtPrivate::lookupClassInfoAndCreateIfNotPresent(const char* typeName)
 {
   PythonQtClassInfo* info = _knownClassInfos.value(typeName);
   if (!info) {
+	std::cout << "Registered " << typeName << std::endl << std::flush;
 	info = new PythonQtClassInfo();
 	info->setupCPPObject(typeName);
 	_knownClassInfos.insert(typeName, info);

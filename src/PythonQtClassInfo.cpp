@@ -89,6 +89,8 @@ PythonQtClassInfo::~PythonQtClassInfo()
   for(auto &&info: _decoratorSlots) {
     info->deleteOverloadsAndThis();
   }
+  _pythonQtClassWrapper = nullptr;
+  std::cout << "Deleted " << _wrappedClassName.toStdString() << std::endl << std::flush;
 }
 
 void PythonQtClassInfo::setupQObject(const QMetaObject* meta)

@@ -392,7 +392,7 @@ static PyObject *PythonQtClassWrapper_help(PythonQtClassWrapper* type, PyObject 
 PyObject *PythonQtClassWrapper_delete(PythonQtClassWrapper *type, PyObject *args)
 {
   Q_UNUSED(type)
-
+  if (!PythonQt::priv()) abort();
   Py_ssize_t argc = PyTuple_Size(args);
   if (argc>0) {
 	PyObject* self = PyTuple_GET_ITEM(args, 0);

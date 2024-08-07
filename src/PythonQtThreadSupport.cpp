@@ -39,6 +39,8 @@
 //----------------------------------------------------------------------------------
 
 #include "PythonQtThreadSupport.h"
+#include <QtCore/QThread>
+#include <iostream>
 
 #ifdef PYTHONQT_GIL_SUPPORT
 
@@ -46,8 +48,16 @@ bool PythonQtGILScope::_enableGILScope = false;
 
 PythonQtGILScope::PythonQtGILScope() : _ensured(false)
 {
-  if (_enableGILScope) {
-    _state = PyGILState_Ensure();
+  if (_enableGILScope && !PyGILState_Check()) {
+	std::cout << "Lock GIL from " << QThread::currentThreadId()
+			  << ":" << QThread::currentThread()->objectName().toStdString() <<  " ..." << std::flush;
+#if PY_VERSION_HEX >= 0x03060000
+	if( _Py_IsFinalizing()) {
+		std::abort();
+	}
+#endif	
+	_state = PyGILState_Ensure();
+	std::cout << " done" << std::endl << std::flush;
     _ensured = true;
   }
 }
@@ -58,9 +68,12 @@ PythonQtGILScope::~PythonQtGILScope()
 }
 
 void PythonQtGILScope::release()
-{
+{  
   if (_ensured) {
+	std::cout << "Unlock GIL from " << QThread::currentThreadId()
+			  << ":" << QThread::currentThread()->objectName().toStdString() <<  " ..." << std::flush;
     PyGILState_Release(_state);
+	std::cout << " done" << std::endl << std::flush;
     _ensured = false;
   }
 }
