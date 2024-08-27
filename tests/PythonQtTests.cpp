@@ -96,6 +96,10 @@ void PythonQtTestSlotCalling::init() {
 
 }
 
+void PythonQtTestSlotCalling::cleanupTestCase()
+{
+	cleanupPtr();
+}
 
 void* polymorphic_ClassB_Handler(const void* ptr, const char** className) {
   ClassB* o = (ClassB*)ptr;
@@ -166,7 +170,6 @@ void PythonQtTestSlotCalling::testInheritance() {
   QVERIFY(_helper->runScript("if type(obj.getClassBPtr(obj.createClassB()))==PythonQt.private.ClassB: obj.setPassed();\n"));
   QVERIFY(_helper->runScript("if type(obj.createClassCAsB())==PythonQt.private.ClassC: obj.setPassed();\n"));
   QVERIFY(_helper->runScript("if type(obj.createClassDAsB())==PythonQt.private.ClassD: obj.setPassed();\n"));
-
 }
 
 void PythonQtTestSlotCalling::testAutoConversion() {
@@ -352,7 +355,8 @@ void PythonQtTestSlotCalling::testCppFactory()
   QVERIFY(_helper->runScript("obj.testNoArg()\nfrom PythonQt.private import PQCppObject2\na = PQCppObject2()\nif a.testEnumFlag2(PQCppObject2.TestEnumValue2)==PQCppObject2.TestEnumValue2: obj.setPassed();\n"));
   // with int overload to check overloading
   QVERIFY(_helper->runScript("obj.testNoArg()\nfrom PythonQt.private import PQCppObject2\na = PQCppObject2()\nif a.testEnumFlag3(PQCppObject2.TestEnumValue2)==PQCppObject2.TestEnumValue2: obj.setPassed();\n"));
-
+  PythonQt::self()->removeWrapperFactory(f);
+  delete f;
 }
 
 PQCppObject2Decorator::TestEnumFlag PQCppObject2Decorator::testEnumFlag1(PQCppObject2* /*obj*/, PQCppObject2Decorator::TestEnumFlag flag) {
@@ -405,6 +409,11 @@ void PythonQtTestSignalHandler::initTestCase()
   _helper = new PythonQtTestSignalHandlerHelper(this);
   PythonQtObjectPtr main = PythonQt::self()->getMainModule();
   PythonQt::self()->addObject(main, "obj", _helper);
+}
+
+void PythonQtTestSignalHandler::cleanupTestCase()
+{
+    delete _helper;
 }
 
 void PythonQtTestSignalHandler::testSignalHandler()
@@ -463,6 +472,10 @@ void PythonQtTestSignalHandler::testRecursiveSignalHandler()
   QVERIFY(PythonQt::self()->addSignalHandler(_helper, SIGNAL(signal2(const QString&)), main, "testSignal2"));
   QVERIFY(PythonQt::self()->addSignalHandler(_helper, SIGNAL(signal3(float)), main, "testSignal3"));
   QVERIFY(_helper->emitSignal1(12));
+
+  QVERIFY(PythonQt::self()->removeSignalHandler(_helper, SIGNAL(signal1(int)), main, "testSignal1"));
+  QVERIFY(PythonQt::self()->removeSignalHandler(_helper, SIGNAL(signal2(const QString&)), main, "testSignal2"));
+  QVERIFY(PythonQt::self()->removeSignalHandler(_helper, SIGNAL(signal3(float)), main, "testSignal3"));
 }
 
 
@@ -472,6 +485,10 @@ void PythonQtTestApi::initTestCase()
   _main = PythonQt::self()->getMainModule();
   _main.evalScript("import PythonQt");
   _main.addObject("obj", _helper);
+}
+
+void PythonQtTestApi::cleanupTestCase()
+{
 }
 
 void PythonQtTestApi::testProperties()

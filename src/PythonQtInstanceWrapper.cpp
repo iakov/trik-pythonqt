@@ -383,8 +383,9 @@ static PyObject *PythonQtInstanceWrapper_getattro(PyObject *obj,PyObject *name)
   }
 
   if (qstrcmp(attributeName, "__dict__")==0) {
-	PyObject* dict = PyBaseObject_Type.tp_getattro(obj, name);
-	dict = PyDict_Copy(dict);
+    PyObject* dict_copy = PyBaseObject_Type.tp_getattro(obj, name);
+    PyObject* dict = PyDict_Copy(dict_copy);
+    Py_DECREF(dict_copy);
 
 	if (wrapper->_obj) {
 	  // we need to replace the properties with their real values...
