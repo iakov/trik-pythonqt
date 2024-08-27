@@ -117,13 +117,14 @@ class ClassA {
 public:
   ClassA() { x = 1; }
   int x;
+  virtual ~ClassA() {};
 };
 
 class ClassB {
 public:
   ClassB() { y = 2; }
   int y;
-
+ virtual ~ClassB() {};
   virtual int type() { return 2; }
 };
 
@@ -131,7 +132,7 @@ class ClassC : public ClassA, public ClassB {
 public:
   ClassC() { z = 3; }
   int z;
-
+ virtual ~ClassC() {};
   virtual int type() { return 3; }
 };
 
@@ -139,6 +140,7 @@ class ClassD : public QObject, public ClassA, public ClassB {
   Q_OBJECT
 public:
   ClassD() { d = 4; }
+  virtual ~ClassD() {};
   public Q_SLOTS:
 	int getD() { return d; }
 private:
